@@ -1,12 +1,10 @@
 package frc.team4373.robot.input;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
 
 /**
- * OI encapsulates various inputs and outputs.
+ * OI provides access to operator interface devices.
  *
  * @author aaplmath
  */
@@ -14,7 +12,6 @@ public class OI {
     private static OI oi = null;
     private RooJoystick<FineGrainedPiecewiseFilter> driveJoystick;
     private RooJoystick operatorJoystick;
-    private Gyro gyro;
 
     private OI() {
         this.driveJoystick =
@@ -22,7 +19,6 @@ public class OI {
         this.operatorJoystick =
                 new RooJoystick<>(RobotMap.OPERATOR_JOYSTICK_PORT,
                         new FineGrainedPiecewiseFilter());
-        this.gyro = new AnalogGyro(RobotMap.GYRO_CHANNEL);
     }
 
     /**
@@ -55,33 +51,5 @@ public class OI {
      */
     public RooJoystick getOperatorJoystick() {
         return this.operatorJoystick;
-    }
-
-    /**
-     * Gets the gyro measuring the robot's direction.
-     * @return The gyro measuring the robot's direction.
-     */
-    public Gyro getGyro() {
-        return gyro;
-    }
-
-    /**
-     * Gets the gyro angle in degrees.
-     * @return The gyro angle in degrees, -180 to 180.
-     */
-    public double getAngleRelative() {
-        double angle = getGyro().getAngle();
-        double relative = (Math.abs(angle) * 9 / 2) % 180;
-        // TODO: Account for 180° boundary case
-        relative *= Math.signum(angle);
-        return relative;
-    }
-
-    /**
-     * Gets the gyro angle in native units.
-     * @return The gyro angle, where 20 units = 90 degrees.
-     */
-    public double getAngleAbsolute() {
-        return getGyro().getAngle();
     }
 }
