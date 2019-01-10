@@ -1,6 +1,7 @@
 package frc.team4373.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,10 +32,34 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once when Sandstorm mode starts.
+     */
+    @Override
+    public void autonomousInit() {
+
+    }
+
+    /**
+     * This function is called once when teleoperated mode starts.
+     */
+    @Override
+    public void teleopInit() {
+    }
+
+    /**
+     * This function is called periodically during Sandstorm mode.
+     */
+    @Override
+    public void autonomousPeriodic() {
+        Scheduler.getInstance().run();
+    }
+
+    /**
      * This function is called periodically during operator control.
      */
     @Override
     public void teleopPeriodic() {
+        Scheduler.getInstance().run();
     }
 
     /**
