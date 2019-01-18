@@ -83,10 +83,11 @@ deploy {
             directory = '/home/lvuser/deploy'
         }
     }
-//    doLast {
-//        switchBack()
-//    }
+    tasks.deploy.doLast(){
+        switchBack()
+    }
 }
+
 
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
 // Also defines JUnit 4.
