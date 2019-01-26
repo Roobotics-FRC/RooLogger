@@ -2,6 +2,7 @@ package frc.team4373.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
@@ -15,6 +16,8 @@ public class Intake extends Subsystem {
 
     private WPI_TalonSRX leftTalon;
     private WPI_TalonSRX rightTalon;
+    private DoubleSolenoid leftPiston;
+    private DoubleSolenoid rightPiston;
 
     private static Intake instance;
 
@@ -26,6 +29,9 @@ public class Intake extends Subsystem {
         leftTalon = new WPI_TalonSRX(RobotMap.LEFT_INTAKE_MOTOR);
         rightTalon = new WPI_TalonSRX(RobotMap.RIGHT_INTAKE_MOTOR);
 
+        leftPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT, RobotMap.LEFT_INTAKE_PISTON_FORWARD, RobotMap.LEFT_INTAKE_PISTON_BACK);
+        rightPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT, RobotMap.RIGHT_INTAKE_PISTON_FORWARD, RobotMap.RIGHT_INTAKE_PISTON_BACK);
+
         this.leftTalon.setNeutralMode(NeutralMode.Brake);
         this.rightTalon.setNeutralMode(NeutralMode.Brake);
 
@@ -34,19 +40,29 @@ public class Intake extends Subsystem {
 
     }
 
-    private void setLeft(double power) {
+    private void setCargoLeft(double power) {
         power = Robot.safetyCheckSpeed(power);
     }
-    private void setRight(double power) {
+    private void setCargoRight(double power) {
         power = Robot.safetyCheckSpeed(power);
     }
-    public void collect() {
-        setLeft(1);
-        setRight(1);
+
+    public void cargoCollect() {
+        setCargoLeft(1);
+        setCargoRight(1);
     }
-    public void release() {
-        setLeft(0);
-        setRight(0);
+    public void cargoRelease() {
+        setCargoLeft(0);
+        setCargoRight(0);
+    }
+
+    public void grabHatch() {
+        leftPiston.set(DoubleSolenoid.Value.kForward);
+        rightPiston.set(DoubleSolenoid.Value.kForward);
+    }
+    public void releaseHatch() {
+        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     @Override
