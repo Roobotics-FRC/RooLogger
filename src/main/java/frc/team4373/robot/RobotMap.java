@@ -9,6 +9,12 @@ package frc.team4373.robot;
 
 public class RobotMap {
     // Inversions
+    public static final boolean DRIVETRAIN_MOTOR_RIGHT_1_INVERSION = false;
+    public static final boolean DRIVETRAIN_MOTOR_RIGHT_2_INVERSION = false;
+    public static final boolean DRIVETRAIN_MOTOR_LEFT_1_INVERSION = false;
+    public static final boolean DRIVETRAIN_MOTOR_LEFT_2_INVERSION = false;
+    public static final boolean DRIVETRAIN_MOTOR_MIDDLE_1_INVERSION = false;
+    public static final boolean DRIVETRAIN_MOTOR_MIDDLE_2_INVERSION = false;
     public static final boolean LIFT_MOTOR_1_INVERSION = false;
     public static final boolean LIFT_MOTOR_2_INVERSION = false;
     public static final boolean CLIMBER_MOTOR_INVERSION = false;
@@ -20,6 +26,12 @@ public class RobotMap {
     public static final int OPERATOR_JOYSTICK_PORT = 1;
 
     // Motor ports
+    public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 111;
+    public static final int DRIVETRAIN_MOTOR_RIGHT_2 = 112;
+    public static final int DRIVETRAIN_MOTOR_LEFT_1 = 121;
+    public static final int DRIVETRAIN_MOTOR_LEFT_2 = 122;
+    public static final int DRIVETRAIN_MOTOR_MIDDLE_1 = 131;
+    public static final int DRIVETRAIN_MOTOR_MIDDLE_2 = 132;
     public static final int LIFT_MOTOR_1 = 231;
     public static final int LIFT_MOTOR_2 = 232;
     public static final int CLIMBER_MOTOR = 351;
@@ -27,6 +39,8 @@ public class RobotMap {
     public static final int INTAKE_MOTOR_LEFT = 421;
 
     // Pneumatic ports
+    public static final int DRIVETRAIN_PISTON_FORWARD = 0;
+    public static final int DRIVETRAIN_PISTON_BACKWARD = 1;
     public static final int LIFT_PISTON_1_FORWARD = 2;
     public static final int LIFT_PISTON_1_BACKWARD = 3;
     public static final int LIFT_PISTON_2_FORWARD = 4;
