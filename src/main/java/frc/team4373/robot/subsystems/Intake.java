@@ -27,17 +27,17 @@ public class Intake extends Subsystem {
     }
 
     private Intake() {
-        leftTalon = new WPI_TalonSRX(RobotMap.LEFT_INTAKE_MOTOR);
-        rightTalon = new WPI_TalonSRX(RobotMap.RIGHT_INTAKE_MOTOR);
+        leftTalon = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR_LEFT);
+        rightTalon = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR_RIGHT);
 
-        leftPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT, RobotMap.LEFT_INTAKE_PISTON_FORWARD, RobotMap.LEFT_INTAKE_PISTON_BACK);
-        rightPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT, RobotMap.RIGHT_INTAKE_PISTON_FORWARD, RobotMap.RIGHT_INTAKE_PISTON_BACK);
+        leftPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT, RobotMap.INTAKE_PISTON_LEFT_FORWARD, RobotMap.INTAKE_PISTON_LEFT_BACKWARD);
+        rightPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT, RobotMap.INTAKE_PISTON_RIGHT_FORWARD, RobotMap.INTAKE_PISTON_RIGHT_BACKWARD);
 
         this.leftTalon.setNeutralMode(NeutralMode.Brake);
         this.rightTalon.setNeutralMode(NeutralMode.Brake);
 
-        this.leftTalon.setInverted(RobotMap.INTAKE_LEFT_INVERTED);
-        this.rightTalon.setInverted(RobotMap.INTAKE_RIGHT_INVERTED);
+        this.leftTalon.setInverted(RobotMap.INTAKE_LEFT_INVERSION);
+        this.rightTalon.setInverted(RobotMap.INTAKE_RIGHT_INVERSION);
 
     }
 
