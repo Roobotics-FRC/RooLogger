@@ -36,8 +36,8 @@ public class Intake extends Subsystem {
         this.leftTalon.setNeutralMode(NeutralMode.Brake);
         this.rightTalon.setNeutralMode(NeutralMode.Brake);
 
-        this.leftTalon.setInverted(RobotMap.INTAKE_LEFT_INVERSION);
-        this.rightTalon.setInverted(RobotMap.INTAKE_RIGHT_INVERSION);
+        this.leftTalon.setInverted(RobotMap.INTAKE_MOTOR_LEFT_INVERSION);
+        this.rightTalon.setInverted(RobotMap.INTAKE_MOTOR_RIGHT_INVERSION);
 
     }
 
