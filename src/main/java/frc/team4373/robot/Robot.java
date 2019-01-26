@@ -68,4 +68,13 @@ public class Robot extends TimedRobot {
     @Override
     public void testPeriodic() {
     }
+    public static double safetyCheckSpeed(double power) {
+        if (power > 1) {
+            return 1;
+        }
+        if (power < -1) {
+            return -1;
+        }
+        return power;
+    }
 }
