@@ -8,8 +8,9 @@ import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
 
 /**
- * A programatic representation of the robot's intake.
+ * A programmatic representation of the robot's intake. This is comprised of both the cargo and hatch intake.
  *
+ * @author Samasaur
  * @author benji123abc
  */
 public class Intake extends Subsystem {
@@ -40,23 +41,25 @@ public class Intake extends Subsystem {
 
     }
 
-    private void setCargoLeft(double power) {
+    private void setLeftTalon(double power) {
         power = Robot.safetyCheckSpeed(power);
+        this.leftTalon.set(power);
     }
-    private void setCargoRight(double power) {
+    private void setRightTalon(double power) {
         power = Robot.safetyCheckSpeed(power);
+        this.rightTalon.set(power);
     }
 
-    public void cargoCollect() {
-        setCargoLeft(1);
-        setCargoRight(1);
+    public void collectCargo() {
+        setLeftTalon(1);
+        setRightTalon(-1);
     }
-    public void cargoRelease() {
-        setCargoLeft(0);
-        setCargoRight(0);
+    public void releaseCargo() {
+        setLeftTalon(-1);
+        setRightTalon(1);
     }
 
-    public void grabHatch() {
+    public void collectHatch() {
         leftPiston.set(DoubleSolenoid.Value.kForward);
         rightPiston.set(DoubleSolenoid.Value.kForward);
     }
