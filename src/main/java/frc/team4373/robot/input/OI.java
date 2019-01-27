@@ -5,8 +5,6 @@ import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
 
 /**
  * OI provides access to operator interface devices.
- *
- * @author aaplmath
  */
 public class OI {
     private static OI oi = null;

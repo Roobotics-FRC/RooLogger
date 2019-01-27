@@ -1,19 +1,20 @@
 package frc.team4373.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
 
 /**
- * A programmatic representation of the robot's climbing features.
- *
- * @author Samasaur
+ * A programmatic representation of the robot's climbing components.
  */
 public class Climber extends Subsystem {
     private static Climber instance;
+
     public static Climber getInstance() {
         return instance == null ? instance = new Climber() : instance;
     }
@@ -21,7 +22,8 @@ public class Climber extends Subsystem {
     private WPI_TalonSRX talon;
     private DoubleSolenoid frontPiston;
     private DoubleSolenoid rearPiston;
-    //TODO: Add limit switches
+    private DigitalInput frontLimitSwitch;
+    private DigitalInput rearLimitSwitch;
 
     private Climber() {
         this.talon = new WPI_TalonSRX(RobotMap.CLIMBER_MOTOR);
@@ -29,11 +31,11 @@ public class Climber extends Subsystem {
                 RobotMap.CLIMBER_PISTON_FRONT_FORWARD, RobotMap.CLIMBER_PISTON_FRONT_BACKWARD);
         this.rearPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT,
                 RobotMap.CLIMBER_PISTON_REAR_FORWARD, RobotMap.CLIMBER_PISTON_REAR_BACKWARD);
+        this.frontLimitSwitch = new DigitalInput(RobotMap.CLIMBER_FRONT_LIMIT_SWITCH_CHANNEL);
+        this.rearLimitSwitch = new DigitalInput(RobotMap.CLIMBER_REAR_LIMIT_SWITCH_CHANNEL);
 
         this.talon.setNeutralMode(NeutralMode.Brake);
-        this.talon.setInverted(RobotMap.CLIMBER_MOTOR_INVERSION);
-
-        //TODO: Add limit switches
+        this.talon.setInverted(RobotMap.CLIMBER_MOTOR_INVERTED);
     }
 
     public void climb() {
@@ -49,22 +51,22 @@ public class Climber extends Subsystem {
         this.rearPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public void retract() {
+    public void retractAll() {
         this.retractFront();
         this.retractRear();
     }
 
-    public void set(double power) {
-        power = Robot.safetyCheckSpeed(power);
-        this.talon.set(power);
+    public void setPercentOutput(double power) {
+        power = Robot.constrainPercentOutput(power);
+        this.talon.set(ControlMode.PercentOutput, power);
     }
 
     public boolean getFrontLimitSwitch() {
-        return true; //TODO: actually use limit switch
+        return frontLimitSwitch.get();
     }
 
     public boolean getRearLimitSwitch() {
-        return true; //TODO: actually use limit switch
+        return rearLimitSwitch.get();
     }
 
     @Override
