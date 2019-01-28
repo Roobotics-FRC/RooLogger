@@ -22,6 +22,20 @@ public class DrivetrainCommand extends Command {
 
     @Override
     protected void execute() {
+        switch (OI.getOI().getDriveJoystick().getPOV()) {
+            case 315:
+            case 0:
+            case 45:
+                drivetrain.retractMiddleWheel();
+                break;
+            case 135:
+            case 180:
+            case 225:
+                drivetrain.deployMiddleWheel();
+                break;
+            default:
+                break;
+        }
         double x = OI.getOI().getDriveJoystick().rooGetX();
         double y = OI.getOI().getDriveJoystick().rooGetY();
         double z = Math.signum(OI.getOI().getDriveJoystick().rooGetZ())
