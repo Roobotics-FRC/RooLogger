@@ -4,13 +4,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
- * A Javadoc template. TODO: Update TimedDriveAuton Javadoc.
+ * A command that dives forward for the specified power for the specified amount of time.
  *
  * @author Samasaur
  */
 public class TimedDriveAuton extends Command {
     private Drivetrain drivetrain;
     private double power;
+
+    /**
+     * Creates a new TimedDriveAuton with the given power and time of running.
+     * @param power The power to drive at.
+     * @param seconds The time to drive for.
+     */
     public TimedDriveAuton(double power, double seconds) {
         requires(this.drivetrain = Drivetrain.getInstance());
         setTimeout(seconds);
