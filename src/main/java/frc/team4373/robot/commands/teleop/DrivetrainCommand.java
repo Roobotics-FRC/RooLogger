@@ -17,6 +17,11 @@ public class DrivetrainCommand extends Command {
 
     @Override
     protected void initialize() {
+
+    }
+
+    @Override
+    protected void execute() {
         double x = OI.getOI().getDriveJoystick().rooGetX();
         double y = OI.getOI().getDriveJoystick().rooGetY();
         double z = Math.signum(OI.getOI().getDriveJoystick().rooGetZ())
@@ -24,11 +29,6 @@ public class DrivetrainCommand extends Command {
         drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, x);
         drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, y + z);
         drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, y - z);
-    }
-
-    @Override
-    protected void execute() {
-        super.execute();
     }
 
     @Override
