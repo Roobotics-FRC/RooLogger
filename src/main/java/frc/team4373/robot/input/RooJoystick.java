@@ -6,7 +6,7 @@ import frc.team4373.robot.input.filters.DoubleTypeFilter;
 /**
  * This class extends the WPILib Joystick class to add deadzone and filter functionality.
  */
-public class RooJoystick<F extends DoubleTypeFilter> extends Joystick {
+public class    RooJoystick<F extends DoubleTypeFilter> extends Joystick {
     /**
      * A representation of an axis of the joystick.
      */
