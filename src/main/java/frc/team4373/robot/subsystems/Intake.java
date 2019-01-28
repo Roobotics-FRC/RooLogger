@@ -52,13 +52,13 @@ public class Intake extends Subsystem {
     }
 
     public void collectHatch() {
-        leftPiston.set(DoubleSolenoid.Value.kForward);
-        rightPiston.set(DoubleSolenoid.Value.kForward);
+        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void releaseHatch() {
-        leftPiston.set(DoubleSolenoid.Value.kReverse);
-        rightPiston.set(DoubleSolenoid.Value.kReverse);
+        leftPiston.set(DoubleSolenoid.Value.kForward);
+        rightPiston.set(DoubleSolenoid.Value.kForward);
     }
 
     private void setLeftTalon(double power) {
