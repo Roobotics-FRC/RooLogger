@@ -6,15 +6,15 @@ import frc.team4373.robot.subsystems.Climber;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
- * Retracts the rear half of the climber and sets the neutral mode of the drivetrain to brake.
+ * Retracts the front half of the climber and sets the neutral mode of the drivetrain to coast.
  *
  * @author Samasaur
  */
-public class RetractClimberRearAuton extends Command {
+public class RetractClimberFrontAuton extends Command {
     private Climber climber;
     private Drivetrain drivetrain;
 
-    public RetractClimberRearAuton() {
+    public RetractClimberFrontAuton() {
         requires(this.climber = Climber.getInstance());
         this.drivetrain = Drivetrain.getInstance();
     }
@@ -26,8 +26,8 @@ public class RetractClimberRearAuton extends Command {
 
     @Override
     protected void execute() {
-        climber.retractFront(); // TODO: This could also be `retractAll()`. Should it be?
-        drivetrain.setNeutralMode(NeutralMode.Brake);
+        climber.retractFront();
+        drivetrain.setNeutralMode(NeutralMode.Coast);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class RetractClimberRearAuton extends Command {
 
     @Override
     protected void end() {
-        climber.retractRear();
-        drivetrain.setNeutralMode(NeutralMode.Brake);
+        climber.retractFront();
+        drivetrain.setNeutralMode(NeutralMode.Coast);
     }
 
     @Override
