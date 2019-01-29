@@ -3,7 +3,6 @@ package frc.team4373.robot.commands.teleop;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.input.OI;
-import frc.team4373.robot.input.RooJoystick;
 import frc.team4373.robot.subsystems.Intake;
 
 public class IntakeCommand extends Command {
@@ -22,16 +21,16 @@ public class IntakeCommand extends Command {
 
     @Override
     protected void execute() {
-        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.TRIGGER_OPERATOR_COLLECT_HATCH) > 0.75) {
+        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.OPERATOR_TRIGGER_COLLECT_HATCH) > 0.75) {
             intake.collectHatch();
         }
-        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.TRIGGER_OPERATOR_RELEASE_HATCH) > 0.75) {
+        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH) > 0.75) {
             intake.releaseHatch();
         }
-        if (OI.getOI().getOperatorJoystick().getRawButton(RobotMap.BUTTON_OPERATOR_COLLECT_HATCH)) {
+        if (OI.getOI().getOperatorJoystick().getRawButton(RobotMap.OPERATOR_BUTTON_COLLECT_HATCH)) {
 
         }
-        if (OI.getOI().getOperatorJoystick().getRawButton(RobotMap.BUTTON_OPERATOR_RELEASE_HATCH)) {
+        if (OI.getOI().getOperatorJoystick().getRawButton(RobotMap.OPERATOR_BUTTON_RELEASE_HATCH)) {
 
         }
 

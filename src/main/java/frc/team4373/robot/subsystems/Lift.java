@@ -86,6 +86,7 @@ public class Lift extends Subsystem {
      */
     public void setPositionRelative(double setpoint) {
         setpoint += initialPosition;
+        if (setpoint < initialPosition) setpoint = initialPosition;
         this.talon1.set(ControlMode.Position, setpoint);
     }
 

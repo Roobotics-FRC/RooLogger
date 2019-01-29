@@ -33,10 +33,10 @@ public class RobotMap {
     public static final int OPERATOR_JOYSTICK_PORT = 1;
 
     // Buttons
-    public static final int TRIGGER_OPERATOR_COLLECT_HATCH = 2;
-    public static final int TRIGGER_OPERATOR_RELEASE_HATCH = 3;
-    public static final int BUTTON_OPERATOR_COLLECT_HATCH = 5;
-    public static final int BUTTON_OPERATOR_RELEASE_HATCH = 6;
+    public static final int OPERATOR_TRIGGER_COLLECT_HATCH = 2;
+    public static final int OPERATOR_TRIGGER_RELEASE_HATCH = 3;
+    public static final int OPERATOR_BUTTON_COLLECT_HATCH = 5;
+    public static final int OPERATOR_BUTTON_RELEASE_HATCH = 6;
 
     // Motor CAN chain identifiers
     public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 111;
@@ -47,7 +47,7 @@ public class RobotMap {
     public static final int DRIVETRAIN_MOTOR_MIDDLE_2 = 132;
     public static final int LIFT_MOTOR_1 = 231;
     public static final int LIFT_MOTOR_2 = 232;
-    public static final int CLIMBER_MOTOR = 351;
+    public static final int CLIMBER_DRIVE_MOTOR = 351;
     public static final int INTAKE_MOTOR_RIGHT = 411;
     public static final int INTAKE_MOTOR_LEFT = 421;
 
@@ -93,4 +93,6 @@ public class RobotMap {
     public static final int TALON_TIMEOUT_MS = 1000;
     public static final int LIFT_PID_IDX = 0;
     public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
+    public static final int DRIVETRAIN_PID_IDX = 0;
+    public static final PID DRIVETRAIN_PID_GAINS = new PID(0, 1, 0, 0);
 }

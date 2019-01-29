@@ -1,5 +1,6 @@
 package frc.team4373.robot.subsystems;
 
+import com.ctre.phoenix.motion.SetValueMotionProfile;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
@@ -26,7 +27,7 @@ public class Drivetrain extends Subsystem {
     private WPI_TalonSRX right2;
     private WPI_TalonSRX left1;
     private WPI_TalonSRX left2;
-    private WPI_TalonSRX middle1;
+    private WPI_TalonSRX middle1; // note: for now, no PID on the center motors
     private WPI_TalonSRX middle2;
     private PigeonIMU pigeon;
     private DoubleSolenoid piston;
@@ -63,15 +64,37 @@ public class Drivetrain extends Subsystem {
         this.middle2.setInverted(RobotMap.DRIVETRAIN_MOTOR_MIDDLE_2_INVERTED);
 
         // TODO: Add full configuration for PID and motion profiling capability
+
+        this.right1.configNominalOutputForward(0, RobotMap.TALON_TIMEOUT_MS);
+        this.right1.configNominalOutputReverse(0, RobotMap.TALON_TIMEOUT_MS);
+        this.right1.configPeakOutputForward(1, RobotMap.TALON_TIMEOUT_MS);
+        this.right1.configPeakOutputReverse(-1, RobotMap.TALON_TIMEOUT_MS);
+
+        this.left1.configNominalOutputForward(0, RobotMap.TALON_TIMEOUT_MS);
+        this.left1.configNominalOutputReverse(0, RobotMap.TALON_TIMEOUT_MS);
+        this.left1.configPeakOutputForward(1, RobotMap.TALON_TIMEOUT_MS);
+        this.left1.configPeakOutputReverse(-1, RobotMap.TALON_TIMEOUT_MS);
+
         this.right1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
                 RobotMap.TALON_TIMEOUT_MS);
         this.right1.setSensorPhase(RobotMap.DRIVETRAIN_RIGHT_ENCODER_PHASE);
         this.left1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
                 RobotMap.TALON_TIMEOUT_MS);
         this.left1.setSensorPhase(RobotMap.DRIVETRAIN_LEFT_ENCODER_PHASE);
-        this.middle1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
-                RobotMap.TALON_TIMEOUT_MS);
-        this.middle1.setSensorPhase(RobotMap.DRIVETRAIN_MIDDLE_ENCODER_PHASE);
+
+        this.right1.config_kF(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kF);
+        this.right1.config_kP(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kP);
+        this.right1.config_kI(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kI);
+        this.right1.config_kD(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kD);
+
+        this.left1.config_kF(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kF);
+        this.left1.config_kP(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kP);
+        this.left1.config_kI(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kI);
+        this.left1.config_kD(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kD);
+
+        // this.middle1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
+        //         RobotMap.TALON_TIMEOUT_MS);
+        // this.middle1.setSensorPhase(RobotMap.DRIVETRAIN_MIDDLE_ENCODER_PHASE);
     }
 
     /**
@@ -94,6 +117,24 @@ public class Drivetrain extends Subsystem {
     public void setSidesPercentOutput(double power) {
         this.setPercentOutput(TalonID.LEFT_1, power);
         this.setPercentOutput(TalonID.RIGHT_1, power);
+    }
+
+    /**
+     * Sets motion profile control mode on a primary motor using auxiliary output.
+     * @param motor the primary motor (must be a "1" motor).
+     * @param svmpValue the SetValueMotionProfile value to set.
+     */
+    public void setMotionProfileValue(TalonID motor, SetValueMotionProfile svmpValue) {
+        switch (motor) {
+            case RIGHT_1:
+                this.right1.set(ControlMode.MotionProfile, svmpValue.value);
+                break;
+            case LEFT_1:
+                this.left1.set(ControlMode.MotionProfile, svmpValue.value);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -144,7 +185,7 @@ public class Drivetrain extends Subsystem {
      * @param talonID the ID of the Talon to fetch.
      * @return the specified Talon.
      */
-    private WPI_TalonSRX getTalon(TalonID talonID) {
+    public WPI_TalonSRX getTalon(TalonID talonID) {
         switch (talonID) {
             case RIGHT_1:
                 return this.right1;
