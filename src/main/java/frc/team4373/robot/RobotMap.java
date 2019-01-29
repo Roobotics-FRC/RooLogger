@@ -32,6 +32,12 @@ public class RobotMap {
     public static final int DRIVE_JOYSTICK_PORT = 0;
     public static final int OPERATOR_JOYSTICK_PORT = 1;
 
+    // Buttons
+    public static final int TRIGGER_OPERATOR_COLLECT_HATCH = 2;
+    public static final int TRIGGER_OPERATOR_RELEASE_HATCH = 3;
+    public static final int BUTTON_OPERATOR_COLLECT_HATCH = 5;
+    public static final int BUTTON_OPERATOR_RELEASE_HATCH = 6;
+
     // Motor CAN chain identifiers
     public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 111;
     public static final int DRIVETRAIN_MOTOR_RIGHT_2 = 112;
