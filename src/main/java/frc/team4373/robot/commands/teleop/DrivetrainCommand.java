@@ -11,6 +11,7 @@ import frc.team4373.robot.subsystems.Drivetrain;
  */
 public class DrivetrainCommand extends Command {
     private Drivetrain drivetrain;
+
     public DrivetrainCommand() {
         requires(this.drivetrain = Drivetrain.getInstance());
     }

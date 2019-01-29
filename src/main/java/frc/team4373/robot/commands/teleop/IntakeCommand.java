@@ -21,17 +21,21 @@ public class IntakeCommand extends Command {
 
     @Override
     protected void execute() {
-        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.OPERATOR_TRIGGER_COLLECT_HATCH) > 0.75) {
+        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.OPERATOR_TRIGGER_COLLECT_HATCH)
+                > 0.75) {
             intake.collectHatch();
         }
-        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH) > 0.75) {
+        if (OI.getOI().getOperatorJoystick().getRawAxis(RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH)
+                > 0.75) {
             intake.releaseHatch();
         }
-        if (OI.getOI().getOperatorJoystick().getRawButton(RobotMap.OPERATOR_BUTTON_COLLECT_HATCH)) {
-
+        if (OI.getOI().getOperatorJoystick().getRawButton(
+                RobotMap.OPERATOR_BUTTON_COLLECT_HATCH)) {
+            // TODO: fill in
         }
-        if (OI.getOI().getOperatorJoystick().getRawButton(RobotMap.OPERATOR_BUTTON_RELEASE_HATCH)) {
-
+        if (OI.getOI().getOperatorJoystick().getRawButton(
+                RobotMap.OPERATOR_BUTTON_RELEASE_HATCH)) {
+            // TODO: fill in
         }
 
         // TODO: No hatch and cargo at the same time
