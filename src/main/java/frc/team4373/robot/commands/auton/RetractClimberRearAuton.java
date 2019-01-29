@@ -1,10 +1,12 @@
 package frc.team4373.robot.commands.auton;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Climber;
+import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
- * A Javadoc template. TODO: Update RetractClimberRearAuton Javadoc.
+ * Retracts the rear half of the climber and sets the neutral mode of the drivetrain to brake.
  *
  * @author Samasaur
  */
@@ -23,6 +25,7 @@ public class RetractClimberRearAuton extends Command {
     @Override
     protected void execute() {
         climber.retractFront(); // TODO: This could also be `retractAll()`. Should it be?
+        Drivetrain.getInstance().setNeutralMode(NeutralMode.Brake);
     }
 
     @Override

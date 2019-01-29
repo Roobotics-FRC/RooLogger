@@ -205,6 +205,17 @@ public class Drivetrain extends Subsystem {
     }
 
     /**
+     * Sets the neutral mode of the side motors to the given value.
+     * @param mode The neutral mode to set the motors to.
+     */
+    public void setNeutralMode(NeutralMode mode) {
+        this.right1.setNeutralMode(mode);
+        this.right2.setNeutralMode(mode);
+        this.left1.setNeutralMode(mode);
+        this.left2.setNeutralMode(mode);
+    }
+
+    /**
      * Returns whether the specified Talon is one of the middle ones.
      * @param talonID the Talon ID to process.
      * @return whether the Talon is connected to a middle wheel motor.
