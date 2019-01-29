@@ -37,6 +37,7 @@ public class RobotMap {
     public static final int OPERATOR_TRIGGER_RELEASE_HATCH = 3;
     public static final int OPERATOR_BUTTON_COLLECT_HATCH = 5;
     public static final int OPERATOR_BUTTON_RELEASE_HATCH = 6;
+    public static final int DRIVER_AXIS_SLIDER_CLIMBER_WHEEL = 3;
 
     // Motor CAN chain identifiers
     public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 111;
