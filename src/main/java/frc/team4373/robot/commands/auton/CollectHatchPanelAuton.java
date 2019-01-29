@@ -3,11 +3,11 @@ package frc.team4373.robot.commands.auton;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Intake;
 
-public class AutonIntakeHatchPanel extends Command {
+public class CollectHatchPanelAuton extends Command {
 
     private Intake intake;
 
-    public AutonIntakeHatchPanel() {
+    public CollectHatchPanelAuton() {
         requires(this.intake = Intake.getInstance());
     }
 

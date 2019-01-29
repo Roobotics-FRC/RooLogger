@@ -6,10 +6,10 @@ import frc.team4373.robot.subsystems.Intake;
 /**
  * Releases a hatch panel.
  */
-public class AutonReleaseHatchPanel extends Command {
+public class ReleaseHatchPanelAuton extends Command {
     private Intake intake;
 
-    public AutonReleaseHatchPanel() {
+    public ReleaseHatchPanelAuton() {
         requires(this.intake = Intake.getInstance());
     }
 
