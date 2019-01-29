@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.RobotMap;
+import frc.team4373.robot.commands.DummyCommand;
 
 /**
  * A programmatic representation of the robot's climbing components.
@@ -57,6 +58,6 @@ public class Climber extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        //TODO
+        setDefaultCommand(new DummyCommand(this));
     }
 }

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
+import frc.team4373.robot.commands.teleop.IntakeCommand;
 
 /**
  * A programmatic representation of the robot's intake mechanism for both hatch and cargo.
@@ -73,6 +74,6 @@ public class Intake extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        //TODO
+        setDefaultCommand(new IntakeCommand());
     }
 }
