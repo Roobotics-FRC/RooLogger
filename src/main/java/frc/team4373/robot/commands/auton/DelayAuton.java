@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DelayAuton extends Command {
     private double time;
+
     public DelayAuton(double seconds) {
         time = seconds;
     }

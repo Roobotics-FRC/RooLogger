@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class DoLaterAuton extends CommandGroup {
     /**
-     * Creates a new DoLaterAuton that will run the specified command after the given amount of time.
+     * Creates a new DoLaterAuton that runs the specified command after the given amount of time.
      * @param command The command to run.
      * @param delay The time to delay.
      */
