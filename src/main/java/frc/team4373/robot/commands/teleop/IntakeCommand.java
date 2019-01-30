@@ -31,8 +31,7 @@ public class IntakeCommand extends Command {
                 RobotMap.OPERATOR_TRIGGER_COLLECT_HATCH) > 0.75) {
             intake.collectHatch();
         } else if (OI.getOI().getOperatorJoystick().getRawAxis(
-                RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH)
-                > 0.75) {
+                RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH) > 0.75) {
             intake.releaseHatch();
         }
     }
