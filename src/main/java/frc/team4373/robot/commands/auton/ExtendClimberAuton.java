@@ -34,10 +34,4 @@ public class ExtendClimberAuton extends Command {
     protected boolean isFinished() {
         return this.isTimedOut();
     }
-
-    @Override
-    protected void end() {
-        climber.climb();
-        drivetrain.setNeutralMode(NeutralMode.Coast);
-    }
 }

@@ -34,15 +34,4 @@ public class RetractClimberRearAuton extends Command {
     protected boolean isFinished() {
         return this.isTimedOut();
     }
-
-    @Override
-    protected void end() {
-        climber.retractRear();
-        drivetrain.setNeutralMode(NeutralMode.Brake);
-    }
-
-    @Override
-    protected void interrupted() {
-        this.end();
-    }
 }
