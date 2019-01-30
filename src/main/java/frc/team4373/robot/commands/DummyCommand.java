@@ -4,16 +4,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * A Javadoc template. TODO: Update DummyCommand Javadoc.
+ * A command that exists to do nothing but require a subsystem.
  *
  * @author Samasaur
  */
 public class DummyCommand extends Command {
-    public DummyCommand(Subsystem... subsystems) {
-        for (Subsystem s: subsystems) {
-            requires(s);
-        }
+    /**
+     * Creates a new DummyCommand that requires the given subsystem.
+     * @param subsystem The subsystem to require.
+     */
+    public DummyCommand(Subsystem subsystem) {
+        requires(subsystem);
     }
+
     @Override
     protected boolean isFinished() {
         return false;
