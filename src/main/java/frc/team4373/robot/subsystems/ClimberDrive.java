@@ -8,6 +8,9 @@ import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.teleop.ClimberDriveCommand;
 
+/**
+ * A programmatic representation of the drivetrain of the climbing system.
+ */
 public class ClimberDrive extends Subsystem {
     private static ClimberDrive instance;
 
@@ -17,12 +20,16 @@ public class ClimberDrive extends Subsystem {
 
     private WPI_TalonSRX talon;
 
-    public ClimberDrive() {
+    private ClimberDrive() {
         this.talon = new WPI_TalonSRX(RobotMap.CLIMBER_DRIVE_MOTOR);
         this.talon.setNeutralMode(NeutralMode.Brake);
         this.talon.setInverted(RobotMap.CLIMBER_MOTOR_INVERTED);
     }
 
+    /**
+     * Sets the percent output of the motor to the specified value.
+     * @param power The percent output on the range [-1, 1].
+     */
     public void setPercentOutput(double power) {
         power = Robot.constrainPercentOutput(power);
         this.talon.set(ControlMode.PercentOutput, power);
