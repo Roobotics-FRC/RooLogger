@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Runs the given command after the given amount of time.
- *
- * @author Samasaur
  */
 public class DoLaterAuton extends CommandGroup {
     /**

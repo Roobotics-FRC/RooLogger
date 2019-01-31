@@ -7,8 +7,6 @@ import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
  * Retracts the rear half of the climber and sets the neutral mode of the drivetrain to brake.
- *
- * @author Samasaur
  */
 public class RetractClimberRearAuton extends Command {
     private Climber climber;

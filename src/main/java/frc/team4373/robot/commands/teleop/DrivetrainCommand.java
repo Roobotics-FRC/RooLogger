@@ -6,8 +6,6 @@ import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
  * A command that controls the drivetrain via the joystick.
- *
- * @author Samasaur
  */
 public class DrivetrainCommand extends Command {
     private Drivetrain drivetrain;

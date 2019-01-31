@@ -7,8 +7,6 @@ import frc.team4373.robot.subsystems.ClimberDrive;
 
 /**
  * A command that controls the drivetrain of the climber.
- *
- * @author Samasaur
  */
 public class ClimberDriveCommand extends Command {
     private ClimberDrive cld;

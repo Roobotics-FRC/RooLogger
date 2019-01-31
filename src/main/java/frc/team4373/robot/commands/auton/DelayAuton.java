@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Delays the given amount of time.
- *
- * @author Samasaur
  */
 public class DelayAuton extends Command {
     private double time;

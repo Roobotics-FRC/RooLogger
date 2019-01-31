@@ -7,8 +7,6 @@ import frc.team4373.robot.subsystems.Lift;
 
 /**
  * Allows manual control of the lift using the left stick on the operator joystick.
- *
- * @author Samasaur
  */
 public class LiftCommand extends Command {
     private Lift lift;

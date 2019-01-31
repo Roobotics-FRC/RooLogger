@@ -9,8 +9,6 @@ import frc.team4373.robot.subsystems.*;
  *
  * <p>The bot should start facing the level 3 platform, as close to it as possible.
  * If the hardware (i.e. limit switches) is perfect, this will be fine; if not, well, KABOOOOOOOOM!
- *
- * @author Samasaur
  */
 public class ClimbAuton extends Command {
     private int state = 0;

@@ -5,8 +5,6 @@ import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
  * A command that dives forward for the specified power for the specified amount of time.
- *
- * @author Samasaur
  */
 public class TimedDriveAuton extends Command {
     private Drivetrain drivetrain;

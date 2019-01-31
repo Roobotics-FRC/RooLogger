@@ -7,8 +7,6 @@ import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
  * Retracts the front half of the climber and sets the neutral mode of the drivetrain to coast.
- *
- * @author Samasaur
  */
 public class RetractClimberFrontAuton extends Command {
     private Climber climber;

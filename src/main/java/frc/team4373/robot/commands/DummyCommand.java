@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * A command that exists to do nothing but require a subsystem.
- *
- * @author Samasaur
  */
 public class DummyCommand extends Command {
     /**

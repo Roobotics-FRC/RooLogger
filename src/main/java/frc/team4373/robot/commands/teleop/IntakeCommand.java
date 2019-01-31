@@ -5,6 +5,9 @@ import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.input.OI;
 import frc.team4373.robot.subsystems.Intake;
 
+/**
+ * Allows manual control of the intake using the rear left and right triggers and buttons.
+ */
 public class IntakeCommand extends Command {
     private Intake intake;
 

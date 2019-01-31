@@ -7,8 +7,6 @@ import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
  * Extends the climber and sets the neutral mode of the drivetrain to coast.
- *
- * @author Samasaur
  */
 public class ExtendClimberAuton extends Command {
     private Climber climber;
