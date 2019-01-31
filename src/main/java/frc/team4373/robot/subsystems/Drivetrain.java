@@ -100,6 +100,9 @@ public class Drivetrain extends Subsystem {
 
     /**
      * Sets safety-checked percent output to the specified motor.
+     *
+     * <p>Positive values to the middle wheel go to the right.
+     *
      * @param motor the motor whose output to set.
      * @param power the percent output on [-1, 1] to set.
      */
@@ -161,6 +164,14 @@ public class Drivetrain extends Subsystem {
     public void deployMiddleWheel() {
         this.piston.set(DoubleSolenoid.Value.kForward);
         this.middleWheelDeployed = true;
+    }
+
+    /**
+     * Returns whether the middle wheel is currently deployed.
+     * @return Whether or not the middle wheel is deployed.
+     */
+    public boolean isMiddleWheelDeployed() {
+        return middleWheelDeployed;
     }
 
     /**

@@ -27,6 +27,7 @@ public class RobotMap {
     // Speed presets
     public static final int LIFT_PEAK_OUTPUT = 1;
     public static final int INTAKE_MOTOR_OUTPUT = 1;
+    public static final double AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED = 0.5;
 
     // OI devices
     public static final int DRIVE_JOYSTICK_PORT = 0;
@@ -97,4 +98,6 @@ public class RobotMap {
     public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
     public static final int DRIVETRAIN_PID_IDX = 0;
     public static final PID DRIVETRAIN_PID_GAINS = new PID(0, 1, 0, 0);
+
+
 }
