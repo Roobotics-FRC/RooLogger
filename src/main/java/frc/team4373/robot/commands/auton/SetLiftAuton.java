@@ -10,9 +10,20 @@ public class SetLiftAuton extends Command {
     private Lift lift;
     private double position;
 
-    public SetLiftAuton(double position) {
+    public enum Position {
+        HATCH_3(210), HATCH_2(110), HATCH_1(30),
+        CARGO_3(200), CARGO_2(100), CARGO_1(20),
+        LOADING(10), STOW(0);
+
+        private int value;
+        Position(int value) {
+            this.value = value;
+        }
+    }
+
+    public SetLiftAuton(Position position) {
         requires(this.lift = Lift.getInstance());
-        this.position = position;
+        this.position = position.value;
     }
 
     @Override

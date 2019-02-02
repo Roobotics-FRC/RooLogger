@@ -8,6 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StowIntakeAuton extends CommandGroup {
     public StowIntakeAuton() {
         addSequential(new RetractIntakeAuton());
-        addSequential(new SetLiftAuton(0));
+        addSequential(new SetLiftAuton(SetLiftAuton.Position.STOW));
     }
 }
