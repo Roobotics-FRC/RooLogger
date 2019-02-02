@@ -8,6 +8,7 @@ import frc.team4373.robot.subsystems.Intake;
  */
 public class RetractIntakeAuton extends Command {
     private Intake intake;
+
     public RetractIntakeAuton() {
         requires(this.intake = Intake.getInstance());
     }

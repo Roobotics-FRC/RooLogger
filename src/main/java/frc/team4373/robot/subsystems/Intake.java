@@ -33,9 +33,11 @@ public class Intake extends Subsystem {
         hatchPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT,
                 RobotMap.INTAKE_PISTON_HATCH_FORWARD, RobotMap.INTAKE_PISTON_HATCH_BACKWARD);
         deployPiston1 = new DoubleSolenoid(RobotMap.PCM_2_PORT,
-                RobotMap.INTAKE_PISTON_DEPLOYMENT_1_FORWARD, RobotMap.INTAKE_PISTON_DEPLOYMENT_1_BACKWARD);
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_1_FORWARD,
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_1_BACKWARD);
         deployPiston2 = new DoubleSolenoid(RobotMap.PCM_2_PORT,
-                RobotMap.INTAKE_PISTON_DEPLOYMENT_2_FORWARD, RobotMap.INTAKE_PISTON_DEPLOYMENT_2_BACKWARD);
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_2_FORWARD,
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_2_BACKWARD);
 
         this.leftTalon.setNeutralMode(NeutralMode.Brake);
         this.rightTalon.setNeutralMode(NeutralMode.Brake);

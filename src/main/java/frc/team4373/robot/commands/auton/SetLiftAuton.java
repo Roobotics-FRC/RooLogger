@@ -27,7 +27,7 @@ public class SetLiftAuton extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;//TODO: How to check if it has arrived?
+        return this.lift.closedLoopErrorIsTolerable();
     }
 
     @Override

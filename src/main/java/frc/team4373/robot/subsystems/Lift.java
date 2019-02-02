@@ -54,12 +54,12 @@ public class Lift extends Subsystem {
 
         this.talon1.config_kP(RobotMap.LIFT_PID_IDX, RobotMap.LIFT_PID_GAINS.kP);
 
-        int absolutePosition = this.talon1.getSensorCollection().getQuadraturePosition();
-        absolutePosition &= 0xFFF;
-        if (RobotMap.LIFT_ENCODER_PHASE) absolutePosition *= -1;
-        if (RobotMap.LIFT_MOTOR_1_INVERTED) absolutePosition *= -1;
-        this.talon1.setSelectedSensorPosition(absolutePosition);
-        this.initialPosition = absolutePosition;
+        // int absolutePosition = this.talon1.getSensorCollection().getQuadraturePosition();
+        // absolutePosition &= 0xFFF;
+        // if (RobotMap.LIFT_ENCODER_PHASE) absolutePosition *= -1;
+        // if (RobotMap.LIFT_MOTOR_1_INVERTED) absolutePosition *= -1;
+        // this.talon1.setSelectedSensorPosition(absolutePosition);
+        // this.initialPosition = absolutePosition;
     }
 
     public void raise() {
@@ -70,6 +70,16 @@ public class Lift extends Subsystem {
     public void lower() {
         this.piston1.set(DoubleSolenoid.Value.kReverse);
         this.piston2.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    /**
+     * Gets whether the closed loop error on the lift is within an acceptable range
+     * (i.e., whether the lift has reached the specified position).
+     * @return whether the error is acceptable.
+     */
+    public boolean closedLoopErrorIsTolerable() {
+        double error = this.talon1.getClosedLoopError();
+        return error <= RobotMap.LIFT_ACCEPTABLE_CLOSED_LOOP_ERROR;
     }
 
     /**
