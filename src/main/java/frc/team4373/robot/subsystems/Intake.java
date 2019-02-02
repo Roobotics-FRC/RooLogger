@@ -3,6 +3,7 @@ package frc.team4373.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
@@ -19,6 +20,7 @@ public class Intake extends Subsystem {
     private DoubleSolenoid hatchPiston;
     private DoubleSolenoid deployPiston1;
     private DoubleSolenoid deployPiston2;
+    private DigitalInput limitSwitch;
 
     private static Intake instance;
 
@@ -39,6 +41,8 @@ public class Intake extends Subsystem {
                 RobotMap.INTAKE_PISTON_DEPLOYMENT_2_FORWARD,
                 RobotMap.INTAKE_PISTON_DEPLOYMENT_2_BACKWARD);
 
+        limitSwitch = new DigitalInput(RobotMap.INTAKE_LIMIT_SWITCH_CHANNEL);
+
         this.leftTalon.setNeutralMode(NeutralMode.Brake);
         this.rightTalon.setNeutralMode(NeutralMode.Brake);
 
@@ -58,7 +62,9 @@ public class Intake extends Subsystem {
     }
 
     public void collectHatch() {
-        hatchPiston.set(DoubleSolenoid.Value.kReverse);
+        if (!isHoldingCargo()) {
+            hatchPiston.set(DoubleSolenoid.Value.kReverse);
+        }
     }
 
     public void releaseHatch() {
@@ -83,6 +89,10 @@ public class Intake extends Subsystem {
     public void retract() {
         this.deployPiston1.set(DoubleSolenoid.Value.kReverse);
         this.deployPiston2.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public boolean isHoldingCargo() {
+        return limitSwitch.get();
     }
 
     @Override

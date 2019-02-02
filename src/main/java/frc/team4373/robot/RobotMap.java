@@ -85,6 +85,7 @@ public class RobotMap {
     // Digital input mappings
     public static final int CLIMBER_FRONT_LIMIT_SWITCH_CHANNEL = 0;
     public static final int CLIMBER_REAR_LIMIT_SWITCH_CHANNEL = 1;
+    public static final int INTAKE_LIMIT_SWITCH_CHANNEL = 2;
 
     // Control system ports
     public static final int PCM_1_PORT = 11;
