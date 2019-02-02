@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
+import frc.team4373.robot.commands.teleop.LiftCommand;
 
 /**
  * A programmatic representation of the robot's lift mechanism that supports the intake.
@@ -76,7 +77,7 @@ public class Lift extends Subsystem {
      * @param power the percent output to which to set the motors.
      */
     public void setPercentOutput(double power) {
-        if (this.talon1.getSensorCollection().getQuadraturePosition() > this.initialPosition) {
+        if (getSensorPosition() > this.initialPosition) {
             power = Robot.constrainPercentOutput(power);
             this.talon1.set(ControlMode.PercentOutput, power);
         }
@@ -102,6 +103,6 @@ public class Lift extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        //TODO
+        setDefaultCommand(new LiftCommand());
     }
 }
