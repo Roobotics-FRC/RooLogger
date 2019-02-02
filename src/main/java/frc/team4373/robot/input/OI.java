@@ -11,6 +11,8 @@ public class OI {
     private RooJoystick<FineGrainedPiecewiseFilter> driveJoystick;
     private RooJoystick operatorJoystick;
 
+    private
+
     private OI() {
         this.driveJoystick =
                 new RooJoystick<>(RobotMap.DRIVE_JOYSTICK_PORT, new FineGrainedPiecewiseFilter());

@@ -59,7 +59,7 @@ public class Lift extends Subsystem {
         // if (RobotMap.LIFT_ENCODER_PHASE) absolutePosition *= -1;
         // if (RobotMap.LIFT_MOTOR_1_INVERTED) absolutePosition *= -1;
         // this.talon1.setSelectedSensorPosition(absolutePosition);
-        // this.initialPosition = absolutePosition;
+        this.initialPosition = this.talon1.getSelectedSensorPosition();
     }
 
     public void raise() {
