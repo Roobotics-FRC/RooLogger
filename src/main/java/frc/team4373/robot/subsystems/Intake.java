@@ -16,8 +16,9 @@ public class Intake extends Subsystem {
 
     private WPI_TalonSRX leftTalon;
     private WPI_TalonSRX rightTalon;
-    private DoubleSolenoid leftPiston;
-    private DoubleSolenoid rightPiston;
+    private DoubleSolenoid hatchPiston;
+    private DoubleSolenoid deployPiston1;
+    private DoubleSolenoid deployPiston2;
 
     private static Intake instance;
 
@@ -29,10 +30,12 @@ public class Intake extends Subsystem {
         leftTalon = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR_LEFT);
         rightTalon = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR_RIGHT);
 
-        leftPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT,
-                RobotMap.INTAKE_PISTON_LEFT_FORWARD, RobotMap.INTAKE_PISTON_LEFT_BACKWARD);
-        rightPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT,
-                RobotMap.INTAKE_PISTON_RIGHT_FORWARD, RobotMap.INTAKE_PISTON_RIGHT_BACKWARD);
+        hatchPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT,
+                RobotMap.INTAKE_PISTON_HATCH_FORWARD, RobotMap.INTAKE_PISTON_HATCH_BACKWARD);
+        deployPiston1 = new DoubleSolenoid(RobotMap.PCM_2_PORT,
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_1_FORWARD, RobotMap.INTAKE_PISTON_DEPLOYMENT_1_BACKWARD);
+        deployPiston2 = new DoubleSolenoid(RobotMap.PCM_2_PORT,
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_2_FORWARD, RobotMap.INTAKE_PISTON_DEPLOYMENT_2_BACKWARD);
 
         this.leftTalon.setNeutralMode(NeutralMode.Brake);
         this.rightTalon.setNeutralMode(NeutralMode.Brake);
@@ -53,13 +56,11 @@ public class Intake extends Subsystem {
     }
 
     public void collectHatch() {
-        leftPiston.set(DoubleSolenoid.Value.kReverse);
-        rightPiston.set(DoubleSolenoid.Value.kReverse);
+        hatchPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void releaseHatch() {
-        leftPiston.set(DoubleSolenoid.Value.kForward);
-        rightPiston.set(DoubleSolenoid.Value.kForward);
+        hatchPiston.set(DoubleSolenoid.Value.kForward);
     }
 
     private void setLeftTalon(double power) {
@@ -70,6 +71,16 @@ public class Intake extends Subsystem {
     private void setRightTalon(double power) {
         power = Robot.constrainPercentOutput(power);
         this.rightTalon.set(ControlMode.PercentOutput, power);
+    }
+
+    public void deploy() {
+        this.deployPiston1.set(DoubleSolenoid.Value.kForward);
+        this.deployPiston2.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void retract() {
+        this.deployPiston1.set(DoubleSolenoid.Value.kReverse);
+        this.deployPiston2.set(DoubleSolenoid.Value.kReverse);
     }
 
     @Override

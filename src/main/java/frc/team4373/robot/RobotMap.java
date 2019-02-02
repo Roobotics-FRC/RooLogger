@@ -65,10 +65,12 @@ public class RobotMap {
     public static final int CLIMBER_PISTON_FRONT_BACKWARD = 7;
     public static final int CLIMBER_PISTON_REAR_FORWARD = 0;
     public static final int CLIMBER_PISTON_REAR_BACKWARD = 1;
-    public static final int INTAKE_PISTON_RIGHT_FORWARD = 2;
-    public static final int INTAKE_PISTON_RIGHT_BACKWARD = 3;
-    public static final int INTAKE_PISTON_LEFT_FORWARD = 4;
-    public static final int INTAKE_PISTON_LEFT_BACKWARD = 5;
+    public static final int INTAKE_PISTON_HATCH_FORWARD = 2;
+    public static final int INTAKE_PISTON_HATCH_BACKWARD = 3;
+    public static final int INTAKE_PISTON_DEPLOYMENT_1_FORWARD = 4;
+    public static final int INTAKE_PISTON_DEPLOYMENT_1_BACKWARD = 5;
+    public static final int INTAKE_PISTON_DEPLOYMENT_2_FORWARD = 6;
+    public static final int INTAKE_PISTON_DEPLOYMENT_2_BACKWARD = 7;
 
     // Digital input mappings
     public static final int CLIMBER_FRONT_LIMIT_SWITCH_CHANNEL = 0;
