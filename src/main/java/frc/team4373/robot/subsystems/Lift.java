@@ -76,8 +76,10 @@ public class Lift extends Subsystem {
      * @param power the percent output to which to set the motors.
      */
     public void setPercentOutput(double power) {
-        power = Robot.constrainPercentOutput(power);
-        this.talon1.set(ControlMode.PercentOutput, power);
+        if (this.talon1.getSensorCollection().getQuadraturePosition() > this.initialPosition) {
+            power = Robot.constrainPercentOutput(power);
+            this.talon1.set(ControlMode.PercentOutput, power);
+        }
     }
 
     /**
