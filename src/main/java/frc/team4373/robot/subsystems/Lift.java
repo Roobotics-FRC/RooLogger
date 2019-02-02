@@ -24,7 +24,6 @@ public class Lift extends Subsystem {
     private WPI_TalonSRX talon2;
     private DoubleSolenoid piston1;
     private DoubleSolenoid piston2;
-    private double initialPosition;
 
     private Lift() {
         this.talon1 = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_1);
@@ -59,7 +58,9 @@ public class Lift extends Subsystem {
         // if (RobotMap.LIFT_ENCODER_PHASE) absolutePosition *= -1;
         // if (RobotMap.LIFT_MOTOR_1_INVERTED) absolutePosition *= -1;
         // this.talon1.setSelectedSensorPosition(absolutePosition);
-        this.initialPosition = this.talon1.getSelectedSensorPosition();
+
+        // Make all sensor positions relative to the starting one
+        this.talon1.getSensorCollection().setQuadraturePosition(0, RobotMap.TALON_TIMEOUT_MS);
     }
 
     public void raise() {
@@ -87,7 +88,7 @@ public class Lift extends Subsystem {
      * @param power the percent output to which to set the motors.
      */
     public void setPercentOutput(double power) {
-        if (getSensorPosition() > this.initialPosition) {
+        if (getSensorPosition() > 0) {
             power = Robot.constrainPercentOutput(power);
             this.talon1.set(ControlMode.PercentOutput, power);
         }
@@ -98,8 +99,7 @@ public class Lift extends Subsystem {
      * @param setpoint the setpoint to set.
      */
     public void setPositionRelative(double setpoint) {
-        setpoint += initialPosition;
-        if (setpoint < initialPosition) setpoint = initialPosition;
+        if (setpoint < 0) setpoint = 0;
         this.talon1.set(ControlMode.Position, setpoint);
     }
 
