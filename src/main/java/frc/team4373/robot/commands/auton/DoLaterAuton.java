@@ -15,7 +15,7 @@ public class DoLaterAuton extends CommandGroup {
         // We could technically use `new WaitCommand(delay)`, but I'm not sure if it is reset in
         // `initialize`. From the decompiled bytecode, I also don't see how it works at all, so
         // I'm not inclined to blindly use it. While I trust ... WPI ... yeah, that's not going
-        // to happen. I trust `DelayAuton` more than I trust WippyLibe
+        // to happen. I trust `DelayAuton` more than I trust WippyLibe.
         //      — @Samasaur, 1/6/19
         addSequential(new DelayAuton(delay));
         addSequential(command);
