@@ -1,11 +1,12 @@
 package frc.team4373.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.teleop.LiftCommand;
@@ -24,6 +25,7 @@ public class Lift extends Subsystem {
     private WPI_TalonSRX talon2;
     private DoubleSolenoid piston1;
     private DoubleSolenoid piston2;
+    private Potentiometer poten;
 
     private Lift() {
         this.talon1 = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_1);
@@ -34,6 +36,9 @@ public class Lift extends Subsystem {
         this.piston2 = new DoubleSolenoid(RobotMap.PCM_1_PORT,
                 RobotMap.LIFT_PISTON_2_FORWARD, RobotMap.LIFT_PISTON_2_BACKWARD);
 
+        this.poten = new AnalogPotentiometer(RobotMap.PTN_CHANNEL,
+                RobotMap.LIFT_DEGREES_OF_MOTION);
+
         this.talon1.setNeutralMode(NeutralMode.Brake);
         this.talon2.setNeutralMode(NeutralMode.Brake);
 
@@ -41,26 +46,6 @@ public class Lift extends Subsystem {
 
         this.talon1.setInverted(RobotMap.LIFT_MOTOR_1_INVERTED);
         this.talon2.setInverted(RobotMap.LIFT_MOTOR_2_INVERTED);
-
-        this.talon1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
-                RobotMap.TALON_TIMEOUT_MS);
-        this.talon1.setSensorPhase(RobotMap.LIFT_ENCODER_PHASE);
-
-        this.talon1.configNominalOutputForward(0, RobotMap.TALON_TIMEOUT_MS);
-        this.talon1.configNominalOutputReverse(0, RobotMap.TALON_TIMEOUT_MS);
-        this.talon1.configPeakOutputForward(RobotMap.LIFT_PEAK_OUTPUT, RobotMap.TALON_TIMEOUT_MS);
-        this.talon1.configPeakOutputReverse(-RobotMap.LIFT_PEAK_OUTPUT, RobotMap.TALON_TIMEOUT_MS);
-
-        this.talon1.config_kP(RobotMap.LIFT_PID_IDX, RobotMap.LIFT_PID_GAINS.kP);
-
-        // int absolutePosition = this.talon1.getSensorCollection().getQuadraturePosition();
-        // absolutePosition &= 0xFFF;
-        // if (RobotMap.LIFT_ENCODER_PHASE) absolutePosition *= -1;
-        // if (RobotMap.LIFT_MOTOR_1_INVERTED) absolutePosition *= -1;
-        // this.talon1.setSelectedSensorPosition(absolutePosition);
-
-        // Make all sensor positions relative to the starting one
-        this.talon1.getSensorCollection().setQuadraturePosition(0, RobotMap.TALON_TIMEOUT_MS);
     }
 
     public void raise() {
@@ -74,41 +59,22 @@ public class Lift extends Subsystem {
     }
 
     /**
-     * Gets whether the closed loop error on the lift is within an acceptable range
-     * (i.e., whether the lift has reached the specified position).
-     * @return whether the error is acceptable.
-     */
-    public boolean closedLoopErrorIsTolerable() {
-        double error = this.talon1.getClosedLoopError();
-        return error <= RobotMap.LIFT_ACCEPTABLE_CLOSED_LOOP_ERROR;
-    }
-
-    /**
      * Sets the raw percent output of the lift motors.
      * @param power the percent output to which to set the motors.
      */
     public void setPercentOutput(double power) {
-        if (getSensorPosition() > 0) {
+        if (getPotenAngle() > 0) {
             power = Robot.constrainPercentOutput(power);
             this.talon1.set(ControlMode.PercentOutput, power);
         }
     }
 
     /**
-     * Sets a position setpoint in encoder units relative to the starting position.
-     * @param setpoint the setpoint to set.
+     * Gets the current angle from the potentiometer.
+     * @return the angle from the potentiometer.
      */
-    public void setPositionRelative(double setpoint) {
-        if (setpoint < 0) setpoint = 0;
-        this.talon1.set(ControlMode.Position, setpoint);
-    }
-
-    /**
-     * Returns the position of the encoder on the primary Talon.
-     * @return the Talon's current position, in encoder units.
-     */
-    public double getSensorPosition() {
-        return this.talon1.getSelectedSensorPosition();
+    public double getPotenAngle() {
+        return poten.get();
     }
 
     @Override

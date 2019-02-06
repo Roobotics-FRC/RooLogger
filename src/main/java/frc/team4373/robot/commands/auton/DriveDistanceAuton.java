@@ -16,9 +16,6 @@ public class DriveDistanceAuton extends PIDCommand {
     private PIDSource distanceSource;
     private PIDOutput distanceOutputLambda;
 
-    // should be WHEEL_DIAMETER * GEARBOX_RATIO * pi / 4096
-    public static final double POSITION_CONVERSION_FACTOR = 3 * 5.95 * Math.PI / 4096;
-
     private double setpointRelative;
     private double distancePIDOutput = 1d;
     private double robotSpeed = 0.25d;
@@ -34,7 +31,7 @@ public class DriveDistanceAuton extends PIDCommand {
         super("DriveDistanceAuton", RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD);
-        this.setpointRelative = distance / POSITION_CONVERSION_FACTOR;
+        this.setpointRelative = distance / RobotMap.DRIVETRAIN_ENC_UNITS_TO_IN;
         this.robotSpeed = speed;
         this.cooldownThreshold = this.robotSpeed * 0.25;
         requires(this.drivetrain = Drivetrain.getInstance());

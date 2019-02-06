@@ -86,6 +86,7 @@ public class RobotMap {
     public static final int CLIMBER_FRONT_LIMIT_SWITCH_CHANNEL = 0;
     public static final int CLIMBER_REAR_LIMIT_SWITCH_CHANNEL = 1;
     public static final int INTAKE_LIMIT_SWITCH_CHANNEL = 2;
+    public static final int PTN_CHANNEL = 0;
 
     // Control system ports
     public static final int PCM_1_PORT = 11;
@@ -109,8 +110,12 @@ public class RobotMap {
     public static final int TALON_TIMEOUT_MS = 1000;
     public static final int LIFT_PID_IDX = 0;
     public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
-    public static final double LIFT_ACCEPTABLE_CLOSED_LOOP_ERROR = 10;
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0, 0.001, 0, 0);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0, 0.01, 0, 0);
     public static final double AUTON_TURN_SPEED = 0.25;
+
+    // 6in diameter wheels; 10.71:1 gearbox ratio; 4096 encoder units per rotation
+    public static final double DRIVETRAIN_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;
+    public static final int LIFT_DEGREES_OF_MOTION = 120;
+    public static final int LIFT_INITIAL_ANG_OFFSET = 0;
 }
