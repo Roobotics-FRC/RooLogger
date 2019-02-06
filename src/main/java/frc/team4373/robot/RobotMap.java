@@ -110,8 +110,7 @@ public class RobotMap {
     public static final int LIFT_PID_IDX = 0;
     public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
     public static final double LIFT_ACCEPTABLE_CLOSED_LOOP_ERROR = 10;
-    public static final int DRIVETRAIN_PID_IDX = 0;
-    public static final PID DRIVETRAIN_PID_GAINS = new PID(0, 1, 0, 0);
-
-
+    public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0, 0.001, 0, 0);
+    public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0, 0.01, 0, 0);
+    public static final double AUTON_TURN_SPEED = 0.25;
 }

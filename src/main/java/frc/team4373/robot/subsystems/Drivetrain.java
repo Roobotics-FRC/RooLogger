@@ -64,38 +64,10 @@ public class Drivetrain extends Subsystem {
         this.middle1.setInverted(RobotMap.DRIVETRAIN_MOTOR_MIDDLE_1_INVERTED);
         this.middle2.setInverted(RobotMap.DRIVETRAIN_MOTOR_MIDDLE_2_INVERTED);
 
-        // TODO: Add full configuration for PID and motion profiling capability
-
-        this.right1.configNominalOutputForward(0, RobotMap.TALON_TIMEOUT_MS);
-        this.right1.configNominalOutputReverse(0, RobotMap.TALON_TIMEOUT_MS);
-        this.right1.configPeakOutputForward(1, RobotMap.TALON_TIMEOUT_MS);
-        this.right1.configPeakOutputReverse(-1, RobotMap.TALON_TIMEOUT_MS);
-
-        this.left1.configNominalOutputForward(0, RobotMap.TALON_TIMEOUT_MS);
-        this.left1.configNominalOutputReverse(0, RobotMap.TALON_TIMEOUT_MS);
-        this.left1.configPeakOutputForward(1, RobotMap.TALON_TIMEOUT_MS);
-        this.left1.configPeakOutputReverse(-1, RobotMap.TALON_TIMEOUT_MS);
-
-        this.right1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
-                RobotMap.TALON_TIMEOUT_MS);
+        this.right1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
         this.right1.setSensorPhase(RobotMap.DRIVETRAIN_RIGHT_ENCODER_PHASE);
-        this.left1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
-                RobotMap.TALON_TIMEOUT_MS);
+        this.left1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
         this.left1.setSensorPhase(RobotMap.DRIVETRAIN_LEFT_ENCODER_PHASE);
-
-        this.right1.config_kF(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kF);
-        this.right1.config_kP(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kP);
-        this.right1.config_kI(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kI);
-        this.right1.config_kD(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kD);
-
-        this.left1.config_kF(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kF);
-        this.left1.config_kP(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kP);
-        this.left1.config_kI(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kI);
-        this.left1.config_kD(RobotMap.DRIVETRAIN_PID_IDX, RobotMap.DRIVETRAIN_PID_GAINS.kD);
-
-        // this.middle1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,
-        //         RobotMap.TALON_TIMEOUT_MS);
-        // this.middle1.setSensorPhase(RobotMap.DRIVETRAIN_MIDDLE_ENCODER_PHASE);
     }
 
     /**
@@ -179,7 +151,7 @@ public class Drivetrain extends Subsystem {
      * @param talonID the Talon whose sensor position to fetch.
      * @return the position of the specified sensor.
      */
-    public double getSensorPosition(TalonID talonID) {
+    public int getSensorPosition(TalonID talonID) {
         return getTalon(talonID).getSelectedSensorPosition();
     }
 
@@ -190,6 +162,15 @@ public class Drivetrain extends Subsystem {
      */
     public double getSensorVelocity(TalonID talonID) {
         return getTalon(talonID).getSelectedSensorVelocity();
+    }
+
+    /**
+     * Gets current percent output of Talon.
+     * @param talonID Talon to query.
+     * @return percent output of talon.
+     */
+    public double getOutputPercent(TalonID talonID) {
+        return getTalon(talonID).getMotorOutputPercent();
     }
 
     /**
@@ -214,6 +195,16 @@ public class Drivetrain extends Subsystem {
             default: // this case should NEVER be reached; it is just used to prevent NPE warnings
                 return this.right1;
         }
+    }
+
+    /**
+     * Returns the Pigeon yaw value.
+     * @return Pigeon yaw value.
+     */
+    public double getPigeonYaw() {
+        double[] ypr = new double[3];
+        this.pigeon.getYawPitchRoll(ypr);
+        return ypr[0];
     }
 
     /**
