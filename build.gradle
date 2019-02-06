@@ -58,7 +58,7 @@ def switchBack() {
 // Define my targets (RoboRIO) and artifacts (deployable files)
 // This is added by GradleRIO's backing project EmbeddedTools.
 deploy {
-    switchTo4373()
+//    switchTo4373()
     targets {
         roboRIO("roborio") {
             // Team number is loaded either from the .wpilib/wpilib_preferences.json
@@ -84,7 +84,7 @@ deploy {
         }
     }
     tasks.deploy.doLast(){
-        switchBack()
+//        switchBack()
     }
 }
 
