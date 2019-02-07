@@ -17,6 +17,7 @@ public class OI {
     private JoystickButton operatorLiftCargoL3;
     private JoystickButton operatorLiftCargoL2;
     private JoystickButton operatorLiftCargoL1;
+    private JoystickButton operatorLiftCargoShip;
     private JoystickButton operatorLiftGround;
     private JoystickButton operatorStowIntake;
 
@@ -46,6 +47,10 @@ public class OI {
         operatorLiftCargoL1 = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L1);
         operatorLiftCargoL1.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_1));
+
+        operatorLiftCargoShip = new JoystickButton(operatorJoystick,
+                RobotMap.OPERATOR_BUTTON_LIFT_CARGO_SHIP);
+        operatorLiftCargoShip.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_SHIP));
 
         operatorLiftGround = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_LIFT_TO_LOAD);
