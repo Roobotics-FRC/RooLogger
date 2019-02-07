@@ -48,12 +48,18 @@ public class Lift extends Subsystem {
         this.talon2.setInverted(RobotMap.LIFT_MOTOR_2_INVERTED);
     }
 
-    public void raise() {
+    /**
+     * Telescopes the lift up.
+     */
+    public void telescope() {
         this.piston1.set(DoubleSolenoid.Value.kForward);
         this.piston2.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void lower() {
+    /**
+     * Retracts the telescoping pistons.
+     */
+    public void retract() {
         this.piston1.set(DoubleSolenoid.Value.kReverse);
         this.piston2.set(DoubleSolenoid.Value.kReverse);
     }

@@ -118,4 +118,8 @@ public class RobotMap {
     public static final double DRIVETRAIN_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;
     public static final int LIFT_DEGREES_OF_MOTION = 120;
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
+    public static final double LIFT_ARM_LENGTH = 39;
+    public static final double LIFT_ARM_MOUNT_HEIGHT = 47;
+    public static final double LIFT_MOVEMENT_SPEED = 0.5;
+
 }
