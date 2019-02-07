@@ -21,7 +21,7 @@ public class SetLiftAuton extends PIDCommand {
     public enum Position {
         HATCH_3(60, true), HATCH_2(42, false), HATCH_1(14, false),
         CARGO_3(68.5, true), CARGO_2(50.5, false), CARGO_1(22.5, false),
-        CARGO_SHIP(43, false), LOADING(14, false), STOW(0, false);
+        CARGO_SHIP(43, false), LOADING(14, false), STOW(5, false);
 
         private double armAngle;
         private boolean telescope;
