@@ -2,6 +2,8 @@ package frc.team4373.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.subsystems.*;
 
 /**
@@ -12,16 +14,35 @@ import frc.team4373.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
+    SendableChooser<String> objectiveChooser = new SendableChooser();
+    SendableChooser<String> positionChooser = new SendableChooser();
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     @Override
     public void robotInit() {
+        // Initialize subsystems
         Drivetrain.getInstance();
         Climber.getInstance();
         Intake.getInstance();
         Lift.getInstance();
+
+        // Populate dashboard
+        objectiveChooser.addOption("CS Side Cargo 1", "cs.cargoS1");
+        objectiveChooser.addOption("CS Side Cargo 2", "cs.cargoS2");
+        objectiveChooser.addOption("CS Side Cargo 3", "cs.cargoS3");
+        objectiveChooser.addOption("CS Side Hatch 1", "cs.hatchS1");
+        objectiveChooser.addOption("CS Side Hatch 2", "cs.hatchS2");
+        objectiveChooser.addOption("CS Side Hatch 3", "cs.hatchS3");
+        objectiveChooser.addOption("CS Front Hatch", "cs.hatchF");
+        SmartDashboard.putData("Objective", objectiveChooser);
+
+        positionChooser.addOption("Left", "left");
+        positionChooser.addOption("Right", "right");
+        positionChooser.addOption("Center", "center");
+        SmartDashboard.putData("Start Pos", positionChooser);
     }
 
     /**
@@ -41,7 +62,12 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        String pos = positionChooser.getSelected();
+        String objective = objectiveChooser.getSelected();
 
+        /*
+            MiddleWheelAdjuster -> Drive Forward -> Release (sth)
+         */
     }
 
     /**
