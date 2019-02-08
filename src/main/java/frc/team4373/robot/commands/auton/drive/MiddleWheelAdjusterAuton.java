@@ -12,6 +12,7 @@ public class MiddleWheelAdjusterAuton extends Command {
     private Drivetrain drivetrain;
     private boolean finished;
     private boolean initiallyDeployed;
+    private int visionErrors;
 
     public MiddleWheelAdjusterAuton() {
         requires(this.drivetrain = Drivetrain.getInstance());
@@ -35,11 +36,15 @@ public class MiddleWheelAdjusterAuton extends Command {
         } else {
             this.finished = true;
         }
+
+        if (!SmartDashboard.getString("vision_error", "none").equals("none")) {
+            ++this.visionErrors;
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return this.finished;
+        return this.finished || this.visionErrors > 9;
     }
 
     @Override

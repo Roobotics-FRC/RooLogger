@@ -22,6 +22,8 @@ public class ApproachVisionTargetAuton extends PIDCommand {
     private static final long COOLDOWN_TIME = 500;
     private static final double COOLDOWN_THRESHOLD = RobotMap.AUTON_VISION_APPROACH_SPEED * 0.25;
 
+    private int visionErrors;
+
     /**
      * Initializes a command to approach a vision target up to a set distance.
      * @param distance the distance away from the vision target to reach.
@@ -96,11 +98,15 @@ public class ApproachVisionTargetAuton extends PIDCommand {
                 distancePIDOutput + angleOutput);
         this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1,
                 distancePIDOutput - angleOutput);
+
+        if (!SmartDashboard.getString("vision_error", "none").equals("none")) {
+            ++this.visionErrors;
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return this.finished;
+        return this.finished || this.visionErrors > 9;
     }
 
     @Override
