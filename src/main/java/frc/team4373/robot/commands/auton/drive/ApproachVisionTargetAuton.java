@@ -22,12 +22,8 @@ public class ApproachVisionTargetAuton extends PIDCommand {
     private static final long COOLDOWN_TIME = 500;
     private static final double COOLDOWN_THRESHOLD = RobotMap.AUTON_VISION_APPROACH_SPEED * 0.25;
 
-    private int visionErrors;
+    private int visionErrors = 0;
 
-    /**
-     * Initializes a command to approach a vision target up to a set distance.
-     * @param distance the distance away from the vision target to reach.
-     */
     public ApproachVisionTargetAuton(double distance) {
         super("ApproachVisionTargetAuton", RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI, RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD,
@@ -64,9 +60,11 @@ public class ApproachVisionTargetAuton extends PIDCommand {
     @Override
     protected void initialize() {
         this.finished = this.coolingDown = false;
+        this.visionErrors = 0;
 
         this.distanceController.setOutputRange(-RobotMap.AUTON_VISION_APPROACH_SPEED,
                 RobotMap.AUTON_VISION_APPROACH_SPEED);
+        this.distanceController.setInputRange(0, 20 * 12); // never more than 20 ft away
         this.distanceController.setSetpoint(targetDistanceFromVisionTarget);
         this.distancePIDOutput = RobotMap.AUTON_VISION_APPROACH_SPEED;
         this.distanceController.enable();
@@ -89,17 +87,18 @@ public class ApproachVisionTargetAuton extends PIDCommand {
                 this.drivetrain.setSidesPercentOutput(0);
                 return;
             }
-        } else if (Math.abs(angleOutput) < COOLDOWN_THRESHOLD) {
+        } else if (Math.abs(this.distancePIDOutput) < COOLDOWN_THRESHOLD) {
             this.coolingDown = true;
             this.cooldownStart = System.currentTimeMillis();
         }
 
+        // distancePIDOutput is negative because we're trying to get closer to the target
         this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1,
                 distancePIDOutput + angleOutput);
         this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1,
                 distancePIDOutput - angleOutput);
 
-        if (!SmartDashboard.getString("vision_error", "none").equals("none")) {
+        if (SmartDashboard.getString("vision_error", "none").equals("too_few")) {
             ++this.visionErrors;
         }
     }
