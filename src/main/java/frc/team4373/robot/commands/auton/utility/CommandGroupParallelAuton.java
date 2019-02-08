@@ -3,6 +3,8 @@ package frc.team4373.robot.commands.auton.utility;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+import java.util.Arrays;
+
 /**
  * Runs the given commands in parallel.
  */
@@ -12,8 +14,6 @@ public class CommandGroupParallelAuton extends CommandGroup {
      * @param commands The commands to run.
      */
     public CommandGroupParallelAuton(Command... commands) {
-        for (Command c: commands) {
-            addParallel(c);
-        }
+        Arrays.stream(commands).forEach(this::addParallel);
     }
 }
