@@ -44,7 +44,7 @@ public class MiddleWheelAdjusterAuton extends Command {
 
     @Override
     protected boolean isFinished() {
-        return this.finished || this.visionErrors > 9;
+        return this.finished || this.visionErrors > RobotMap.ALLOWABLE_VISION_ERRORS;
     }
 
     @Override
