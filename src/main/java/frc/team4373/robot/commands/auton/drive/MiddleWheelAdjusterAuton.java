@@ -36,15 +36,11 @@ public class MiddleWheelAdjusterAuton extends Command {
         } else {
             this.finished = true;
         }
-
-        if (!SmartDashboard.getString("vision_error", "none").equals("none")) {
-            ++this.visionErrors;
-        }
     }
 
     @Override
     protected boolean isFinished() {
-        return this.finished || this.visionErrors > RobotMap.ALLOWABLE_VISION_ERRORS;
+        return this.finished;
     }
 
     @Override
