@@ -22,6 +22,10 @@ public class ApproachVisionTargetAuton extends PIDCommand {
     private static final long COOLDOWN_TIME = 500;
     private static final double COOLDOWN_THRESHOLD = RobotMap.AUTON_VISION_APPROACH_SPEED * 0.25;
 
+    /**
+     * Initializes a command to approach a vision target up to a set distance.
+     * @param distance the distance away from the vision target to reach.
+     */
     public ApproachVisionTargetAuton(double distance) {
         super("ApproachVisionTargetAuton", RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI, RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD,

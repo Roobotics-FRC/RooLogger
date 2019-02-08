@@ -9,14 +9,21 @@ import frc.team4373.robot.commands.auton.elemental.ReleaseCargoAuton;
 
 public class SideCargoAuton extends CommandGroup {
 
+    /**
+     * Constructs a new SideCargoAuton command group.
+     * @param side the side on which the robot is starting (right or left ONLY).
+     * @param portLoc the port (near, middle, far) to go for.
+     */
     public SideCargoAuton(RobotMap.Side side, RobotMap.CargoShipPort portLoc) {
         double angleTurn = 90;
         double driveDistance;
         switch (side) {
             case RIGHT:
                 angleTurn *= -1;
+                break;
             default:
                 angleTurn *= 1;
+                break;
         }
         switch (portLoc) {
             case NEAR:

@@ -128,6 +128,7 @@ public class RobotMap {
     public enum Side {
         RIGHT, LEFT
     }
+
     public enum CargoShipPort {
         NEAR, MIDDLE, FAR
     }

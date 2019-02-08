@@ -32,12 +32,16 @@ public class SetLiftAuton extends PIDCommand {
          * @param telescope whether to telescope the lift with pistons.
          */
         Position(double armHeight, boolean telescope) {
-            this.armAngle = Math.acos((RobotMap.LIFT_ARM_MOUNT_HEIGHT - armHeight) /
-                    RobotMap.LIFT_ARM_LENGTH);
+            this.armAngle = Math.acos((RobotMap.LIFT_ARM_MOUNT_HEIGHT - armHeight)
+                    / RobotMap.LIFT_ARM_LENGTH);
             this.telescope = telescope;
         }
     }
 
+    /**
+     * Constructs a new SetLiftAuton command to set the lift to a predefined height.
+     * @param position the position to attain.
+     */
     public SetLiftAuton(Position position) {
         super("SetLiftAuton", RobotMap.LIFT_PID_GAINS.kP, RobotMap.LIFT_PID_GAINS.kI,
                 RobotMap.LIFT_PID_GAINS.kD);
