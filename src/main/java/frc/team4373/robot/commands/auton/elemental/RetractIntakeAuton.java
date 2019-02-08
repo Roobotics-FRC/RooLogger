@@ -1,13 +1,15 @@
-package frc.team4373.robot.commands.auton;
+package frc.team4373.robot.commands.auton.elemental;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Intake;
 
-public class CollectCargoAuton extends Command {
-
+/**
+ * Retracts the intake.
+ */
+public class RetractIntakeAuton extends Command {
     private Intake intake;
 
-    public CollectCargoAuton() {
+    public RetractIntakeAuton() {
         requires(this.intake = Intake.getInstance());
     }
 
@@ -18,11 +20,21 @@ public class CollectCargoAuton extends Command {
 
     @Override
     protected void execute() {
-        this.intake.collectCargo();
+        this.intake.retract();
     }
 
     @Override
     protected boolean isFinished() {
         return this.isTimedOut();
+    }
+
+    @Override
+    protected void end() {
+
+    }
+
+    @Override
+    protected void interrupted() {
+        this.end();
     }
 }

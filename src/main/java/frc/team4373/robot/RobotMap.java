@@ -115,6 +115,7 @@ public class RobotMap {
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0, 0.01, 0, 0);
     public static final double AUTON_TURN_SPEED = 0.25;
     public static final double AUTON_LONG_DRIVE_SPEED = 1; // for driving long distances
+    public static final double AUTON_VISION_APPROACH_SPEED = 0.25;
 
     // 6in diameter wheels; 10.71:1 gearbox ratio; 4096 encoder units per rotation
     public static final double DRIVETRAIN_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;

@@ -1,4 +1,4 @@
-package frc.team4373.robot.commands.auton;
+package frc.team4373.robot.commands.auton.sequences;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;

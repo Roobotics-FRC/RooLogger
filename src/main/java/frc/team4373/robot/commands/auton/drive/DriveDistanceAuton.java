@@ -1,4 +1,4 @@
-package frc.team4373.robot.commands.auton;
+package frc.team4373.robot.commands.auton.drive;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -69,7 +69,7 @@ public class DriveDistanceAuton extends PIDCommand {
         this.distancePIDController.setSetpoint(getAveragePosition()
                 + setpointRelative);
         this.distancePIDController.enable();
-        this.distancePIDOutput = 1;
+        this.distancePIDOutput = robotSpeed;
 
         // Angular PID configuration
         this.setSetpoint(drivetrain.getPigeonYaw());
@@ -89,6 +89,10 @@ public class DriveDistanceAuton extends PIDCommand {
                 distancePIDOutput - angleOutput);
     }
 
+    /**
+     * Averages the positions of the left and right encoders.
+     * @return the average position of the drivetrain.
+     */
     private int getAveragePosition() {
         return (this.drivetrain.getSensorPosition(Drivetrain.TalonID.RIGHT_1)
                 + this.drivetrain.getSensorPosition(Drivetrain.TalonID.LEFT_1)) / 2;

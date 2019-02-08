@@ -1,4 +1,4 @@
-package frc.team4373.robot.commands.auton;
+package frc.team4373.robot.commands.auton.elemental;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
@@ -6,13 +6,13 @@ import frc.team4373.robot.subsystems.Climber;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
- * Extends the climber and sets the neutral mode of the drivetrain to coast.
+ * Retracts the rear half of the climber and sets the neutral mode of the drivetrain to brake.
  */
-public class ExtendClimberAuton extends Command {
+public class RetractClimberRearAuton extends Command {
     private Climber climber;
     private Drivetrain drivetrain;
 
-    public ExtendClimberAuton() {
+    public RetractClimberRearAuton() {
         requires(this.climber = Climber.getInstance());
         this.drivetrain = Drivetrain.getInstance();
     }
@@ -24,8 +24,8 @@ public class ExtendClimberAuton extends Command {
 
     @Override
     protected void execute() {
-        climber.climb();
-        drivetrain.setNeutralMode(NeutralMode.Coast);
+        climber.retractFront(); // TODO: This could also be `retractAll()`. Should it be?
+        drivetrain.setNeutralMode(NeutralMode.Brake);
     }
 
     @Override

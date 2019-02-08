@@ -1,7 +1,11 @@
-package frc.team4373.robot.commands.auton;
+package frc.team4373.robot.commands.auton.sequences;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.team4373.robot.RobotMap;
+import frc.team4373.robot.commands.auton.drive.DriveDistanceAuton;
+import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
+import frc.team4373.robot.commands.auton.drive.TurnToAngleAuton;
+import frc.team4373.robot.commands.auton.elemental.ReleaseCargoAuton;
 
 public class SideCargoAuton extends CommandGroup {
 

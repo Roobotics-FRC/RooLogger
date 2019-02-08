@@ -1,26 +1,24 @@
-package frc.team4373.robot.commands.auton;
+package frc.team4373.robot.commands.auton.elemental;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Intake;
 
-/**
- * Releases a hatch panel.
- */
-public class ReleaseHatchPanelAuton extends Command {
+public class CollectCargoAuton extends Command {
+
     private Intake intake;
 
-    public ReleaseHatchPanelAuton() {
+    public CollectCargoAuton() {
         requires(this.intake = Intake.getInstance());
     }
 
     @Override
     protected void initialize() {
-        setTimeout(1);
+        setTimeout(0.5);
     }
 
     @Override
     protected void execute() {
-        this.intake.releaseHatch();
+        this.intake.collectCargo();
     }
 
     @Override

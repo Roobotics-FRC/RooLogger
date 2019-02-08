@@ -1,26 +1,24 @@
-package frc.team4373.robot.commands.auton;
+package frc.team4373.robot.commands.auton.elemental;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Intake;
 
-/**
- * Deploys the intake.
- */
-public class DeployIntakeAuton extends Command {
+public class ReleaseCargoAuton extends Command {
+
     private Intake intake;
 
-    public DeployIntakeAuton() {
+    public ReleaseCargoAuton() {
         requires(this.intake = Intake.getInstance());
     }
 
     @Override
     protected void initialize() {
-        setTimeout(0.25);
+        setTimeout(0.5);
     }
 
     @Override
     protected void execute() {
-        this.intake.deploy();
+        this.intake.releaseCargo();
     }
 
     @Override
@@ -28,13 +26,4 @@ public class DeployIntakeAuton extends Command {
         return this.isTimedOut();
     }
 
-    @Override
-    protected void end() {
-
-    }
-
-    @Override
-    protected void interrupted() {
-        this.end();
-    }
 }
