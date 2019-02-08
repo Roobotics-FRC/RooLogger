@@ -1,9 +1,16 @@
 package frc.team4373.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team4373.robot.RobotMap.CargoShipPort;
+import frc.team4373.robot.RobotMap.Side;
+import frc.team4373.robot.commands.auton.sequences.CSFrontHatchAuton;
+import frc.team4373.robot.commands.auton.sequences.CSSideCargoAuton;
+import frc.team4373.robot.commands.auton.sequences.CSSideHatchAuton;
+import frc.team4373.robot.commands.auton.sequences.DriveForwardAuton;
 import frc.team4373.robot.subsystems.*;
 
 /**
@@ -14,6 +21,7 @@ import frc.team4373.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
+    private Command autonCommand = null;
     SendableChooser<String> objectiveChooser = new SendableChooser();
     SendableChooser<String> positionChooser = new SendableChooser();
 
@@ -30,12 +38,13 @@ public class Robot extends TimedRobot {
         Lift.getInstance();
 
         // Populate dashboard
-        objectiveChooser.addOption("CS Side Cargo 1", "cs.cargoS1");
-        objectiveChooser.addOption("CS Side Cargo 2", "cs.cargoS2");
-        objectiveChooser.addOption("CS Side Cargo 3", "cs.cargoS3");
-        objectiveChooser.addOption("CS Side Hatch 1", "cs.hatchS1");
-        objectiveChooser.addOption("CS Side Hatch 2", "cs.hatchS2");
-        objectiveChooser.addOption("CS Side Hatch 3", "cs.hatchS3");
+        objectiveChooser.addOption("Drive Forward", "drive");
+        objectiveChooser.addOption("CS Side Cargo 1", "cs.cargo.s1");
+        objectiveChooser.addOption("CS Side Cargo 2", "cs.cargo.s2");
+        objectiveChooser.addOption("CS Side Cargo 3", "cs.cargo.s3");
+        objectiveChooser.addOption("CS Side Hatch 1", "cs.hatch.s1");
+        objectiveChooser.addOption("CS Side Hatch 2", "cs.hatch.s2");
+        objectiveChooser.addOption("CS Side Hatch 3", "cs.hatch.s3");
         objectiveChooser.addOption("CS Front Hatch", "cs.hatchF");
         SmartDashboard.putData("Objective", objectiveChooser);
 
@@ -62,12 +71,65 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        String pos = positionChooser.getSelected();
+        Side pos;
+        switch (positionChooser.getSelected()) {
+            case "left":
+                pos = Side.LEFT;
+                break;
+            case "right":
+                pos = Side.RIGHT;
+                break;
+            default:
+                pos = Side.MIDDLE;
+        }
         String objective = objectiveChooser.getSelected();
 
-        /*
-            MiddleWheelAdjuster -> Drive Forward -> Release (sth)
-         */
+        if (pos == Side.MIDDLE) {
+            if (objective.equals("cs.hatchF")) {
+                autonCommand = new CSFrontHatchAuton();
+            } else if (objective.equals("drive")) {
+                autonCommand = new DriveForwardAuton();
+            }
+        } else {
+            String[] components = objective.split(".");
+            switch (components[0]) {
+                case "cs":
+                    CargoShipPort port;
+                    switch (components[2]) {
+                        case "s1":
+                            port = CargoShipPort.NEAR;
+                            break;
+                        case "s2":
+                            port = CargoShipPort.MIDDLE;
+                            break;
+                        case "s3":
+                            port = CargoShipPort.FAR;
+                            break;
+                        default:
+                            port = CargoShipPort.NEAR;
+                    }
+                    if (components[1].equals("cargo")) {
+                        autonCommand = new CSSideCargoAuton(pos, port);
+                    } else if (components[1].equals("hatch")) {
+                        autonCommand = new CSSideHatchAuton(pos, port);
+                    }
+                    break;
+                case "r":
+                    // TODO: rocket auton
+                    break;
+                case "drive":
+                    autonCommand = new DriveForwardAuton();
+                    break;
+                default:
+                    autonCommand = new DriveForwardAuton();
+            }
+        }
+
+        if (autonCommand == null) {
+            System.out.println("No auton command selected—using DriveForward");
+            autonCommand = new DriveForwardAuton();
+        }
+        autonCommand.start();
     }
 
     /**

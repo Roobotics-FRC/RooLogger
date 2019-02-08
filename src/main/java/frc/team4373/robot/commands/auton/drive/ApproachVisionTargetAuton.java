@@ -24,6 +24,10 @@ public class ApproachVisionTargetAuton extends PIDCommand {
 
     private int visionErrors = 0;
 
+    /**
+     * Constructs a command to approach a vision target up to a specified distance AWAY from it.
+     * @param distance the distance away from the target to achieve.
+     */
     public ApproachVisionTargetAuton(double distance) {
         super("ApproachVisionTargetAuton", RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI, RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD,
