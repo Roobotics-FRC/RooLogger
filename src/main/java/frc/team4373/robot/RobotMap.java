@@ -139,4 +139,12 @@ public class RobotMap {
         NEAR, MIDDLE, FAR
     }
 
+    public enum RocketHatchPanel {
+        NEAR, FAR
+    }
+
+    public enum RocketHeight {
+        LOW, MIDDLE, HIGH
+    }
+
 }

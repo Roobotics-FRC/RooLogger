@@ -7,10 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap.CargoShipPort;
 import frc.team4373.robot.RobotMap.Side;
-import frc.team4373.robot.commands.auton.sequences.CSFrontHatchAuton;
-import frc.team4373.robot.commands.auton.sequences.CSSideCargoAuton;
-import frc.team4373.robot.commands.auton.sequences.CSSideHatchAuton;
-import frc.team4373.robot.commands.auton.sequences.DriveForwardAuton;
+import frc.team4373.robot.commands.auton.sequences.*;
 import frc.team4373.robot.subsystems.*;
 
 /**
@@ -46,6 +43,15 @@ public class Robot extends TimedRobot {
         objectiveChooser.addOption("CS Side Hatch 2", "cs.hatch.s2");
         objectiveChooser.addOption("CS Side Hatch 3", "cs.hatch.s3");
         objectiveChooser.addOption("CS Front Hatch", "cs.hatchF");
+        objectiveChooser.addOption("R Cargo Low", "r.cargo.low");
+        objectiveChooser.addOption("R Cargo Med", "r.cargo.med");
+        objectiveChooser.addOption("R Cargo Hi", "r.cargo.hi");
+        objectiveChooser.addOption("R Hatch 1 Low", "r.hatch.near.low");
+        objectiveChooser.addOption("R Hatch 1 Mid", "r.hatch.near.mid");
+        objectiveChooser.addOption("R Hatch 1 Hi", "r.hatch.near.hi");
+        objectiveChooser.addOption("R Hatch 2 Low", "r.hatch.far.low");
+        objectiveChooser.addOption("R Hatch 2 Mid", "r.hatch.far.mid");
+        objectiveChooser.addOption("R Hatch 2 Hi", "r.hatch.far.hi");
         SmartDashboard.putData("Objective", objectiveChooser);
 
         positionChooser.addOption("Left", "left");
@@ -115,7 +121,41 @@ public class Robot extends TimedRobot {
                     }
                     break;
                 case "r":
-                    // TODO: rocket auton
+                    if (components[1].equals("cargo")) {
+                        RobotMap.RocketHeight height;
+                        switch (components[2]) {
+                            case "hi":
+                                height = RobotMap.RocketHeight.HIGH;
+                                break;
+                            case "mid":
+                                height = RobotMap.RocketHeight.MIDDLE;
+                                break;
+                            default:
+                                height = RobotMap.RocketHeight.LOW;
+                                break;
+                        }
+                        autonCommand = new RCargoAuton(pos, height);
+                    } else if (components[1].equals("hatch")) {
+                        RobotMap.RocketHatchPanel panelLoc;
+                        RobotMap.RocketHeight height;
+                        if (components[2].equals("far")) {
+                            panelLoc = RobotMap.RocketHatchPanel.FAR;
+                        } else {
+                            panelLoc = RobotMap.RocketHatchPanel.NEAR;
+                        }
+                        switch (components[3]) {
+                            case "hi":
+                                height = RobotMap.RocketHeight.HIGH;
+                                break;
+                            case "mid":
+                                height = RobotMap.RocketHeight.MIDDLE;
+                                break;
+                            default:
+                                height = RobotMap.RocketHeight.LOW;
+                                break;
+                        }
+                        autonCommand = new RHatchAuton(pos, height, panelLoc);
+                    }
                     break;
                 case "drive":
                     autonCommand = new DriveForwardAuton();
