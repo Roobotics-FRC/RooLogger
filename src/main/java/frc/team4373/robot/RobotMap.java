@@ -110,9 +110,6 @@ public class RobotMap {
 
     public static final int TALON_TIMEOUT_MS = 1000;
     public static final int LIFT_PID_IDX = 0;
-    public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
-    public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0, 0.001, 0, 0);
-    public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0, 0.01, 0, 0);
     public static final double AUTON_TURN_SPEED = 0.25;
     public static final double AUTON_LONG_DRIVE_SPEED = 1; // for driving long distances
 
@@ -123,6 +120,12 @@ public class RobotMap {
     public static final double LIFT_ARM_LENGTH = 39;
     public static final double LIFT_ARM_MOUNT_HEIGHT = 47;
     public static final double LIFT_MOVEMENT_SPEED = 0.5;
+
+    // PID gains
+    public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
+    public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0, 0.001, 0, 0);
+    public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0, 0.01, 0, 0);
+    public static final PID DRIVETRAIN_VIS_APPR_PID_GAINS = new PID(0, 0.03, 0.01, 0);
 
     // Vision
     public static final double AUTON_VISION_APPROACH_SPEED = 0.25;

@@ -56,9 +56,10 @@ public class ApproachVisionTargetAuton extends PIDCommand {
             this.distancePIDOutput = output;
         };
 
-        this.distanceController = new PIDController(RobotMap.DRIVETRAIN_DIST_PID_GAINS.kP,
-                RobotMap.DRIVETRAIN_DIST_PID_GAINS.kI, RobotMap.DRIVETRAIN_DIST_PID_GAINS.kD,
-                RobotMap.DRIVETRAIN_DIST_PID_GAINS.kF, source, outputLambda);
+        this.distanceController = new PIDController(RobotMap.DRIVETRAIN_VIS_APPR_PID_GAINS.kP,
+                RobotMap.DRIVETRAIN_VIS_APPR_PID_GAINS.kI,
+                RobotMap.DRIVETRAIN_VIS_APPR_PID_GAINS.kD,
+                RobotMap.DRIVETRAIN_VIS_APPR_PID_GAINS.kF, source, outputLambda);
     }
 
     @Override

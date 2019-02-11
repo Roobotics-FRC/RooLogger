@@ -16,6 +16,7 @@ public class ClearSubsystemCommand extends Command {
     public ClearSubsystemCommand(Subsystem... subsystems) {
         Arrays.stream(subsystems).forEach(this::requires);
     }
+
     @Override
     protected boolean isFinished() {
         return true;
