@@ -8,6 +8,7 @@ import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.drive.TurnToAngleAuton;
 import frc.team4373.robot.commands.auton.elemental.CollectHatchPanelAuton;
 import frc.team4373.robot.commands.auton.elemental.ReleaseHatchPanelAuton;
+import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
 
 public class RHatchAuton extends CommandGroup {
     private RobotMap.Side side;
@@ -22,6 +23,19 @@ public class RHatchAuton extends CommandGroup {
                        RobotMap.RocketHatchPanel panel) {
         this.side = side;
 
+        SetLiftAuton.Position pos;
+        switch (height) {
+            case HIGH:
+                pos = SetLiftAuton.Position.HATCH_3;
+                break;
+            case MIDDLE:
+                pos = SetLiftAuton.Position.HATCH_2;
+                break;
+            default:
+                pos = SetLiftAuton.Position.HATCH_1;
+                break;
+        }
+
         addParallel(new CollectHatchPanelAuton());
         if (panel == RobotMap.RocketHatchPanel.FAR) {
             addSequential(new DriveDistanceAuton(196, RobotMap.AUTON_LONG_DRIVE_SPEED));
@@ -34,6 +48,7 @@ public class RHatchAuton extends CommandGroup {
         }
         addSequential(new MiddleWheelAdjusterAuton());
         addSequential(new ApproachVisionTargetAuton(36));
+        addSequential(new SetLiftAuton(pos));
         addSequential(new ReleaseHatchPanelAuton());
     }
 
