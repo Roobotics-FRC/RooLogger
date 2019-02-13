@@ -15,6 +15,7 @@ public class ApproachVisionTargetAuton extends PIDCommand {
 
     private double targetDistanceFromVisionTarget;
     private double distancePIDOutput;
+    private boolean noDistance = false;
 
     private boolean finished = false;
     private boolean coolingDown = false;
@@ -48,7 +49,7 @@ public class ApproachVisionTargetAuton extends PIDCommand {
 
             @Override
             public double pidGet() {
-                return SmartDashboard.getNumber("distance_to_target", 0);
+                return SmartDashboard.getNumber("distance_to_target", -1);
             }
         };
 
@@ -86,6 +87,11 @@ public class ApproachVisionTargetAuton extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double angleOutput) {
+        if (SmartDashboard.getNumber("distance_to_target", -1) == -1) {
+            // The script either has crashed or isn't running—abort
+            this.finished = true;
+            return;
+        }
         if (coolingDown) {
             if (System.currentTimeMillis() - COOLDOWN_TIME > this.cooldownStart) {
                 this.finished = true;
