@@ -54,17 +54,17 @@ public class RobotMap {
     public static final int DRIVER_AXIS_SLIDER_CLIMBER_WHEEL = 3;
 
     // Motor CAN chain identifiers
-    public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 111;
-    public static final int DRIVETRAIN_MOTOR_RIGHT_2 = 112;
-    public static final int DRIVETRAIN_MOTOR_LEFT_1 = 121;
-    public static final int DRIVETRAIN_MOTOR_LEFT_2 = 122;
-    public static final int DRIVETRAIN_MOTOR_MIDDLE_1 = 131;
-    public static final int DRIVETRAIN_MOTOR_MIDDLE_2 = 132;
-    public static final int LIFT_MOTOR_1 = 231;
-    public static final int LIFT_MOTOR_2 = 232;
-    public static final int CLIMBER_DRIVE_MOTOR = 351;
-    public static final int INTAKE_MOTOR_RIGHT = 411;
-    public static final int INTAKE_MOTOR_LEFT = 421;
+    public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 11;
+    public static final int DRIVETRAIN_MOTOR_RIGHT_2 = 12;
+    public static final int DRIVETRAIN_MOTOR_LEFT_1 = 13;
+    public static final int DRIVETRAIN_MOTOR_LEFT_2 = 14;
+    public static final int DRIVETRAIN_MOTOR_MIDDLE_1 = 15;
+    public static final int DRIVETRAIN_MOTOR_MIDDLE_2 = 16;
+    public static final int LIFT_MOTOR_1 = 21;
+    public static final int LIFT_MOTOR_2 = 22;
+    public static final int CLIMBER_DRIVE_MOTOR = 31;
+    public static final int INTAKE_MOTOR_RIGHT = 41;
+    public static final int INTAKE_MOTOR_LEFT = 42;
 
     // Pneumatic channel mappings
     public static final int DRIVETRAIN_PISTON_FORWARD = 0;
@@ -91,8 +91,8 @@ public class RobotMap {
     public static final int PTN_CHANNEL = 0;
 
     // Control system ports
-    public static final int PCM_1_PORT = 11;
-    public static final int PCM_2_PORT = 12;
+    public static final int PCM_1_PORT = 2;
+    public static final int PCM_2_PORT = 3;
 
     // PID- and sensor-related constants
     public static class PID {
