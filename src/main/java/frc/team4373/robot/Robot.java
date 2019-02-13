@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
                 pos = Side.MIDDLE;
         }
         String objective = objectiveChooser.getSelected();
-        String[] components = objective.split(".");
+        String[] components = objective.split("\\.");
 
         if (pos == Side.MIDDLE) {
             if (objective.equals("cs.hatchF")) {
@@ -274,8 +274,8 @@ public class Robot extends TimedRobot {
         }
 
         String objective = objectiveChooser.getSelected();
-        String[] components = objective.split(".");
-
+        String[] components = objective.split("\\.");
+        
         if (components.length == 0) {
             SmartDashboard.putBoolean("Auton OK", false);
             return;
