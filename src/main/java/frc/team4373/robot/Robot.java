@@ -67,14 +67,20 @@ public class Robot extends TimedRobot {
         Lift.getInstance();
 
         // Populate dashboard
+        boolean isFirstEntry = true;
         for (Map.Entry<String, String> entry: autonEntries.entrySet()) {
-            objectiveChooser.addOption(entry.getKey(), entry.getValue());
+            if (isFirstEntry) {
+                objectiveChooser.setDefaultOption(entry.getKey(), entry.getValue());
+                isFirstEntry = false;
+            } else {
+                objectiveChooser.addOption(entry.getKey(), entry.getValue());
+            }
         }
         SmartDashboard.putData("Objective", objectiveChooser);
 
+        positionChooser.setDefaultOption("Center", "center");
         positionChooser.addOption("Left", "left");
         positionChooser.addOption("Right", "right");
-        positionChooser.addOption("Center", "center");
         SmartDashboard.putData("Start Pos", positionChooser);
 
         SmartDashboard.putBoolean("Auton OK", true);
