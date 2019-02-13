@@ -2,19 +2,24 @@ package frc.team4373.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team4373.robot.subsystems.*;
 
 import java.util.Arrays;
 
 /**
- * Removes any active commands from the given subsystem(s).
+ * Removes any active commands from all subsystems.
  */
 public class ClearSubsystemCommand extends Command {
     /**
-     * Creates a new ClearSubsystemCommand to clear the given subsystems.
-     * @param subsystems The subsystems to clear.
+     * Creates a new ClearSubsystemCommand to clear all current subsystem commands
+     * and return them to default (i.e., teleop).
      */
-    public ClearSubsystemCommand(Subsystem... subsystems) {
-        Arrays.stream(subsystems).forEach(this::requires);
+    public ClearSubsystemCommand() {
+        requires(Drivetrain.getInstance());
+        requires(Climber.getInstance());
+        requires(ClimberDrive.getInstance());
+        requires(Intake.getInstance());
+        requires(Lift.getInstance());
     }
 
     @Override
