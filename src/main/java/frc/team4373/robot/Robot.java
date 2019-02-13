@@ -120,8 +120,10 @@ public class Robot extends TimedRobot {
 
         if (pos == Side.MIDDLE) {
             if (objective.equals("cs.hatchF")) {
+                SmartDashboard.putString("Activated Auton", "CS Front Hatch");
                 autonCommand = new CSFrontHatchAuton();
             } else if (objective.equals("drive")) {
+                SmartDashboard.putString("Activated Auton", "Drive");
                 autonCommand = new DriveForwardAuton();
             }
         } else if (components.length > 2) {
@@ -282,7 +284,7 @@ public class Robot extends TimedRobot {
         }
 
         if (pos == Side.MIDDLE) {
-            if (components[0].equals("cs.hatchF") || components[0].equals("drive")) {
+            if (objective.equals("cs.hatchF") || objective.equals("drive")) {
                 SmartDashboard.putBoolean("Auton OK", true);
                 return;
             } else {
