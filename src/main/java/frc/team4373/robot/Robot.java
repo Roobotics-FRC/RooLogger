@@ -126,6 +126,9 @@ public class Robot extends TimedRobot {
                 SmartDashboard.putString("Activated Auton", "Drive");
                 autonCommand = new DriveForwardAuton();
             }
+        } else if (objective.equals("drive")) {
+            autonCommand = new DriveForwardAuton();
+            SmartDashboard.putString("Activated Auton", "Drive");
         } else if (components.length > 2) {
             switch (components[0]) {
                 case "cs":
@@ -201,10 +204,6 @@ public class Robot extends TimedRobot {
                         SmartDashboard.putString("Activated Auton", activatedAuton.toString());
                         autonCommand = new RHatchAuton(pos, height, panelLoc);
                     }
-                    break;
-                case "drive":
-                    autonCommand = new DriveForwardAuton();
-                    SmartDashboard.putString("Activated Auton", "Drive");
                     break;
                 default:
                     autonCommand = new DriveForwardAuton();
