@@ -97,6 +97,12 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
+        SmartDashboard.putNumber("R Power",
+                Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.RIGHT_1));
+        SmartDashboard.putNumber("L Power",
+                Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.LEFT_1));
+        SmartDashboard.putNumber("C Power",
+                Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.MIDDLE_1));
     }
 
     /**

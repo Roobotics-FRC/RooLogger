@@ -22,12 +22,14 @@ public class RobotMap {
     public static final boolean DRIVETRAIN_RIGHT_ENCODER_PHASE = false;
     public static final boolean DRIVETRAIN_LEFT_ENCODER_PHASE = false;
     public static final boolean DRIVETRAIN_MIDDLE_ENCODER_PHASE = false;
-    public static final boolean LIFT_ENCODER_PHASE = false;
 
     // Speed presets
-    public static final int LIFT_PEAK_OUTPUT = 1;
+    public static final double LIFT_MOVEMENT_SPEED = 0.5;
     public static final int INTAKE_MOTOR_OUTPUT = 1;
     public static final double AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED = 0.5;
+    public static final double AUTON_TURN_SPEED = 0.25;
+    public static final double AUTON_LONG_DRIVE_SPEED = 1; // for driving long distances
+    public static final double AUTON_VISION_APPROACH_SPEED = 0.25;
 
     // OI devices
     public static final int DRIVE_JOYSTICK_PORT = 0;
@@ -111,8 +113,6 @@ public class RobotMap {
 
     public static final int TALON_TIMEOUT_MS = 1000;
     public static final int LIFT_PID_IDX = 0;
-    public static final double AUTON_TURN_SPEED = 0.25;
-    public static final double AUTON_LONG_DRIVE_SPEED = 1; // for driving long distances
 
     // 6in diameter wheels; 10.71:1 gearbox ratio; 4096 encoder units per rotation
     public static final double DRIVETRAIN_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;
@@ -120,7 +120,6 @@ public class RobotMap {
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
     public static final double LIFT_ARM_LENGTH = 39;
     public static final double LIFT_ARM_MOUNT_HEIGHT = 47;
-    public static final double LIFT_MOVEMENT_SPEED = 0.5;
 
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
@@ -129,7 +128,6 @@ public class RobotMap {
     public static final PID DRIVETRAIN_VIS_APPR_PID_GAINS = new PID(0, 0.03, 0.01, 0);
 
     // Vision
-    public static final double AUTON_VISION_APPROACH_SPEED = 0.25;
     public static final int ALLOWABLE_VISION_ERRORS = 3;
 
     public enum Side {
