@@ -68,7 +68,7 @@ public class ApproachVisionTargetAuton extends PIDCommand {
         this.finished = this.coolingDown = false;
         this.visionErrors = 0;
 
-        this.drivetrain.enableLightRing(true);
+        this.drivetrain.setLightRing(true);
 
         this.distanceController.setOutputRange(-RobotMap.AUTON_VISION_APPROACH_SPEED,
                 RobotMap.AUTON_VISION_APPROACH_SPEED);
@@ -123,7 +123,7 @@ public class ApproachVisionTargetAuton extends PIDCommand {
 
     @Override
     protected void end() {
-        this.drivetrain.enableLightRing(false);
+        this.drivetrain.setLightRing(false);
         this.distanceController.reset();
         this.getPIDController().reset();
         this.drivetrain.zeroMotors();

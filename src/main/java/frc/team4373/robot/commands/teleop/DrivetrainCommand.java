@@ -16,7 +16,7 @@ public class DrivetrainCommand extends Command {
 
     @Override
     protected void initialize() {
-
+        this.drivetrain.setLightRing(false);
     }
 
     @Override

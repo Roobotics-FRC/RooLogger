@@ -121,7 +121,7 @@ public class Drivetrain extends Subsystem {
      * Turns the light ring on and off.
      * @param enable whether to enable the light ring.
      */
-    public void enableLightRing(boolean enable) {
+    public void setLightRing(boolean enable) {
         if (enable) {
             this.lightRingRelay.set(Relay.Value.kOn);
         } else {

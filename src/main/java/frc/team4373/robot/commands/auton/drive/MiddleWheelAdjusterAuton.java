@@ -20,7 +20,7 @@ public class MiddleWheelAdjusterAuton extends Command {
     @Override
     protected void initialize() {
         this.finished = false;
-        this.drivetrain.enableLightRing(true);
+        this.drivetrain.setLightRing(true);
         this.initiallyDeployed = drivetrain.isMiddleWheelDeployed();
         this.drivetrain.deployMiddleWheel();
     }
@@ -46,7 +46,7 @@ public class MiddleWheelAdjusterAuton extends Command {
 
     @Override
     protected void end() {
-        this.drivetrain.enableLightRing(false);
+        this.drivetrain.setLightRing(false);
         if (initiallyDeployed) {
             drivetrain.deployMiddleWheel();
         } else {
