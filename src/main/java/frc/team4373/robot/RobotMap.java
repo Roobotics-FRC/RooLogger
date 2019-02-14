@@ -90,6 +90,9 @@ public class RobotMap {
     public static final int CLIMBER_FRONT_LIMIT_SWITCH_CHANNEL = 0;
     public static final int CLIMBER_REAR_LIMIT_SWITCH_CHANNEL = 1;
     public static final int INTAKE_LIMIT_SWITCH_CHANNEL = 2;
+    public static final int LIGHT_RING_RELAY_CHANNEL = 3;
+
+    // Other mappings
     public static final int PTN_CHANNEL = 0;
 
     // Control system ports

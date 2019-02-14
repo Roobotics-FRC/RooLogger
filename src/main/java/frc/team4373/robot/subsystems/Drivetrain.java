@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
@@ -32,6 +33,7 @@ public class Drivetrain extends Subsystem {
     private WPI_TalonSRX middle2;
     private PigeonIMU pigeon;
     private DoubleSolenoid piston;
+    private Relay lightRingRelay;
     private boolean middleWheelDeployed = true; // TODO: is this a valid assumption?
 
     private Drivetrain() {
@@ -45,6 +47,8 @@ public class Drivetrain extends Subsystem {
         this.pigeon = new PigeonIMU(this.middle2);
         this.piston = new DoubleSolenoid(RobotMap.PCM_1_PORT,
                 RobotMap.DRIVETRAIN_PISTON_FORWARD, RobotMap.DRIVETRAIN_PISTON_BACKWARD);
+
+        this.lightRingRelay = new Relay(RobotMap.LIGHT_RING_RELAY_CHANNEL);
 
         this.left1.setNeutralMode(NeutralMode.Brake);
         this.left2.setNeutralMode(NeutralMode.Brake);
@@ -110,6 +114,18 @@ public class Drivetrain extends Subsystem {
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * Turns the light ring on and off.
+     * @param enable whether to enable the light ring.
+     */
+    public void enableLightRing(boolean enable) {
+        if (enable) {
+            this.lightRingRelay.set(Relay.Value.kOn);
+        } else {
+            this.lightRingRelay.set(Relay.Value.kOff);
         }
     }
 
