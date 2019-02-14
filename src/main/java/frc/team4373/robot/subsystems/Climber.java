@@ -48,6 +48,22 @@ public class Climber extends Subsystem {
         this.retractRear();
     }
 
+    /**
+     * Whether the front pistons are deployed.
+     * @return whether the front pistons are deployed.
+     */
+    public boolean frontIsDeployed() {
+        return this.frontPiston.get() == DoubleSolenoid.Value.kForward;
+    }
+
+    /**
+     * Whether the rear pistons are deployed.
+     * @return whether the rear pistons are deployed.
+     */
+    public boolean rearIsDeployed() {
+        return this.rearPiston.get() == DoubleSolenoid.Value.kForward;
+    }
+
     public boolean getFrontLimitSwitch() {
         return frontLimitSwitch.get();
     }

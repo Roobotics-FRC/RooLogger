@@ -35,6 +35,14 @@ public class ClimberDrive extends Subsystem {
         this.talon.set(ControlMode.PercentOutput, power);
     }
 
+    /**
+     * Gets the current percent output of the climb drive motor.
+     * @return the output of the motor.
+     */
+    public double getPercentOutput() {
+        return this.talon.getMotorOutputPercent();
+    }
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new ClimberDriveCommand());

@@ -97,12 +97,16 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        SmartDashboard.putNumber("R Power",
+        SmartDashboard.putNumber("R Pow",
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.RIGHT_1));
-        SmartDashboard.putNumber("L Power",
+        SmartDashboard.putNumber("L Pow",
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.LEFT_1));
-        SmartDashboard.putNumber("C Power",
+        SmartDashboard.putNumber("C Pow",
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.MIDDLE_1));
+        SmartDashboard.putNumber("Lift Pos", Lift.getInstance().getComputedArmHeight());
+        SmartDashboard.putNumber("CDrive Pow", ClimberDrive.getInstance().getPercentOutput());
+        SmartDashboard.putBoolean("Climb Front", Climber.getInstance().frontIsDeployed());
+        SmartDashboard.putBoolean("Climb Rear", Climber.getInstance().rearIsDeployed());
     }
 
     /**
