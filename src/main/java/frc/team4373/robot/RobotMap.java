@@ -118,7 +118,7 @@ public class RobotMap {
     public static final int LIFT_DEGREES_OF_MOTION = 120;
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
     public static final double LIFT_ARM_LENGTH = 39;
-    public static final double LIFT_ARM_MOUNT_HEIGHT = 47;
+    public static final double LIFT_ARM_MOUNT_HEIGHT = 43.5; // from floor, not bottom of bot
 
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
