@@ -13,7 +13,6 @@ import frc.team4373.robot.subsystems.Lift;
  */
 public class LiftCommand extends Command {
     private Lift lift;
-    private RooJoystick opStick;
 
     private Command liftToHatch3;
     private Command liftToHatch2;
@@ -24,7 +23,6 @@ public class LiftCommand extends Command {
      */
     public LiftCommand() {
         requires(this.lift = Lift.getInstance());
-        this.opStick = OI.getOI().getOperatorJoystick();
 
         this.liftToHatch3 = new SetLiftAuton(SetLiftAuton.Position.HATCH_3);
         this.liftToHatch2 = new SetLiftAuton(SetLiftAuton.Position.HATCH_2);
@@ -33,16 +31,15 @@ public class LiftCommand extends Command {
 
     @Override
     protected void initialize() {
-        super.initialize();
     }
 
     @Override
     protected void execute() {
-        double power = opStick.getRawAxis(
+        double power = OI.getOI().getOperatorJoystick().getRawAxis(
                 RobotMap.OPERATOR_AXIS_LIFT_MANUAL_CONTROL);
         lift.setPercentOutput(power);
 
-        switch (opStick.getPOV()) {
+        switch (OI.getOI().getOperatorJoystick().getPOV()) {
             case 0:
                 Scheduler.getInstance().add(liftToHatch3);
                 break;
@@ -64,7 +61,7 @@ public class LiftCommand extends Command {
 
     @Override
     protected void end() {
-        lift.setPercentOutput(0);
+        // lift.setPercentOutput(0);
     }
 
     @Override

@@ -7,6 +7,7 @@ import frc.team4373.robot.commands.auton.drive.DriveDistanceAuton;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.drive.TurnToAngleAuton;
 import frc.team4373.robot.commands.auton.elemental.CollectCargoAuton;
+import frc.team4373.robot.commands.auton.elemental.DeployIntakeAuton;
 import frc.team4373.robot.commands.auton.elemental.ReleaseCargoAuton;
 import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
 
@@ -42,6 +43,7 @@ public class CSSideCargoAuton extends CommandGroup {
                 return;
         }
         addParallel(new CollectCargoAuton());
+        addParallel(new DeployIntakeAuton());
         addSequential(new DriveDistanceAuton(driveDistance, RobotMap.AUTON_LONG_DRIVE_SPEED));
         addSequential(new TurnToAngleAuton(angleTurn));
         addSequential(new MiddleWheelAdjusterAuton());

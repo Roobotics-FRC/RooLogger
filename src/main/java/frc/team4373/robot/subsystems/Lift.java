@@ -24,17 +24,14 @@ public class Lift extends Subsystem {
     private WPI_TalonSRX talon1;
     private WPI_TalonSRX talon2;
     private DoubleSolenoid piston1;
-    private DoubleSolenoid piston2;
     private Potentiometer poten;
 
     private Lift() {
         this.talon1 = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_1);
         this.talon2 = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_2);
 
-        this.piston1 = new DoubleSolenoid(RobotMap.PCM_1_PORT,
-                RobotMap.LIFT_PISTON_1_FORWARD, RobotMap.LIFT_PISTON_1_BACKWARD);
-        this.piston2 = new DoubleSolenoid(RobotMap.PCM_1_PORT,
-                RobotMap.LIFT_PISTON_2_FORWARD, RobotMap.LIFT_PISTON_2_BACKWARD);
+        this.piston1 = new DoubleSolenoid(RobotMap.PCM_2_PORT,
+                RobotMap.LIFT_PISTON_FORWARD, RobotMap.LIFT_PISTON_BACKWARD);
 
         this.poten = new AnalogPotentiometer(RobotMap.PTN_CHANNEL,
                 RobotMap.LIFT_DEGREES_OF_MOTION);
@@ -53,7 +50,6 @@ public class Lift extends Subsystem {
      */
     public void telescope() {
         this.piston1.set(DoubleSolenoid.Value.kForward);
-        this.piston2.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
@@ -61,7 +57,6 @@ public class Lift extends Subsystem {
      */
     public void retract() {
         this.piston1.set(DoubleSolenoid.Value.kReverse);
-        this.piston2.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**

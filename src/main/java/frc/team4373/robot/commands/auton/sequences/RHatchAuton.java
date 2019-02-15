@@ -7,6 +7,7 @@ import frc.team4373.robot.commands.auton.drive.DriveDistanceAuton;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.drive.TurnToAngleAuton;
 import frc.team4373.robot.commands.auton.elemental.CollectHatchPanelAuton;
+import frc.team4373.robot.commands.auton.elemental.DeployIntakeAuton;
 import frc.team4373.robot.commands.auton.elemental.ReleaseHatchPanelAuton;
 import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
 
@@ -36,6 +37,7 @@ public class RHatchAuton extends CommandGroup {
                 break;
         }
 
+        addParallel(new DeployIntakeAuton());
         addParallel(new CollectHatchPanelAuton());
         if (panel == RobotMap.RocketHatchPanel.FAR) {
             addSequential(new DriveDistanceAuton(196, RobotMap.AUTON_LONG_DRIVE_SPEED));

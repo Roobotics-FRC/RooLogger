@@ -24,7 +24,7 @@ public class Climber extends Subsystem {
     private Climber() {
         this.frontPiston = new DoubleSolenoid(RobotMap.PCM_1_PORT,
                 RobotMap.CLIMBER_PISTON_FRONT_FORWARD, RobotMap.CLIMBER_PISTON_FRONT_BACKWARD);
-        this.rearPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT,
+        this.rearPiston = new DoubleSolenoid(RobotMap.PCM_1_PORT,
                 RobotMap.CLIMBER_PISTON_REAR_FORWARD, RobotMap.CLIMBER_PISTON_REAR_BACKWARD);
         this.frontLimitSwitch = new DigitalInput(RobotMap.CLIMBER_FRONT_LIMIT_SWITCH_CHANNEL);
         this.rearLimitSwitch = new DigitalInput(RobotMap.CLIMBER_REAR_LIMIT_SWITCH_CHANNEL);

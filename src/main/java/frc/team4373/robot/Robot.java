@@ -22,10 +22,10 @@ import java.util.Map;
  */
 public class Robot extends TimedRobot {
     private Command autonCommand = null;
-    SendableChooser<String> objectiveChooser = new SendableChooser();
-    SendableChooser<String> positionChooser = new SendableChooser();
+    private SendableChooser<String> objectiveChooser = new SendableChooser<>();
+    private SendableChooser<String> positionChooser = new SendableChooser<>();
 
-    Map<String, String> autonEntries;
+    private Map<String, String> autonEntries;
 
     /**
      * Constructor for the Robot class. Variable initialization occurs here;
@@ -286,7 +286,7 @@ public class Robot extends TimedRobot {
 
         String objective = objectiveChooser.getSelected();
         String[] components = objective.split("\\.");
-        
+
         if (components.length == 0) {
             SmartDashboard.putBoolean("Auton OK", false);
             return;

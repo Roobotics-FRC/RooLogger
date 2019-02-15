@@ -7,6 +7,7 @@ import frc.team4373.robot.commands.auton.drive.DriveDistanceAuton;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.drive.TurnToAngleAuton;
 import frc.team4373.robot.commands.auton.elemental.CollectCargoAuton;
+import frc.team4373.robot.commands.auton.elemental.DeployIntakeAuton;
 import frc.team4373.robot.commands.auton.elemental.ReleaseCargoAuton;
 import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
 
@@ -32,6 +33,7 @@ public class RCargoAuton extends CommandGroup {
         }
         int angle = 90;
         if (side == RobotMap.Side.LEFT) angle *= -1;
+        addParallel(new DeployIntakeAuton());
         addParallel(new CollectCargoAuton());
         addSequential(new DriveDistanceAuton(167, RobotMap.AUTON_LONG_DRIVE_SPEED));
         addSequential(new TurnToAngleAuton(angle));

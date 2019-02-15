@@ -7,6 +7,7 @@ import frc.team4373.robot.commands.auton.drive.DriveDistanceAuton;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.drive.TurnToAngleAuton;
 import frc.team4373.robot.commands.auton.elemental.CollectHatchPanelAuton;
+import frc.team4373.robot.commands.auton.elemental.DeployIntakeAuton;
 import frc.team4373.robot.commands.auton.elemental.ReleaseHatchPanelAuton;
 import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
 
@@ -41,6 +42,7 @@ public class CSSideHatchAuton extends CommandGroup {
                 return;
         }
         addParallel(new CollectHatchPanelAuton());
+        addParallel(new DeployIntakeAuton());
         addSequential(new DriveDistanceAuton(driveDistance, RobotMap.AUTON_LONG_DRIVE_SPEED));
         addSequential(new TurnToAngleAuton(angleTurn));
         addSequential(new MiddleWheelAdjusterAuton());

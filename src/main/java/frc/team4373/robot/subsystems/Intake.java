@@ -19,7 +19,6 @@ public class Intake extends Subsystem {
     private WPI_TalonSRX rightTalon;
     private DoubleSolenoid hatchPiston;
     private DoubleSolenoid deployPiston1;
-    private DoubleSolenoid deployPiston2;
     private DigitalInput limitSwitch;
 
     private static Intake instance;
@@ -34,12 +33,9 @@ public class Intake extends Subsystem {
 
         hatchPiston = new DoubleSolenoid(RobotMap.PCM_2_PORT,
                 RobotMap.INTAKE_PISTON_HATCH_FORWARD, RobotMap.INTAKE_PISTON_HATCH_BACKWARD);
-        deployPiston1 = new DoubleSolenoid(RobotMap.PCM_2_PORT,
-                RobotMap.INTAKE_PISTON_DEPLOYMENT_1_FORWARD,
-                RobotMap.INTAKE_PISTON_DEPLOYMENT_1_BACKWARD);
-        deployPiston2 = new DoubleSolenoid(RobotMap.PCM_2_PORT,
-                RobotMap.INTAKE_PISTON_DEPLOYMENT_2_FORWARD,
-                RobotMap.INTAKE_PISTON_DEPLOYMENT_2_BACKWARD);
+        deployPiston1 = new DoubleSolenoid(RobotMap.PCM_1_PORT,
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_FORWARD,
+                RobotMap.INTAKE_PISTON_DEPLOYMENT_BACKWARD);
 
         limitSwitch = new DigitalInput(RobotMap.INTAKE_LIMIT_SWITCH_CHANNEL);
 
@@ -86,12 +82,10 @@ public class Intake extends Subsystem {
 
     public void deploy() {
         this.deployPiston1.set(DoubleSolenoid.Value.kForward);
-        this.deployPiston2.set(DoubleSolenoid.Value.kForward);
     }
 
     public void retract() {
         this.deployPiston1.set(DoubleSolenoid.Value.kReverse);
-        this.deployPiston2.set(DoubleSolenoid.Value.kReverse);
     }
 
     public boolean isHoldingCargo() {

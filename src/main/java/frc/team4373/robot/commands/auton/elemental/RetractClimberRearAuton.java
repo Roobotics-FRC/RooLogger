@@ -24,7 +24,7 @@ public class RetractClimberRearAuton extends Command {
 
     @Override
     protected void execute() {
-        climber.retractFront(); // TODO: This could also be `retractAll()`. Should it be?
+        climber.retractRear();
         drivetrain.setNeutralMode(NeutralMode.Brake);
     }
 

@@ -36,8 +36,8 @@ public class RobotMap {
     public static final int OPERATOR_JOYSTICK_PORT = 1;
 
     // Buttons
-    public static final int OPERATOR_TRIGGER_COLLECT_HATCH = 2;
-    public static final int OPERATOR_TRIGGER_RELEASE_HATCH = 3;
+    public static final int OPERATOR_TRIGGER_COLLECT_HATCH = 2; // L trigger
+    public static final int OPERATOR_TRIGGER_RELEASE_HATCH = 3; // R trigger
     public static final int OPERATOR_BUTTON_COLLECT_CARGO = 5;
     public static final int OPERATOR_BUTTON_RELEASE_CARGO = 6;
     public static final int OPERATOR_BUTTON_LIFT_CARGO_L3 = 4; // y button
@@ -69,22 +69,18 @@ public class RobotMap {
     public static final int INTAKE_MOTOR_LEFT = 42;
 
     // Pneumatic channel mappings
-    public static final int DRIVETRAIN_PISTON_FORWARD = 0;
-    public static final int DRIVETRAIN_PISTON_BACKWARD = 1;
-    public static final int LIFT_PISTON_1_FORWARD = 2;
-    public static final int LIFT_PISTON_1_BACKWARD = 3;
-    public static final int LIFT_PISTON_2_FORWARD = 4;
-    public static final int LIFT_PISTON_2_BACKWARD = 5;
-    public static final int CLIMBER_PISTON_FRONT_FORWARD = 6;
-    public static final int CLIMBER_PISTON_FRONT_BACKWARD = 7;
-    public static final int CLIMBER_PISTON_REAR_FORWARD = 0;
-    public static final int CLIMBER_PISTON_REAR_BACKWARD = 1;
-    public static final int INTAKE_PISTON_HATCH_FORWARD = 2;
-    public static final int INTAKE_PISTON_HATCH_BACKWARD = 3;
-    public static final int INTAKE_PISTON_DEPLOYMENT_1_FORWARD = 4;
-    public static final int INTAKE_PISTON_DEPLOYMENT_1_BACKWARD = 5;
-    public static final int INTAKE_PISTON_DEPLOYMENT_2_FORWARD = 6;
-    public static final int INTAKE_PISTON_DEPLOYMENT_2_BACKWARD = 7;
+    public static final int DRIVETRAIN_PISTON_FORWARD = 0; // pcm 1
+    public static final int DRIVETRAIN_PISTON_BACKWARD = 1; // pcm 1
+    public static final int INTAKE_PISTON_DEPLOYMENT_FORWARD = 2; // pcm 1
+    public static final int INTAKE_PISTON_DEPLOYMENT_BACKWARD = 3; // pcm 1
+    public static final int CLIMBER_PISTON_REAR_FORWARD = 4; // pcm 1
+    public static final int CLIMBER_PISTON_REAR_BACKWARD = 5; // pcm 1
+    public static final int CLIMBER_PISTON_FRONT_FORWARD = 6; // pcm 1
+    public static final int CLIMBER_PISTON_FRONT_BACKWARD = 7; // pcm 1
+    public static final int LIFT_PISTON_BACKWARD = 1; // pcm 2
+    public static final int LIFT_PISTON_FORWARD = 7; // pcm 2
+    public static final int INTAKE_PISTON_HATCH_BACKWARD = 0; // pcm 2
+    public static final int INTAKE_PISTON_HATCH_FORWARD = 2; // pcm 2
 
     // Digital input mappings
     public static final int CLIMBER_FRONT_LIMIT_SWITCH_CHANNEL = 0;
