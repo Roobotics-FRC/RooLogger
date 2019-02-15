@@ -33,14 +33,14 @@ public class RCargoAuton extends CommandGroup {
         }
         int angle = 90;
         if (side == RobotMap.Side.LEFT) angle *= -1;
-        addParallel(new DeployIntakeAuton());
         addParallel(new CollectCargoAuton());
         addSequential(new DriveDistanceAuton(167, RobotMap.AUTON_LONG_DRIVE_SPEED));
         addSequential(new TurnToAngleAuton(angle));
-        addSequential(new DriveDistanceAuton(52, RobotMap.AUTON_LONG_DRIVE_SPEED));
+        addSequential(new DriveDistanceAuton(28, RobotMap.AUTON_LONG_DRIVE_SPEED));
         addSequential(new MiddleWheelAdjusterAuton());
-        addSequential(new ApproachVisionTargetAuton(36));
         addSequential(new SetLiftAuton(pos));
+        addSequential(new DeployIntakeAuton());
+        addSequential(new ApproachVisionTargetAuton(42));
         addSequential(new ReleaseCargoAuton());
     }
 }

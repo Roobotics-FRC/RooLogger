@@ -15,12 +15,12 @@ public class CSFrontHatchAuton extends CommandGroup {
      * Constructs a new auton command to place a hatch panel on the front cargo ship hatch.
      */
     public CSFrontHatchAuton() {
-        addParallel(new DeployIntakeAuton());
         addParallel(new CollectHatchPanelAuton());
-        addSequential(new DriveDistanceAuton(120, RobotMap.AUTON_LONG_DRIVE_SPEED));
+        addSequential(new DriveDistanceAuton(96, RobotMap.AUTON_LONG_DRIVE_SPEED));
         addSequential(new MiddleWheelAdjusterAuton());
-        addSequential(new ApproachVisionTargetAuton(24));
         addSequential(new SetLiftAuton(SetLiftAuton.Position.HATCH_1));
+        addSequential(new DeployIntakeAuton());
+        addSequential(new ApproachVisionTargetAuton(34));
         addSequential(new ReleaseHatchPanelAuton());
     }
 }

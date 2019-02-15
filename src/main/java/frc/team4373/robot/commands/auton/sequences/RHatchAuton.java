@@ -37,20 +37,21 @@ public class RHatchAuton extends CommandGroup {
                 break;
         }
 
-        addParallel(new DeployIntakeAuton());
         addParallel(new CollectHatchPanelAuton());
         if (panel == RobotMap.RocketHatchPanel.FAR) {
             addSequential(new DriveDistanceAuton(196, RobotMap.AUTON_LONG_DRIVE_SPEED));
             addSequential(new TurnToAngleAuton(angleForSide(90)));
             addSequential(new DriveDistanceAuton(70, RobotMap.AUTON_LONG_DRIVE_SPEED));
             addSequential(new TurnToAngleAuton(angleForSide(119)));
+            // TODO: Recompute this with the 2-ft offset
         } else {
             addSequential(new TurnToAngleAuton(angleForSide(63)));
-            addSequential(new DriveDistanceAuton(135, RobotMap.AUTON_LONG_DRIVE_SPEED));
+            addSequential(new DriveDistanceAuton(111, RobotMap.AUTON_LONG_DRIVE_SPEED));
         }
         addSequential(new MiddleWheelAdjusterAuton());
-        addSequential(new ApproachVisionTargetAuton(36));
         addSequential(new SetLiftAuton(pos));
+        addSequential(new DeployIntakeAuton());
+        addSequential(new ApproachVisionTargetAuton(34));
         addSequential(new ReleaseHatchPanelAuton());
     }
 

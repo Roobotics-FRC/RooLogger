@@ -30,24 +30,24 @@ public class CSSideHatchAuton extends CommandGroup {
         }
         switch (portLoc) {
             case NEAR:
-                driveDistance = 180;
+                driveDistance = 156;
                 break;
             case MIDDLE:
-                driveDistance = 201;
+                driveDistance = 177;
                 break;
             case FAR:
-                driveDistance = 222;
+                driveDistance = 198;
                 break;
             default:
                 return;
         }
         addParallel(new CollectHatchPanelAuton());
-        addParallel(new DeployIntakeAuton());
         addSequential(new DriveDistanceAuton(driveDistance, RobotMap.AUTON_LONG_DRIVE_SPEED));
         addSequential(new TurnToAngleAuton(angleTurn));
         addSequential(new MiddleWheelAdjusterAuton());
-        addSequential(new ApproachVisionTargetAuton(36));
+        addSequential(new ApproachVisionTargetAuton(42));
         addSequential(new SetLiftAuton(SetLiftAuton.Position.HATCH_1));
+        addSequential(new DeployIntakeAuton());
         addSequential(new ReleaseHatchPanelAuton());
     }
 }
