@@ -14,12 +14,8 @@ public class ClearSubsystemCommand extends Command {
      * Creates a new ClearSubsystemCommand to clear all current subsystem commands
      * and return them to default (i.e., teleop).
      */
-    public ClearSubsystemCommand() {
-        requires(Drivetrain.getInstance());
-        requires(Climber.getInstance());
-        requires(ClimberDrive.getInstance());
-        requires(Intake.getInstance());
-        requires(Lift.getInstance());
+    public ClearSubsystemCommand(Subsystem subsystem) {
+        requires(subsystem);
     }
 
     @Override

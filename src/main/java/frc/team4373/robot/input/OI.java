@@ -2,7 +2,7 @@ package frc.team4373.robot.input;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.team4373.robot.RobotMap;
-import frc.team4373.robot.commands.ClearSubsystemCommand;
+import frc.team4373.robot.commands.auton.ClearSubsystemsCommandGroup;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.elemental.*;
 import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
@@ -81,7 +81,7 @@ public class OI {
 
         killAllAuton = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_KILL_AUTON);
-        killAllAuton.whenPressed(new ClearSubsystemCommand());
+        killAllAuton.whenPressed(new ClearSubsystemsCommandGroup());
     }
 
     /**
