@@ -61,9 +61,9 @@ public class Intake extends Subsystem {
      * Extends the hatch arms to grab a hatch. Won't do anything if holding a cargo.
      */
     public void collectHatch() {
-        if (!isHoldingCargo()) {
-            hatchPiston.set(DoubleSolenoid.Value.kReverse);
-        }
+        // if (!isHoldingCargo()) {
+        hatchPiston.set(DoubleSolenoid.Value.kReverse);
+        // }
     }
 
     public void releaseHatch() {

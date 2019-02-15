@@ -38,8 +38,8 @@ public class RobotMap {
     // Buttons
     public static final int OPERATOR_TRIGGER_COLLECT_HATCH = 2; // L trigger
     public static final int OPERATOR_TRIGGER_RELEASE_HATCH = 3; // R trigger
-    public static final int OPERATOR_BUTTON_COLLECT_CARGO = 5;
-    public static final int OPERATOR_BUTTON_RELEASE_CARGO = 6;
+    public static final int OPERATOR_BUTTON_COLLECT_CARGO = 5; // left button
+    public static final int OPERATOR_BUTTON_RELEASE_CARGO = 6; // right button
     public static final int OPERATOR_BUTTON_LIFT_CARGO_L3 = 4; // y button
     public static final int OPERATOR_BUTTON_LIFT_CARGO_L2 = 2; // b button
     public static final int OPERATOR_BUTTON_LIFT_CARGO_L1 = 1; // a button

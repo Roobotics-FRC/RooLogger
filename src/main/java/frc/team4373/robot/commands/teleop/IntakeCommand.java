@@ -13,7 +13,6 @@ public class IntakeCommand extends Command {
 
     public IntakeCommand() {
         requires(this.intake = Intake.getInstance());
-        setInterruptible(false);
     }
 
     @Override

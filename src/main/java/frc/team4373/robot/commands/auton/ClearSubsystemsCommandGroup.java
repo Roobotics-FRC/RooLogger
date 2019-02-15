@@ -9,10 +9,10 @@ public class ClearSubsystemsCommandGroup extends CommandGroup {
      * Constructs a ClearSubsystemsCommandGroup.
      */
     public ClearSubsystemsCommandGroup() {
-        // Do not need to clear intake because intake has no auton commands
         addParallel(new ClearSubsystemCommand(Climber.getInstance()));
         addParallel(new ClearSubsystemCommand(ClimberDrive.getInstance()));
         addParallel(new ClearSubsystemCommand(Drivetrain.getInstance()));
+        addParallel(new ClearSubsystemCommand(Intake.getInstance()));
         addParallel(new ClearSubsystemCommand(Lift.getInstance()));
     }
 }
