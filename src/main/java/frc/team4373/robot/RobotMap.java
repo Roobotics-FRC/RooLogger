@@ -21,6 +21,7 @@ public class RobotMap {
     // Sensor phase configuration
     public static final boolean DRIVETRAIN_RIGHT_ENCODER_PHASE = false;
     public static final boolean DRIVETRAIN_LEFT_ENCODER_PHASE = false;
+    public static final boolean DRIVETRAIN_MIDDLE_SENSOR_PHASE = false;
 
     // Speed presets
     public static final double LIFT_MOVEMENT_SPEED = 0.5;
@@ -97,13 +98,11 @@ public class RobotMap {
 
     // PID- and sensor-related constants
     public static class PID {
-        public double kF;
         public double kP;
         public double kI;
         public double kD;
 
-        PID(double kF, double kP, double kI, double kD) {
-            this.kF = kF;
+        PID(double kP, double kI, double kD) {
             this.kP = kP;
             this.kI = kI;
             this.kD = kD;
@@ -116,15 +115,16 @@ public class RobotMap {
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
     public static final double LIFT_ARM_LENGTH = 39;
     public static final double LIFT_ARM_MOUNT_HEIGHT = 43.5; // from floor, not bottom of bot
+    public static final double LIFT_MAXIMUM_SAFE_ANGLE = 110;
 
     // PID gains
-    public static final PID LIFT_PID_GAINS = new PID(0, 1, 0, 0);
-    public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0, 0.001, 0, 0);
-    public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0, 0.01, 0, 0);
-    public static final PID DRIVETRAIN_VIS_APPR_PID_GAINS = new PID(0, 0.03, 0.01, 0);
+    public static final PID LIFT_PID_GAINS = new PID(1, 0, 0);
+    public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.001, 0, 0);
+    public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.01, 0, 0);
+    public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.01, 0, 0);
 
     // Vision
-    public static final int ALLOWABLE_VISION_ERRORS = 3;
+    public static final double VISION_SAMPLE_COUNT = 10;
 
     public enum Side {
         RIGHT, LEFT, MIDDLE

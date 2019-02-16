@@ -59,7 +59,7 @@ public class DriveDistanceAuton extends PIDCommand {
         };
         this.distancePIDController = new PIDController(RobotMap.DRIVETRAIN_DIST_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_DIST_PID_GAINS.kI, RobotMap.DRIVETRAIN_DIST_PID_GAINS.kD,
-                RobotMap.DRIVETRAIN_DIST_PID_GAINS.kF, distanceSource, distanceOutputLambda);
+                distanceSource, distanceOutputLambda);
     }
 
     @Override

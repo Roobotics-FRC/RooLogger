@@ -64,7 +64,7 @@ public class Lift extends Subsystem {
      * @param power the percent output to which to set the motors.
      */
     public void setPercentOutput(double power) {
-        if (getPotenAngle() > 0) {
+        if (getPotenAngle() > 0 && getPotenAngle() < RobotMap.LIFT_MAXIMUM_SAFE_ANGLE) {
             power = Robot.constrainPercentOutput(power);
             this.talon1.set(ControlMode.PercentOutput, power);
         }
