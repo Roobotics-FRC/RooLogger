@@ -11,7 +11,7 @@ import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.teleop.IntakeCommand;
 
 /**
- * A programmatic representation of the robot's intake mechanism for both hatch and cargo.
+ * A programmatic representation of the robot's intake mechanism for both hatch panels and cargo.
  */
 public class Intake extends Subsystem {
 
