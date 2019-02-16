@@ -10,6 +10,8 @@ import frc.team4373.robot.subsystems.Intake;
  */
 public class IntakeCommand extends Command {
     private Intake intake;
+    private boolean limitSwitch = false;
+    private boolean firstTime = true;
 
     public IntakeCommand() {
         requires(this.intake = Intake.getInstance());
@@ -18,30 +20,42 @@ public class IntakeCommand extends Command {
     @Override
     protected void initialize() {
         intake.releaseHatch();
-        intake.releaseCargo();
+        intake.neutralizeCargoMotors();
+        this.firstTime = true;
     }
 
     @Override
     protected void execute() {
         if (OI.getOI().getOperatorJoystick().getRawButton(
                 RobotMap.OPERATOR_BUTTON_COLLECT_CARGO)) {
-            intake.collectCargo();
-            intake.releaseHatch();
+            if (firstTime) {
+                limitSwitch = intake.getLimitSwitch();
+                firstTime = false;
+            } else if (limitSwitch == intake.getLimitSwitch()) {
+                intake.collectCargo();
+                intake.releaseHatch();
+            } else {
+                firstTime = true;
+            }
         } else if (OI.getOI().getOperatorJoystick().getRawButton(
                 RobotMap.OPERATOR_BUTTON_RELEASE_CARGO)) {
             intake.releaseCargo();
             intake.releaseHatch();
+            firstTime = true;
         } else if (OI.getOI().getOperatorJoystick().getRawAxis(
                 RobotMap.OPERATOR_TRIGGER_COLLECT_HATCH) > 0.75) {
             intake.collectHatch();
             intake.neutralizeCargoMotors();
+            firstTime = true;
         } else if (OI.getOI().getOperatorJoystick().getRawAxis(
                 RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH) > 0.75) {
             intake.releaseHatch();
             intake.neutralizeCargoMotors();
+            firstTime = true;
         } else {
             intake.neutralizeCargoMotors();
             intake.releaseHatch();
+            firstTime = true;
         }
     }
 

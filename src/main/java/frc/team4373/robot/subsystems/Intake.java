@@ -48,12 +48,8 @@ public class Intake extends Subsystem {
     }
 
     public void collectCargo() {
-        if (!isHoldingCargo()) {
-            setLeftTalon(RobotMap.INTAKE_MOTOR_OUTPUT);
-            setRightTalon(-RobotMap.INTAKE_MOTOR_OUTPUT);
-        } else {
-            neutralizeCargoMotors();
-        }
+        setLeftTalon(RobotMap.INTAKE_MOTOR_OUTPUT);
+        setRightTalon(-RobotMap.INTAKE_MOTOR_OUTPUT);
     }
 
     public void releaseCargo() {
@@ -66,13 +62,8 @@ public class Intake extends Subsystem {
         setRightTalon(0);
     }
 
-    /**
-     * Extends the hatch arms to grab a hatch. Won't do anything if holding a cargo.
-     */
     public void collectHatch() {
-        if (!isHoldingCargo()) {
-            hatchPiston.set(DoubleSolenoid.Value.kReverse);
-        }
+        hatchPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void releaseHatch() {
@@ -97,7 +88,7 @@ public class Intake extends Subsystem {
         this.deployPiston1.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public boolean isHoldingCargo() {
+    public boolean getLimitSwitch() {
         return limitSwitch.get();
     }
 
