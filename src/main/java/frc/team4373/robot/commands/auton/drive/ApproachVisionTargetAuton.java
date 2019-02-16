@@ -9,7 +9,7 @@ import frc.team4373.robot.subsystems.Drivetrain;
 public class ApproachVisionTargetAuton extends Command {
     private Drivetrain drivetrain;
     private double targetDistanceFromVisionTarget;
-    private int samples = 0;
+    private int sampleCount = 0;
     private double distanceSum = 0;
     private boolean finished = false;
 
@@ -25,9 +25,9 @@ public class ApproachVisionTargetAuton extends Command {
     @Override
     protected void execute() {
         double currentDistance = SmartDashboard.getNumber("forward_distance_to_target", 0);
-        if (this.samples < RobotMap.VISION_SAMPLE_COUNT) {
+        if (this.sampleCount < RobotMap.VISION_SAMPLE_COUNT) {
             this.distanceSum += currentDistance;
-            ++this.samples;
+            ++this.sampleCount;
         } else {
             double averageCurrentDistance = this.distanceSum / RobotMap.VISION_SAMPLE_COUNT;
             double distanceToDrive = averageCurrentDistance - this.targetDistanceFromVisionTarget;
