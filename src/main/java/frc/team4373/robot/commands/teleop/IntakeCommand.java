@@ -34,8 +34,6 @@ public class IntakeCommand extends Command {
             } else if (limitSwitch == intake.getLimitSwitch()) {
                 intake.collectCargo();
                 intake.releaseHatch();
-            } else {
-                firstTime = true;
             }
         } else if (OI.getOI().getOperatorJoystick().getRawButton(
                 RobotMap.OPERATOR_BUTTON_RELEASE_CARGO)) {
