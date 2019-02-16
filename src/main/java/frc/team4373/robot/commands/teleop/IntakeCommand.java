@@ -26,14 +26,21 @@ public class IntakeCommand extends Command {
         if (OI.getOI().getOperatorJoystick().getRawButton(
                 RobotMap.OPERATOR_BUTTON_COLLECT_CARGO)) {
             intake.collectCargo();
+            intake.releaseHatch();
         } else if (OI.getOI().getOperatorJoystick().getRawButton(
                 RobotMap.OPERATOR_BUTTON_RELEASE_CARGO)) {
             intake.releaseCargo();
+            intake.releaseHatch();
         } else if (OI.getOI().getOperatorJoystick().getRawAxis(
                 RobotMap.OPERATOR_TRIGGER_COLLECT_HATCH) > 0.75) {
             intake.collectHatch();
+            intake.neutralizeCargoMotors();
         } else if (OI.getOI().getOperatorJoystick().getRawAxis(
                 RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH) > 0.75) {
+            intake.releaseHatch();
+            intake.neutralizeCargoMotors();
+        } else {
+            intake.neutralizeCargoMotors();
             intake.releaseHatch();
         }
     }
