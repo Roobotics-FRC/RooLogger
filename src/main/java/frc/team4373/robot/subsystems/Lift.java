@@ -34,7 +34,7 @@ public class Lift extends Subsystem {
                 RobotMap.LIFT_PISTON_FORWARD, RobotMap.LIFT_PISTON_BACKWARD);
 
         this.poten = new AnalogPotentiometer(RobotMap.PTN_CHANNEL,
-                RobotMap.LIFT_DEGREES_OF_MOTION);
+                RobotMap.LIFT_DEGREES_OF_MOTION, RobotMap.LIFT_INITIAL_ANG_OFFSET);
 
         this.talon1.setNeutralMode(NeutralMode.Brake);
         this.talon2.setNeutralMode(NeutralMode.Brake);

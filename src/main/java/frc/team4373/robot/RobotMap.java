@@ -21,7 +21,6 @@ public class RobotMap {
     // Sensor phase configuration
     public static final boolean DRIVETRAIN_RIGHT_ENCODER_PHASE = false;
     public static final boolean DRIVETRAIN_LEFT_ENCODER_PHASE = false;
-    public static final boolean DRIVETRAIN_MIDDLE_ENCODER_PHASE = false;
 
     // Speed presets
     public static final double LIFT_MOVEMENT_SPEED = 0.5;
@@ -109,9 +108,6 @@ public class RobotMap {
             this.kD = kD;
         }
     }
-
-    public static final int TALON_TIMEOUT_MS = 1000;
-    public static final int LIFT_PID_IDX = 0;
 
     // 6in diameter wheels; 10.71:1 gearbox ratio; 4096 encoder units per rotation
     public static final double DRIVETRAIN_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;
