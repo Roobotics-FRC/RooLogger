@@ -50,7 +50,8 @@ public class RobotMap {
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_FRONT = 9;
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_REAR = 11;
     public static final int DRIVER_BUTTON_VISION_ALIGNMENT = 2;
-    public static final int DRIVER_BUTTON_KILL_AUTON = 5;
+    public static final int DRIVER_BUTTON_KILL_AUTON = 6;
+    public static final int DRIVER_BUTTON_TOGGLE_LIGHT_RING = 5;
 
     public static final int DRIVER_AXIS_SLIDER_CLIMBER_WHEEL = 3;
 

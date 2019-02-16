@@ -72,6 +72,8 @@ public class Drivetrain extends Subsystem {
         this.right1.setSensorPhase(RobotMap.DRIVETRAIN_RIGHT_ENCODER_PHASE);
         this.left1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
         this.left1.setSensorPhase(RobotMap.DRIVETRAIN_LEFT_ENCODER_PHASE);
+        this.middle1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+        this.middle1.setSensorPhase(RobotMap.DRIVETRAIN_MIDDLE_SENSOR_PHASE);
     }
 
     /**
@@ -127,6 +129,14 @@ public class Drivetrain extends Subsystem {
         } else {
             this.lightRingRelay.set(Relay.Value.kOff);
         }
+    }
+
+    /**
+     * Whether the light ring is currently on.
+     * @return whether the ring is on.
+     */
+    public boolean getLightRingEnabled() {
+        return this.lightRingRelay.get() == Relay.Value.kForward;
     }
 
     /**
