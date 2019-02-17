@@ -7,6 +7,7 @@ import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.elemental.*;
 import frc.team4373.robot.commands.teleop.ToggleLightRingCommand;
 import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
+import frc.team4373.robot.input.filters.XboxAxisFilter;
 
 /**
  * OI provides access to operator interface devices.
@@ -38,8 +39,7 @@ public class OI {
         this.driveJoystick =
                 new RooJoystick<>(RobotMap.DRIVE_JOYSTICK_PORT, new FineGrainedPiecewiseFilter());
         this.operatorJoystick =
-                new RooJoystick<>(RobotMap.OPERATOR_JOYSTICK_PORT,
-                        new FineGrainedPiecewiseFilter());
+                new RooJoystick<>(RobotMap.OPERATOR_JOYSTICK_PORT, new XboxAxisFilter());
 
         operatorLiftCargoL3 = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L3);
