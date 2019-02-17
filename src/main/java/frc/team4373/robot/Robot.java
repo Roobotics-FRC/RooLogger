@@ -103,6 +103,7 @@ public class Robot extends TimedRobot {
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.LEFT_1));
         SmartDashboard.putNumber("C Pow",
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.MIDDLE_1));
+        SmartDashboard.putNumber("Lift Ang", Lift.getInstance().getPotenAngle());
         SmartDashboard.putNumber("Lift Pos", Lift.getInstance().getComputedArmHeight());
         SmartDashboard.putNumber("CDrive Pow", ClimberDrive.getInstance().getPercentOutput());
         SmartDashboard.putBoolean("Climb Front", Climber.getInstance().frontIsDeployed());
