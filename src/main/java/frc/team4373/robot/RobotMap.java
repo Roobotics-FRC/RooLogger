@@ -8,8 +8,8 @@ public class RobotMap {
     // Motor inversions
     public static final boolean DRIVETRAIN_MOTOR_RIGHT_1_INVERTED = false;
     public static final boolean DRIVETRAIN_MOTOR_RIGHT_2_INVERTED = false;
-    public static final boolean DRIVETRAIN_MOTOR_LEFT_1_INVERTED = false;
-    public static final boolean DRIVETRAIN_MOTOR_LEFT_2_INVERTED = false;
+    public static final boolean DRIVETRAIN_MOTOR_LEFT_1_INVERTED = true;
+    public static final boolean DRIVETRAIN_MOTOR_LEFT_2_INVERTED = true;
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_1_INVERTED = false;
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_2_INVERTED = false;
     public static final boolean LIFT_MOTOR_1_INVERTED = false;
@@ -57,10 +57,10 @@ public class RobotMap {
     public static final int DRIVER_AXIS_SLIDER_CLIMBER_WHEEL = 3;
 
     // Motor CAN chain identifiers
-    public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 11;
-    public static final int DRIVETRAIN_MOTOR_RIGHT_2 = 12;
-    public static final int DRIVETRAIN_MOTOR_LEFT_1 = 13;
-    public static final int DRIVETRAIN_MOTOR_LEFT_2 = 14;
+    public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 13;
+    public static final int DRIVETRAIN_MOTOR_RIGHT_2 = 14;
+    public static final int DRIVETRAIN_MOTOR_LEFT_1 = 11;
+    public static final int DRIVETRAIN_MOTOR_LEFT_2 = 12;
     public static final int DRIVETRAIN_MOTOR_MIDDLE_1 = 15;
     public static final int DRIVETRAIN_MOTOR_MIDDLE_2 = 16;
     public static final int LIFT_MOTOR_1 = 21;
