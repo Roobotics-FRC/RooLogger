@@ -33,7 +33,7 @@ public class ApproachVisionTargetAuton extends Command {
     protected void execute() {
         if (this.sampleCount < RobotMap.VISION_SAMPLE_COUNT) { // polling state
             this.drivetrain.setLightRing(true);
-            // TODO: Check whether the light ring turns on fast enough for the first fetch to be valid
+            // TODO: Check whether light ring turns on fast enough for the first fetch to be valid
             double currentDistance = SmartDashboard.getNumber("forward_distance_to_target", 0);
             this.distanceSum += currentDistance;
             ++this.sampleCount;

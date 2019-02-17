@@ -45,7 +45,7 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
     protected void usePIDOutput(double output) {
         if (sampleCount < RobotMap.VISION_SAMPLE_COUNT) { // polling state
             this.drivetrain.setLightRing(true);
-            // TODO: Check whether the light ring turns on fast enough for the first fetch to be valid
+            // TODO: Check whether light ring turns on fast enough for the first fetch to be valid
             distanceSum += SmartDashboard.getNumber("lateral_distance_to_target", 0);
             ++sampleCount;
         } else if (!readyForPID) { // setpoint setting state
