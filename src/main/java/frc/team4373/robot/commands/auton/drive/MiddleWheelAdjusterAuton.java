@@ -15,6 +15,7 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
     private int sampleCount = 0;
     private double distanceSum = 0;
     private boolean readyForPID = false;
+    private double outputThreshold = RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED * 0.1;
 
     /**
      * Constructs a new auton command to align the robot with the vision target using the H-wheel.
@@ -28,9 +29,11 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
     @Override
     protected void initialize() {
         this.drivetrain.setLightRing(true);
-        this.finished = false;
+        resetState();
         this.initiallyDeployed = drivetrain.isMiddleWheelDeployed();
         this.drivetrain.deployMiddleWheel();
+        this.getPIDController().setOutputRange(-RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED,
+                RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED);
     }
 
     @Override
@@ -40,19 +43,37 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        if (sampleCount < RobotMap.VISION_SAMPLE_COUNT) {
+        if (sampleCount < RobotMap.VISION_SAMPLE_COUNT) { // polling state
+            this.drivetrain.setLightRing(true);
+            // TODO: Check whether the light ring turns on fast enough for the first fetch to be valid
             distanceSum += SmartDashboard.getNumber("lateral_distance_to_target", 0);
             ++sampleCount;
-        } else if (!readyForPID) {
-            double setpointInches = distanceSum / RobotMap.VISION_SAMPLE_COUNT;
-            this.setSetpoint(this.drivetrain.getSensorPosition(Drivetrain.TalonID.MIDDLE_1)
-                    + setpointInches / RobotMap.DRIVETRAIN_ENC_UNITS_TO_IN);
+        } else if (!readyForPID) { // setpoint setting state
             this.drivetrain.setLightRing(false);
-            readyForPID = true;
-        } else {
-            drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1,
-                    RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED);
+            double setpointInches = distanceSum / RobotMap.VISION_SAMPLE_COUNT;
+            if (setpointInches < RobotMap.ALLOWABLE_OFFSET_FROM_VIS_TARGET) {
+                this.finished = true;
+            } else {
+                this.setSetpoint(this.drivetrain.getSensorPosition(Drivetrain.TalonID.MIDDLE_1)
+                        + setpointInches / RobotMap.DRIVETRAIN_ENC_UNITS_TO_IN);
+                this.drivetrain.setLightRing(false);
+                readyForPID = true;
+            }
+        } else { // PID execution state
+            this.drivetrain.setLightRing(false); // safety
+            if (Math.abs(output) < outputThreshold) {
+                resetState();
+            } else {
+                drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, output);
+            }
         }
+    }
+
+    private void resetState() {
+        this.sampleCount = 0;
+        this.distanceSum = 0;
+        this.readyForPID = false;
+        this.finished = false;
     }
 
     @Override

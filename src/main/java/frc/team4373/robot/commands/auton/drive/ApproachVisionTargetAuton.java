@@ -23,17 +23,32 @@ public class ApproachVisionTargetAuton extends Command {
     }
 
     @Override
+    protected void initialize() {
+        this.drivetrain.setLightRing(true);
+        this.sampleCount = 0;
+        this.distanceSum = 0;
+    }
+
+    @Override
     protected void execute() {
-        double currentDistance = SmartDashboard.getNumber("forward_distance_to_target", 0);
-        if (this.sampleCount < RobotMap.VISION_SAMPLE_COUNT) {
+        if (this.sampleCount < RobotMap.VISION_SAMPLE_COUNT) { // polling state
+            this.drivetrain.setLightRing(true);
+            // TODO: Check whether the light ring turns on fast enough for the first fetch to be valid
+            double currentDistance = SmartDashboard.getNumber("forward_distance_to_target", 0);
             this.distanceSum += currentDistance;
             ++this.sampleCount;
-        } else {
+        } else { // acting on distance state
+            this.drivetrain.setLightRing(false);
             double averageCurrentDistance = this.distanceSum / RobotMap.VISION_SAMPLE_COUNT;
             double distanceToDrive = averageCurrentDistance - this.targetDistanceFromVisionTarget;
-            Scheduler.getInstance().add(new DriveDistanceAuton(
-                    distanceToDrive, RobotMap.AUTON_VISION_APPROACH_SPEED));
-            this.finished = true;
+            if (distanceToDrive < RobotMap.ALLOWABLE_ERR_DISTANCE_TO_VIS_TARGET) {
+                this.finished = true;
+            } else {
+                this.sampleCount = 0;
+                this.distanceSum = 0;
+                Scheduler.getInstance().add(new DriveDistanceAuton(
+                        distanceToDrive, RobotMap.AUTON_VISION_APPROACH_SPEED));
+            }
         }
     }
 
@@ -44,7 +59,7 @@ public class ApproachVisionTargetAuton extends Command {
 
     @Override
     protected void end() {
-        this.drivetrain.setLightRing(false);
+        this.drivetrain.setLightRing(false); // safety
     }
 
     @Override
