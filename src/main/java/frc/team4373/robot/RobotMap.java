@@ -125,6 +125,8 @@ public class RobotMap {
 
     // Vision
     public static final double VISION_SAMPLE_COUNT = 10;
+    public static final double ALLOWABLE_OFFSET_FROM_VIS_TARGET = 3; // inches
+    public static final double ALLOWABLE_ERR_DISTANCE_TO_VIS_TARGET = 4;
 
     public enum Side {
         RIGHT, LEFT, MIDDLE
