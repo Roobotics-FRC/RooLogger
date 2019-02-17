@@ -38,7 +38,7 @@ task switchTo4373 {
             curNetProc.waitFor()
             if (network != '4373') {
                 println 'Connecting to 4373…'
-                Process setProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 4373 robotics')
+                Process setProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 4373')
                 setProc.waitFor()
                 println 'Connected to 4373'
             } else {
