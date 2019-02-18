@@ -82,11 +82,11 @@ public class Lift extends Subsystem {
     }
 
     /**
-     * Gets the current angle from the potentiometer.
-     * @return the angle from the potentiometer.
+     * Gets the current angle from the potentiometer. Converts based on chain ratio.
+     * @return the angle from the potentiometer, converted based on the chain ratio.
      */
     public double getPotenAngle() {
-        return poten.get();
+        return poten.get() * RobotMap.LIFT_PTN_TO_ARM_CHAIN_RATIO;
     }
 
     /**
