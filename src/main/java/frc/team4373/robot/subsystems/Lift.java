@@ -98,6 +98,10 @@ public class Lift extends Subsystem {
                 - RobotMap.LIFT_ARM_LENGTH * Math.cos(getPotenAngle());
     }
 
+    public boolean isTelescoped() {
+        return this.piston1.get() == DoubleSolenoid.Value.kForward;
+    }
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new LiftCommand());
