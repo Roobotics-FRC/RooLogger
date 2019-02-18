@@ -57,7 +57,7 @@ task switchTo4373 {
             curNetProc.waitFor()
             if (network != '4373') {
                 println 'Connecting to 4373…'
-                Process setProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 4373')
+                Process setProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 4373 && sleep 3')
                 setProc.waitFor()
                 println 'Connected to 4373'
             } else {
@@ -71,7 +71,7 @@ task switchBack {
     doLast {
         if (isMacOS && network != '4373') {
             println 'Reconnecting to ' + network + '…'
-            Process resetProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 ' + network)
+            Process resetProc = Runtime.getRuntime().exec('sleep 5 && networksetup -setairportnetwork en0 ' + network)
             resetProc.waitFor()
             println 'Reconnected to ' + network
         }
