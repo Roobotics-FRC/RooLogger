@@ -92,11 +92,11 @@ public class Intake extends Subsystem {
     }
 
     public void deploy() {
-        this.deployPiston1.set(DoubleSolenoid.Value.kForward);
+        this.deployPiston1.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void retract() {
-        this.deployPiston1.set(DoubleSolenoid.Value.kReverse);
+        this.deployPiston1.set(DoubleSolenoid.Value.kForward);
     }
 
     public boolean getLimitSwitch() {
