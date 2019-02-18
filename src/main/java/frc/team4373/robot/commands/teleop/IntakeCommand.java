@@ -32,27 +32,26 @@ public class IntakeCommand extends Command {
                 limitSwitch = intake.getLimitSwitch();
                 firstTime = false;
             } else if (limitSwitch == intake.getLimitSwitch()) {
-                intake.collectCargo();
                 intake.releaseHatch();
+                intake.collectCargo();
             }
         } else if (OI.getOI().getOperatorJoystick().getRawButton(
                 RobotMap.OPERATOR_BUTTON_RELEASE_CARGO)) {
-            intake.releaseCargo();
             intake.releaseHatch();
+            intake.releaseCargo();
             firstTime = true;
         } else if (OI.getOI().getOperatorJoystick().getRawAxis(
                 RobotMap.OPERATOR_TRIGGER_COLLECT_HATCH) > 0.75) {
-            intake.collectHatch();
             intake.neutralizeCargoMotors();
+            intake.collectHatch();
             firstTime = true;
         } else if (OI.getOI().getOperatorJoystick().getRawAxis(
                 RobotMap.OPERATOR_TRIGGER_RELEASE_HATCH) > 0.75) {
-            intake.releaseHatch();
             intake.neutralizeCargoMotors();
+            intake.releaseHatch();
             firstTime = true;
         } else {
             intake.neutralizeCargoMotors();
-            intake.releaseHatch();
             firstTime = true;
         }
     }
