@@ -17,6 +17,7 @@ public class TimedDriveAuton extends Command {
      */
     public TimedDriveAuton(double power, double seconds) {
         requires(this.drivetrain = Drivetrain.getInstance());
+        this.power = power;
         setTimeout(seconds);
     }
 
