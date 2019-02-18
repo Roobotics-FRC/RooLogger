@@ -117,6 +117,8 @@ public class RobotMap {
 
     // 6in diameter wheels; 10.71:1 gearbox ratio; 4096 encoder units per rotation
     public static final double DRIVETRAIN_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;
+    // converts from units/0.1s to in/s
+    public static final double DRIVETRAIN_ENC_VEL_TO_INPS = 6 * 10 * Math.PI / 4096 / 10.71;
     public static final double LIFT_PTN_TO_ARM_CHAIN_RATIO = 10d / 3d; // 10/3 ptn turns = 1 motor
     public static final int LIFT_DEGREES_OF_MOTION = 120;
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
