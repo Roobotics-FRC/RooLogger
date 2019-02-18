@@ -14,7 +14,7 @@ public class RobotMap {
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_2_INVERTED = false;
     public static final boolean LIFT_MOTOR_1_INVERTED = true;
     public static final boolean LIFT_MOTOR_2_INVERTED = true;
-    public static final boolean CLIMBER_MOTOR_INVERTED = false;
+    public static final boolean CLIMBER_MOTOR_INVERTED = true;
     public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = false;
     public static final boolean INTAKE_MOTOR_LEFT_INVERTED = false;
 
@@ -30,6 +30,7 @@ public class RobotMap {
     public static final double AUTON_TURN_SPEED = 0.25;
     public static final double AUTON_LONG_DRIVE_SPEED = 1; // for driving long distances
     public static final double AUTON_VISION_APPROACH_SPEED = 0.25;
+    public static final double MAXIMUM_CLIMBER_DRIVE_SPEED = 0.333;
 
     // OI devices
     public static final int DRIVE_JOYSTICK_PORT = 0;

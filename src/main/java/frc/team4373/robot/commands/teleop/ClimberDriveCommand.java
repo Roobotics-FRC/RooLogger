@@ -24,6 +24,7 @@ public class ClimberDriveCommand extends Command {
     protected void execute() {
         double power = (OI.getOI().getDriveJoystick().getRawAxis(
                 RobotMap.DRIVER_AXIS_SLIDER_CLIMBER_WHEEL) - 1) / -2;
+        power *= RobotMap.MAXIMUM_CLIMBER_DRIVE_SPEED;
         cld.setPercentOutput(power);
     }
 
