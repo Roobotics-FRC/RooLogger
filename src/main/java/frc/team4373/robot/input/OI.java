@@ -29,6 +29,7 @@ public class OI {
     private JoystickButton driverClimbRaiseBot;
     private JoystickButton driverClimbRetractFront;
     private JoystickButton driverClimbRetractRear;
+    private JoystickButton driverClimbRetract;
 
     // drive buttons
     private JoystickButton driverVisionAlignment;
@@ -76,6 +77,10 @@ public class OI {
         driverClimbRetractRear = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_REAR);
         driverClimbRetractRear.whenPressed(new RetractClimberRearAuton());
+
+        driverClimbRetract = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_ALL);
+        driverClimbRetract.whenPressed(new RetractClimberAuton());
 
         driverVisionAlignment = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_VISION_ALIGNMENT);
