@@ -42,7 +42,15 @@ public class Climber extends Subsystem {
     }
 
     public void climb() {
+        deployFront();
+        deployRear();
+    }
+
+    public void deployFront() {
         this.frontPiston.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void deployRear() {
         this.rearPiston.set(DoubleSolenoid.Value.kForward);
     }
 

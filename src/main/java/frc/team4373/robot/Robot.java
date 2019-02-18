@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap.CargoShipPort;
 import frc.team4373.robot.RobotMap.Side;
+import frc.team4373.robot.commands.auton.elemental.RetractClimberAuton;
 import frc.team4373.robot.commands.auton.sequences.*;
 import frc.team4373.robot.subsystems.*;
 
@@ -71,6 +72,8 @@ public class Robot extends TimedRobot {
         Intake.getInstance();
         Lift.getInstance();
         compressor.start();
+
+        Scheduler.getInstance().add(new RetractClimberAuton());
 
         // Populate dashboard
         boolean isFirstEntry = true;

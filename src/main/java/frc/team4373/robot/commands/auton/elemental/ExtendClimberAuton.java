@@ -3,6 +3,7 @@ package frc.team4373.robot.commands.auton.elemental;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Climber;
+import frc.team4373.robot.subsystems.ClimberDrive;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
@@ -10,11 +11,16 @@ import frc.team4373.robot.subsystems.Drivetrain;
  */
 public class ExtendClimberAuton extends Command {
     private Climber climber;
+    private ClimberDrive cld;
     private Drivetrain drivetrain;
 
+    /**
+     * Constructs an ExtendClimberAuton command.
+     */
     public ExtendClimberAuton() {
         requires(this.climber = Climber.getInstance());
-        this.drivetrain = Drivetrain.getInstance();
+        requires(this.cld = ClimberDrive.getInstance());
+        requires(this.drivetrain = Drivetrain.getInstance());
     }
 
     @Override
@@ -24,8 +30,9 @@ public class ExtendClimberAuton extends Command {
 
     @Override
     protected void execute() {
-        climber.climb();
-        drivetrain.setNeutralMode(NeutralMode.Coast);
+        this.climber.climb();
+        this.drivetrain.setNeutralMode(NeutralMode.Coast);
+        this.cld.setNeutralMode(NeutralMode.Brake);
     }
 
     @Override

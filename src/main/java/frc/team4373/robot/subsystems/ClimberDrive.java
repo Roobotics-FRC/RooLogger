@@ -33,7 +33,7 @@ public class ClimberDrive extends Subsystem {
 
     private ClimberDrive() {
         this.talon = new WPI_TalonSRX(RobotMap.CLIMBER_DRIVE_MOTOR);
-        this.talon.setNeutralMode(NeutralMode.Brake);
+        this.talon.setNeutralMode(NeutralMode.Coast);
         this.talon.setInverted(RobotMap.CLIMBER_MOTOR_INVERTED);
     }
 
@@ -44,6 +44,10 @@ public class ClimberDrive extends Subsystem {
     public void setPercentOutput(double power) {
         power = Robot.constrainPercentOutput(power);
         this.talon.set(ControlMode.PercentOutput, power);
+    }
+
+    public void setNeutralMode(NeutralMode mode) {
+        this.talon.setNeutralMode(mode);
     }
 
     /**

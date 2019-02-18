@@ -3,6 +3,7 @@ package frc.team4373.robot.commands.auton.elemental;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Climber;
+import frc.team4373.robot.subsystems.ClimberDrive;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
@@ -10,11 +11,16 @@ import frc.team4373.robot.subsystems.Drivetrain;
  */
 public class RetractClimberFrontAuton extends Command {
     private Climber climber;
+    private ClimberDrive cld;
     private Drivetrain drivetrain;
 
+    /**
+     * Constructs a command to retract the front half of the climber.
+     */
     public RetractClimberFrontAuton() {
         requires(this.climber = Climber.getInstance());
-        this.drivetrain = Drivetrain.getInstance();
+        requires(this.drivetrain = Drivetrain.getInstance());
+        requires(this.cld = ClimberDrive.getInstance());
     }
 
     @Override
@@ -24,8 +30,9 @@ public class RetractClimberFrontAuton extends Command {
 
     @Override
     protected void execute() {
-        climber.retractFront();
-        drivetrain.setNeutralMode(NeutralMode.Coast);
+        this.climber.retractFront();
+        this.drivetrain.setNeutralMode(NeutralMode.Brake);
+        this.cld.setNeutralMode(NeutralMode.Coast);
     }
 
     @Override
