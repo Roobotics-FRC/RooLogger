@@ -12,10 +12,21 @@ import frc.team4373.robot.commands.teleop.ClimberDriveCommand;
  * A programmatic representation of the drivetrain of the climbing system.
  */
 public class ClimberDrive extends Subsystem {
-    private static ClimberDrive instance;
+    private static volatile ClimberDrive instance;
 
+    /**
+     * The getter for the ClimberDrive class.
+     * @return the singleton ClimberDrive object.
+     */
     public static ClimberDrive getInstance() {
-        return instance == null ? instance = new ClimberDrive() : instance;
+        if (instance == null) {
+            synchronized (ClimberDrive.class) {
+                if (instance == null) {
+                    instance = new ClimberDrive();
+                }
+            }
+        }
+        return instance;
     }
 
     private WPI_TalonSRX talon;

@@ -15,10 +15,21 @@ import frc.team4373.robot.commands.teleop.LiftCommand;
  * A programmatic representation of the robot's lift mechanism that supports the intake.
  */
 public class Lift extends Subsystem {
-    private static Lift instance;
+    private static volatile Lift instance;
 
+    /**
+     * The getter for the Lift class.
+     * @return the singleton Lift object.
+     */
     public static Lift getInstance() {
-        return instance == null ? instance = new Lift() : instance;
+        if (instance == null) {
+            synchronized (Lift.class) {
+                if (instance == null) {
+                    instance = new Lift();
+                }
+            }
+        }
+        return instance;
     }
 
     private WPI_TalonSRX talon1;
