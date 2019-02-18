@@ -51,9 +51,10 @@ public class RobotMap {
     public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT = 7;
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_FRONT = 9;
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_REAR = 11;
+    public static final int DRIVER_BUTTON_CLIMB_DRIVE_BACKWARD = 12;
     // ----- begin debugging buttons -----
+    public static final int DRIVER_BUTTON_CLIMB_RETRACT_ALL = 8;
     public static final int DRIVER_BUTTON_TOGGLE_TELESCOPE = 10;
-    public static final int DRIVER_BUTTON_CLIMB_RETRACT_ALL = 12;
     // -----  end debugging buttons  -----
     public static final int DRIVER_BUTTON_VISION_ALIGNMENT = 2;
     public static final int DRIVER_BUTTON_KILL_AUTON = 6;

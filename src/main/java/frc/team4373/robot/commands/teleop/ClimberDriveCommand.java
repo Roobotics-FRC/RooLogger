@@ -22,9 +22,18 @@ public class ClimberDriveCommand extends Command {
 
     @Override
     protected void execute() {
+        // axis is 0 -> -1, convert to 0 -> 1—use raw axis b/c we don't want filtering
         double power = (OI.getOI().getDriveJoystick().getRawAxis(
                 RobotMap.DRIVER_AXIS_SLIDER_CLIMBER_WHEEL) - 1) / -2;
+
+        // make power relative to max speed
         power *= RobotMap.MAXIMUM_CLIMBER_DRIVE_SPEED;
+
+        // if reversal button is held, go backward
+        if (OI.getOI().getDriveJoystick().getRawButton(
+                RobotMap.DRIVER_BUTTON_CLIMB_DRIVE_BACKWARD)) {
+            power *= -1;
+        }
         cld.setPercentOutput(power);
     }
 

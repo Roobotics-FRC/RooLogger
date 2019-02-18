@@ -31,8 +31,8 @@ public class OI {
     private JoystickButton driverClimbRetractRear;
 
     // debug
-    private JoystickButton DEBUGdriverClimbRetract;
-    private JoystickButton DEBUGdriverToggleTelescope;
+    private JoystickButton dEBUGdriverClimbRetract;
+    private JoystickButton dEBUGdriverToggleTelescope;
 
     // drive buttons
     private JoystickButton driverVisionAlignment;
@@ -81,13 +81,13 @@ public class OI {
                 RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_REAR);
         driverClimbRetractRear.whenPressed(new RetractClimberRearAuton());
 
-        DEBUGdriverClimbRetract = new JoystickButton(driveJoystick,
+        dEBUGdriverClimbRetract = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_ALL);
-        DEBUGdriverClimbRetract.whenPressed(new RetractClimberAuton());
+        dEBUGdriverClimbRetract.whenPressed(new RetractClimberAuton());
 
-        DEBUGdriverToggleTelescope = new JoystickButton(driveJoystick,
+        dEBUGdriverToggleTelescope = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_TOGGLE_TELESCOPE);
-        DEBUGdriverToggleTelescope.whenPressed(new ToggleLiftTelescopeAuton());
+        dEBUGdriverToggleTelescope.whenPressed(new ToggleLiftTelescopeAuton());
 
         driverVisionAlignment = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_VISION_ALIGNMENT);
