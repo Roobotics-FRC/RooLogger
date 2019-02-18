@@ -2,6 +2,7 @@ package frc.team4373.robot.commands.auton.sequences;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.subsystems.*;
 
 /**
@@ -50,7 +51,7 @@ public class ClimbAuton extends Command {
                     this.state++;
                     this.cld.setPercentOutput(0);
                 }
-                this.cld.setPercentOutput(1);
+                this.cld.setPercentOutput(RobotMap.MAXIMUM_CLIMBER_DRIVE_SPEED);
                 break;
             case 2:
                 this.climber.retractFront();
@@ -63,7 +64,7 @@ public class ClimbAuton extends Command {
                     this.state++;
                     this.cld.setPercentOutput(0);
                 }
-                this.cld.setPercentOutput(1);
+                this.cld.setPercentOutput(RobotMap.MAXIMUM_CLIMBER_DRIVE_SPEED);
                 break;
             case 4:
                 this.climber.retractRear();
