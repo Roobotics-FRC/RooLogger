@@ -35,7 +35,7 @@ public class LiftCommand extends Command {
 
     @Override
     protected void execute() {
-        double power = -OI.getOI().getOperatorJoystick().getRawAxis(
+        double power = -OI.getOI().getOperatorJoystick().getAxis(
                 RobotMap.OPERATOR_AXIS_LIFT_MANUAL_CONTROL);
         lift.setPercentOutput(power);
 

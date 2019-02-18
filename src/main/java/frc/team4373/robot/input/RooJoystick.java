@@ -6,7 +6,7 @@ import frc.team4373.robot.input.filters.DoubleTypeFilter;
 /**
  * This class extends the WPILib Joystick class to add deadzone and filter functionality.
  */
-public class    RooJoystick<F extends DoubleTypeFilter> extends Joystick {
+public class RooJoystick<F extends DoubleTypeFilter> extends Joystick {
     /**
      * A representation of an axis of the joystick.
      */
@@ -108,26 +108,13 @@ public class    RooJoystick<F extends DoubleTypeFilter> extends Joystick {
 
     /**
      * Returns the filtered value of a joystick axis.
+     * If joystick has single, well-defined axes, {@link #getAxis(Axis axis)} is preferable.
      *
      * @param axis the axis to read from.
      * @return the filtered value of the axis.
      */
-    @Deprecated
-    private double getAxis(int axis) {
-        switch (axis) {
-            case 0:
-                return this.rooGetX();
-            case 1:
-                return this.rooGetY();
-            case 2:
-                return this.rooGetZ();
-            case 3:
-                return this.rooGetTwist();
-            case 4:
-                return this.rooGetThrottle();
-            default:
-                return 0d;
-        }
+    public double getAxis(int axis) {
+        return this.filter(this.getRawAxis(axis));
     }
 
     /**

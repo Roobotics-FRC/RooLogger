@@ -1,5 +1,6 @@
 package frc.team4373.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,6 +25,8 @@ public class Robot extends TimedRobot {
     private Command autonCommand = null;
     private SendableChooser<String> objectiveChooser = new SendableChooser<>();
     private SendableChooser<String> positionChooser = new SendableChooser<>();
+
+    private Compressor compressor;
 
     private Map<String, String> autonEntries;
 
@@ -50,6 +53,8 @@ public class Robot extends TimedRobot {
         autonEntries.put("R Hatch 2 Low", "r.hatch.far.low");
         autonEntries.put("R Hatch 2 Mid", "r.hatch.far.mid");
         autonEntries.put("R Hatch 2 Hi", "r.hatch.far.hi");
+
+        this.compressor = new Compressor(RobotMap.PCM_1_PORT);
     }
 
     /**
@@ -65,6 +70,7 @@ public class Robot extends TimedRobot {
         Climber.getInstance();
         Intake.getInstance();
         Lift.getInstance();
+        compressor.start();
 
         // Populate dashboard
         boolean isFirstEntry = true;
