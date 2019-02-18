@@ -20,6 +20,9 @@ public class DriveStraightCommand extends PIDCommand {
 
     private Drivetrain drivetrain;
 
+    /**
+     * Constructs a new teleop drive command that drives straight with PID.
+     */
     public DriveStraightCommand() {
         super("DriveStraightCommand", RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI, RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD);
@@ -80,7 +83,8 @@ public class DriveStraightCommand extends PIDCommand {
         double joyX = OI.getOI().getDriveJoystick().rooGetX();
         double joyY = OI.getOI().getDriveJoystick().rooGetY();
 
-        double rightOutput, leftOutput;
+        double rightOutput;
+        double leftOutput;
         if (joyZ == 0 && System.currentTimeMillis() > lastManualOp + 500000) {
             rightOutput = Robot.constrainPercentOutput(this.velocityPIDOutput + angleOutput);
             leftOutput = Robot.constrainPercentOutput(this.velocityPIDOutput - angleOutput);
@@ -95,8 +99,8 @@ public class DriveStraightCommand extends PIDCommand {
     }
 
     private double getAverageVelocity() {
-        return (this.drivetrain.getSensorVelocity(Drivetrain.TalonID.LEFT_1) +
-                this.drivetrain.getSensorVelocity(Drivetrain.TalonID.RIGHT_1)) / 2;
+        return (this.drivetrain.getSensorVelocity(Drivetrain.TalonID.LEFT_1)
+                + this.drivetrain.getSensorVelocity(Drivetrain.TalonID.RIGHT_1)) / 2;
     }
 
     @Override
