@@ -13,7 +13,7 @@ import frc.team4373.robot.input.filters.XboxAxisFilter;
  * OI provides access to operator interface devices.
  */
 public class OI {
-    private static OI oi = null;
+    private static volatile OI oi = null;
     private RooJoystick<FineGrainedPiecewiseFilter> driveJoystick;
     private RooJoystick operatorJoystick;
 

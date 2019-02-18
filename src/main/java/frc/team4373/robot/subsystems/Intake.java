@@ -21,10 +21,21 @@ public class Intake extends Subsystem {
     private DoubleSolenoid deployPiston1;
     private DigitalInput limitSwitch;
 
-    private static Intake instance;
+    private static volatile Intake instance;
 
+    /**
+     * The getter for the Intake class.
+     * @return the singleton Intake object.
+     */
     public static Intake getInstance() {
-        return instance == null ? instance = new Intake() : instance;
+        if (instance == null) {
+            synchronized (Intake.class) {
+                if (instance == null) {
+                    instance = new Intake();
+                }
+            }
+        }
+        return instance;
     }
 
     private Intake() {

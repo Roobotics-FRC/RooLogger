@@ -10,10 +10,21 @@ import frc.team4373.robot.commands.DummyCommand;
  * A programmatic representation of the robot's climbing components.
  */
 public class Climber extends Subsystem {
-    private static Climber instance;
+    private static volatile Climber instance;
 
+    /**
+     * The getter for the Climber class.
+     * @return the singleton Climber object.
+     */
     public static Climber getInstance() {
-        return instance == null ? instance = new Climber() : instance;
+        if (instance == null) {
+            synchronized (Climber.class) {
+                if (instance == null) {
+                    instance = new Climber();
+                }
+            }
+        }
+        return instance;
     }
 
     private DoubleSolenoid frontPiston;

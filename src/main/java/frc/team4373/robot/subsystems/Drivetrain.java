@@ -15,10 +15,21 @@ import frc.team4373.robot.commands.teleop.DrivetrainCommand;
  * A programmatic representation of the robot's drivetrain.
  */
 public class Drivetrain extends Subsystem {
-    private static Drivetrain instance;
+    private static volatile Drivetrain instance;
 
+    /**
+     * The getter for the Drivetrain class.
+     * @return the singleton Drivetrain object.
+     */
     public static Drivetrain getInstance() {
-        return instance == null ? instance = new Drivetrain() : instance;
+        if (instance == null) {
+            synchronized (Drivetrain.class) {
+                if (instance == null) {
+                    instance = new Drivetrain();
+                }
+            }
+        }
+        return instance;
     }
 
     public enum TalonID {
