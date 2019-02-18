@@ -117,6 +117,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("CDrive Pow", ClimberDrive.getInstance().getPercentOutput());
         SmartDashboard.putBoolean("Climb Front", Climber.getInstance().frontIsDeployed());
         SmartDashboard.putBoolean("Climb Rear", Climber.getInstance().rearIsDeployed());
+        SmartDashboard.putBoolean("Light Ring", Drivetrain.getInstance().getLightRingEnabled());
     }
 
     /**

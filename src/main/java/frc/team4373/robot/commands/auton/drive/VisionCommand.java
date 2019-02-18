@@ -47,11 +47,12 @@ public abstract class VisionCommand extends Command {
             if (cameraValueIsAcceptable(this.averageSetpoint)) {
                 this.finished = true;
             } else {
-                this.drivetrain.setLightRing(false);
                 this.readyForPID = true;
             }
         } else { // PID execution state
             this.drivetrain.setLightRing(false);
+            resetState();
+            // if uACV creates a new command, initialize() will be called again
             useAverageCameraValue(this.averageSetpoint);
         }
     }

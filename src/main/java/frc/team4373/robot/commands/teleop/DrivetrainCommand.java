@@ -16,7 +16,9 @@ public class DrivetrainCommand extends Command {
 
     @Override
     protected void initialize() {
-        this.drivetrain.setLightRing(false);
+        // this is commented out b/c it shuts off the light ring if operator manually enables it
+        // because initialize() is re-called after an interrupt
+        // this.drivetrain.setLightRing(false);
     }
 
     @Override

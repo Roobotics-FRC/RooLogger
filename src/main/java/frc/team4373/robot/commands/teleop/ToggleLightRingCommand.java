@@ -6,6 +6,7 @@ import frc.team4373.robot.subsystems.Drivetrain;
 public class ToggleLightRingCommand extends Command {
     private Drivetrain drivetrain;
     private Boolean explicitState = null;
+    private boolean stateToSet;
 
     public ToggleLightRingCommand() {
         requires(this.drivetrain = Drivetrain.getInstance());
@@ -17,11 +18,16 @@ public class ToggleLightRingCommand extends Command {
     }
 
     @Override
+    protected void initialize() {
+        this.stateToSet = !this.drivetrain.getLightRingEnabled();
+    }
+
+    @Override
     protected void execute() {
         if (this.explicitState != null) {
             this.drivetrain.setLightRing(explicitState);
         } else {
-            this.drivetrain.setLightRing(!this.drivetrain.getLightRingEnabled());
+            this.drivetrain.setLightRing(stateToSet);
         }
     }
 
