@@ -11,6 +11,7 @@ plugins {
     id "checkstyle"
     id "edu.wpi.first.GradleRIO" version "2019.2.1"
     id "idea"
+    id "com.github.spotbugs" version "1.6.9"
 }
 
 repositories {
@@ -21,6 +22,23 @@ checkstyle {
     //noinspection GroovyAssignabilityCheck
     configFile = rootProject.file('config/checkstyle/checkstyle.xml')
     toolVersion = '7.1.2'
+}
+
+spotbugs {
+    toolVersion = '3.1.11'
+    effort = 'max'
+    reportLevel = 'low'
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+task roospotbugs(type: GradleBuild) {
+    tasks = ['clean', 'build', 'spotbugsMain']
 }
 
 def ROBOT_MAIN_CLASS = "frc.team4373.robot.Main"
@@ -48,18 +66,19 @@ task switchTo4373 {
     }
 }
 
-def switchBack() {
-    if (isMacOS && network != '4373') {
-        println 'Reconnecting to ' + network + '…'
-        Process resetProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 ' + network)
-        resetProc.waitFor()
-        println 'Reconnected to ' + network
+task switchBack {
+    doLast {
+        if (isMacOS && network != '4373') {
+            println 'Reconnecting to ' + network + '…'
+            Process resetProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 ' + network)
+            resetProc.waitFor()
+            println 'Reconnected to ' + network
+        }
     }
 }
 
-project.tasks.deploy.dependsOn switchTo4373
-project.tasks.deploy.doLast {
-    switchBack()
+task roodeploy(type: GradleBuild) {
+    tasks = ['switchTo4373', 'deploy', 'switchBack']
 }
 
 // Define my targets (RoboRIO) and artifacts (deployable files)
