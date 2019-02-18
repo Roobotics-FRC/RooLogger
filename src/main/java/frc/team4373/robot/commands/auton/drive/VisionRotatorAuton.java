@@ -23,7 +23,8 @@ public class VisionRotatorAuton extends VisionCommand {
 
     @Override
     protected void useAverageCameraValue(double value) {
-        Scheduler.getInstance().add(new TurnToAngleAuton(this.getDrivetrain().getPigeonYaw() + value));
+        Scheduler.getInstance().add(new TurnToAngleAuton(
+                this.getDrivetrain().getPigeonYaw() + value));
     }
 
 

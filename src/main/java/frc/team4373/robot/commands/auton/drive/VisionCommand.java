@@ -17,6 +17,11 @@ public abstract class VisionCommand extends Command {
     private boolean readyForPID = false;
     private boolean finished = false;
 
+    /**
+     * Constructs a vision-based auton command.
+     * @param name the name of the command.
+     * @param smartDashboardId the ID published by the vision script on NetworkTables to query.
+     */
     public VisionCommand(String name, String smartDashboardId) {
         super(name);
         requires(this.drivetrain = Drivetrain.getInstance());
