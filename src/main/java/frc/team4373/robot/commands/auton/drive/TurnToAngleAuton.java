@@ -50,7 +50,7 @@ public class TurnToAngleAuton extends PIDCommand {
         if (coolingDown) {
             if (System.currentTimeMillis() - COOLDOWN_TIME > this.cooldownStart) {
                 this.finished = true;
-                this.drivetrain.setSidesPercentOutput(0);
+                this.drivetrain.zeroMotors();
                 return;
             }
         } else if (Math.abs(output) < COOLDOWN_THRESHOLD) {

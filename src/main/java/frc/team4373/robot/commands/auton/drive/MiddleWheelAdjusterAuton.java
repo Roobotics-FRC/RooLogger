@@ -51,7 +51,7 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
         } else if (!readyForPID) { // setpoint setting state
             this.drivetrain.setLightRing(false);
             double setpointInches = distanceSum / RobotMap.VISION_SAMPLE_COUNT;
-            if (setpointInches < RobotMap.ALLOWABLE_OFFSET_FROM_VIS_TARGET) {
+            if (setpointInches < RobotMap.ALLOWABLE_LATERAL_OFFSET_FROM_VIS_TARGET) {
                 this.finished = true;
             } else {
                 this.setSetpoint(this.drivetrain.getSensorPosition(Drivetrain.TalonID.MIDDLE_1)
@@ -84,6 +84,7 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
     @Override
     protected void end() {
         this.drivetrain.setLightRing(false); // safety
+        this.drivetrain.zeroMotors();
         if (initiallyDeployed) {
             drivetrain.deployMiddleWheel();
         } else {

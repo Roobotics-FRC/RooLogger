@@ -60,6 +60,7 @@ public class ApproachVisionTargetAuton extends Command {
     @Override
     protected void end() {
         this.drivetrain.setLightRing(false); // safety
+        this.drivetrain.zeroMotors();
     }
 
     @Override
