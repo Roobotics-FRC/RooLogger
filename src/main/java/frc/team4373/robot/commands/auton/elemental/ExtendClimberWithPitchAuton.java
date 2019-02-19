@@ -15,10 +15,11 @@ public class ExtendClimberWithPitchAuton extends Command {
     private Drivetrain drivetrain;
 
     private long lastPitch = -1;
-    private long initialDeploy = -1;
+    private boolean initialDeploy = false;
     private boolean finished = false;
-    private static final double TOLERABLE_PITCH = 10;
-    private static final long COOLDOWN = 250;
+    private double startingPitch = 0;
+    private static final double TOLERABLE_PITCH = 1;
+    private static final long COOLDOWN = 1000;
 
 
     /**
@@ -32,24 +33,30 @@ public class ExtendClimberWithPitchAuton extends Command {
 
     @Override
     protected void initialize() {
-        this.initialDeploy = -1;
+        this.initialDeploy = false;
         this.finished = false;
+        this.startingPitch = drivetrain.getPigeonPitch();
+        setTimeout(30); // FIXME: Undo if used at competition
     }
 
     @Override
     protected void execute() {
         long now = System.currentTimeMillis();
-        if (this.initialDeploy == -1) {
-            this.climber.climb();
-            this.initialDeploy = now;
-        } else if (now > this.initialDeploy + COOLDOWN) {
+        if (!this.initialDeploy) {
+            this.climber.deployFront();
+            this.initialDeploy = true;
+        } else {
             double pitch = this.drivetrain.getPigeonPitch();
-            if (pitch > TOLERABLE_PITCH) {
+            if (pitch - this.startingPitch > TOLERABLE_PITCH) {
                 this.climber.neutralizeFront();
+                this.climber.deployRear();
                 lastPitch = now;
-            } else if (pitch < -TOLERABLE_PITCH) {
+                this.finished = false;
+            } else if (pitch + this.startingPitch < -TOLERABLE_PITCH) {
                 this.climber.neutralizeRear();
+                this.climber.deployFront();
                 lastPitch = now;
+                this.finished = false;
             } else if (this.lastPitch > -1) {
                 this.climber.climb();
                 if (now > this.lastPitch + COOLDOWN) {
@@ -63,6 +70,6 @@ public class ExtendClimberWithPitchAuton extends Command {
 
     @Override
     protected boolean isFinished() {
-        return this.finished;
+        return this.isTimedOut();
     }
 }

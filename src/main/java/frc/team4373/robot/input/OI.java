@@ -15,7 +15,7 @@ import frc.team4373.robot.input.filters.XboxAxisFilter;
 public class OI {
     private static volatile OI oi = null;
     private RooJoystick<FineGrainedPiecewiseFilter> driveJoystick;
-    private RooJoystick operatorJoystick;
+    private RooJoystick<XboxAxisFilter> operatorJoystick;
 
     // lift buttons
     private JoystickButton operatorLiftCargoL3;
@@ -71,7 +71,7 @@ public class OI {
 
         driverClimbRaiseBot = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT);
-        driverClimbRaiseBot.whenPressed(new ExtendClimberAuton());
+        driverClimbRaiseBot.whenPressed(new ExtendClimberWithPitchAuton());
 
         driverClimbRetractFront = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_FRONT);
