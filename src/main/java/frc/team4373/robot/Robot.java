@@ -118,6 +118,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putBoolean("Climb Front", Climber.getInstance().frontIsDeployed());
         SmartDashboard.putBoolean("Climb Rear", Climber.getInstance().rearIsDeployed());
         SmartDashboard.putBoolean("Light Ring", Drivetrain.getInstance().getLightRingEnabled());
+        SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
+        SmartDashboard.putBoolean("Intake Deployed", Intake.getInstance().isDeployed());
     }
 
     /**

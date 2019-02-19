@@ -46,8 +46,9 @@ public class RobotMap {
     public static final int OPERATOR_BUTTON_LIFT_CARGO_L1 = 1; // a button
     public static final int OPERATOR_BUTTON_LIFT_CARGO_SHIP = 3; // x button
     public static final int OPERATOR_BUTTON_LIFT_TO_LOAD = 8; // start button
-    public static final int OPERATOR_AXIS_LIFT_MANUAL_CONTROL = 1; //Left stick Y, up is negative.
     public static final int OPERATOR_BUTTON_STOW_INTAKE = 7;
+    public static final int OPERATOR_BUTTON_TOGGLE_INTAKE = 12; // press unused (right) stick
+    public static final int OPERATOR_AXIS_LIFT_MANUAL_CONTROL = 1; //Left stick Y, up is negative.
     public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT = 7;
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_FRONT = 9;
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_REAR = 11;

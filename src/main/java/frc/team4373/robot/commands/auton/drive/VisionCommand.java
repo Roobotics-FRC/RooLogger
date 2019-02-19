@@ -49,7 +49,7 @@ public abstract class VisionCommand extends Command {
             } else {
                 this.readyForPID = true;
             }
-        } else { // PID execution state
+        } else { // PID execution state—NEEDS to be separate so that we can reset the state
             this.drivetrain.setLightRing(false);
             resetState();
             // if uACV creates a new command, initialize() will be called again

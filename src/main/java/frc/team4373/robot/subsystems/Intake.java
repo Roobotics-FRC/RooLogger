@@ -21,6 +21,9 @@ public class Intake extends Subsystem {
     private DoubleSolenoid deployPiston1;
     private DigitalInput limitSwitch;
 
+    private static final DoubleSolenoid.Value DEPLOYED = DoubleSolenoid.Value.kForward;
+    private static final DoubleSolenoid.Value RETRACTED = DoubleSolenoid.Value.kReverse;
+
     private static volatile Intake instance;
 
     /**
@@ -92,11 +95,15 @@ public class Intake extends Subsystem {
     }
 
     public void deploy() {
-        this.deployPiston1.set(DoubleSolenoid.Value.kReverse);
+        this.deployPiston1.set(DEPLOYED);
     }
 
     public void retract() {
-        this.deployPiston1.set(DoubleSolenoid.Value.kForward);
+        this.deployPiston1.set(RETRACTED);
+    }
+
+    public boolean isDeployed() {
+        return this.deployPiston1.get() == DEPLOYED;
     }
 
     public boolean getLimitSwitch() {

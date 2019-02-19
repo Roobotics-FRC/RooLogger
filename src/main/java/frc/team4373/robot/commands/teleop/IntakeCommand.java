@@ -13,6 +13,9 @@ public class IntakeCommand extends Command {
     private boolean limitSwitch = false;
     private boolean firstTime = true;
 
+    private long deploymentTimeout = 0;
+    private static final long BUTTON_COOLDOWN_TIME = 2000;
+
     public IntakeCommand() {
         requires(this.intake = Intake.getInstance());
     }
@@ -26,6 +29,16 @@ public class IntakeCommand extends Command {
 
     @Override
     protected void execute() {
+        long now = System.currentTimeMillis();
+        if (OI.getOI().getOperatorJoystick().getRawButton(RobotMap.OPERATOR_BUTTON_TOGGLE_INTAKE)
+                && now > deploymentTimeout + BUTTON_COOLDOWN_TIME) {
+            if (intake.isDeployed()) {
+                intake.retract();
+            } else {
+                intake.deploy();
+            }
+            this.deploymentTimeout = now;
+        }
         if (OI.getOI().getOperatorJoystick().getRawButton(
                 RobotMap.OPERATOR_BUTTON_COLLECT_CARGO)) {
             if (firstTime) {
