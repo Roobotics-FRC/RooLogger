@@ -15,8 +15,8 @@ public class RobotMap {
     public static final boolean LIFT_MOTOR_1_INVERTED = true;
     public static final boolean LIFT_MOTOR_2_INVERTED = true;
     public static final boolean CLIMBER_MOTOR_INVERTED = true;
-    public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = false;
-    public static final boolean INTAKE_MOTOR_LEFT_INVERTED = false;
+    public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = true;
+    public static final boolean INTAKE_MOTOR_LEFT_INVERTED = true;
 
     // Sensor phase configuration
     public static final boolean DRIVETRAIN_RIGHT_ENCODER_PHASE = false;
@@ -47,7 +47,7 @@ public class RobotMap {
     public static final int OPERATOR_BUTTON_LIFT_CARGO_SHIP = 3; // x button
     public static final int OPERATOR_BUTTON_LIFT_TO_LOAD = 8; // start button
     public static final int OPERATOR_BUTTON_STOW_INTAKE = 7;
-    public static final int OPERATOR_BUTTON_TOGGLE_INTAKE = 12; // press unused (right) stick
+    public static final int OPERATOR_BUTTON_TOGGLE_INTAKE = 10; // press unused (right) stick
     public static final int OPERATOR_AXIS_LIFT_MANUAL_CONTROL = 1; //Left stick Y, up is negative.
     public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT = 7;
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_FRONT = 9;

@@ -120,6 +120,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putBoolean("Light Ring", Drivetrain.getInstance().getLightRingEnabled());
         SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
         SmartDashboard.putBoolean("Intake Deployed", Intake.getInstance().isDeployed());
+        SmartDashboard.putNumber("Pitch", Drivetrain.getInstance().getPigeonPitch());
     }
 
     /**
