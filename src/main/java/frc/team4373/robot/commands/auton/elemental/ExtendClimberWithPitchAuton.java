@@ -15,10 +15,10 @@ public class ExtendClimberWithPitchAuton extends Command {
     private Drivetrain drivetrain;
 
     private long lastPitch = -1;
-    private final long COOLDOWN = 250;
     private long initialDeploy = -1;
-    private final double TOLERABLE_PITCH = 10;
     private boolean finished = false;
+    private static final double TOLERABLE_PITCH = 10;
+    private static final long COOLDOWN = 250;
 
 
     /**

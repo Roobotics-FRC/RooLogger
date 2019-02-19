@@ -16,7 +16,7 @@ public class DriveStraightCommand extends PIDCommand {
     private PIDOutput velocityOutputLambda;
     private double velocityPIDOutput;
 
-    private final long COOLDOWN = 500;
+    private static final long COOLDOWN = 500;
 
     private long lastManualOp = 0;
 
