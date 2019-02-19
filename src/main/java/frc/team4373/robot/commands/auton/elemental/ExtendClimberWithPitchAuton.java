@@ -42,14 +42,19 @@ public class ExtendClimberWithPitchAuton extends Command {
         if (this.initialDeploy == -1) {
             this.climber.climb();
             this.initialDeploy = now;
-        } else if (now + COOLDOWN > this.initialDeploy) {
+        } else if (now > this.initialDeploy + COOLDOWN) {
             double pitch = this.drivetrain.getPigeonPitch();
             if (pitch > TOLERABLE_PITCH) {
                 this.climber.neutralizeFront();
+                lastPitch = now;
             } else if (pitch < -TOLERABLE_PITCH) {
                 this.climber.neutralizeRear();
-            } else if (this.lastPitch > -1 && now + COOLDOWN > this.lastPitch) {
-                this.finished = true;
+                lastPitch = now;
+            } else if (this.lastPitch > -1) {
+                this.climber.climb();
+                if (now > this.lastPitch + COOLDOWN) {
+                    this.finished = true;
+                }
             }
             this.drivetrain.setNeutralMode(NeutralMode.Coast);
             this.cld.setNeutralMode(NeutralMode.Brake);
