@@ -245,6 +245,16 @@ public class Drivetrain extends Subsystem {
     }
 
     /**
+     * Returns the Pigeon pitch value.
+     * @return Pigeon pitch value.
+     */
+    public double getPigeonPitch() {
+        double[] ypr = new double[3];
+        this.pigeon.getYawPitchRoll(ypr);
+        return ypr[1];
+    }
+
+    /**
      * Sets the neutral mode of the side motors to the given value.
      * @param mode The neutral mode to set the motors to.
      */

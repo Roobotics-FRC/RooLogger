@@ -16,6 +16,8 @@ public class DriveStraightCommand extends PIDCommand {
     private PIDOutput velocityOutputLambda;
     private double velocityPIDOutput;
 
+    private final long COOLDOWN = 500;
+
     private long lastManualOp = 0;
 
     private Drivetrain drivetrain;
@@ -85,7 +87,7 @@ public class DriveStraightCommand extends PIDCommand {
 
         double rightOutput;
         double leftOutput;
-        if (joyZ == 0 && System.currentTimeMillis() > lastManualOp + 500000) {
+        if (joyZ == 0 && System.currentTimeMillis() > lastManualOp + COOLDOWN) {
             rightOutput = Robot.constrainPercentOutput(this.velocityPIDOutput + angleOutput);
             leftOutput = Robot.constrainPercentOutput(this.velocityPIDOutput - angleOutput);
         } else {

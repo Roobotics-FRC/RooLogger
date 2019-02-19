@@ -62,6 +62,14 @@ public class Climber extends Subsystem {
         this.rearPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public void neutralizeFront() {
+        this.frontPiston.set(DoubleSolenoid.Value.kOff);
+    }
+
+    public void neutralizeRear() {
+        this.rearPiston.set(DoubleSolenoid.Value.kOff);
+    }
+
     public void retractAll() {
         this.retractFront();
         this.retractRear();
