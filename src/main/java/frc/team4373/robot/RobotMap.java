@@ -97,7 +97,7 @@ public class RobotMap {
     public static final int LIGHT_RING_RELAY_CHANNEL = 3;
 
     // Other mappings
-    public static final int PTN_CHANNEL = 0;
+    public static final int PTN_CHANNEL = 1;
 
     // Control system ports
     public static final int PCM_1_PORT = 2;
