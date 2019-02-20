@@ -27,7 +27,7 @@ public class RobotMap {
     public static final double LIFT_MOVEMENT_SPEED = 0.5;
     public static final int INTAKE_MOTOR_OUTPUT = 1;
     public static final double AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED = 0.5;
-    public static final double AUTON_TURN_SPEED = 0.25;
+    public static final double AUTON_TURN_SPEED = 0.2;
     public static final double AUTON_LONG_DRIVE_SPEED = 1; // for driving long distances
     public static final double AUTON_VISION_APPROACH_SPEED = 0.25;
     public static final double MAXIMUM_CLIMBER_DRIVE_SPEED = 0.333;
@@ -130,7 +130,7 @@ public class RobotMap {
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(1, 0, 0);
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.001, 0, 0);
-    public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.01, 0, 0);
+    public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
     public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.01, 0, 0);
 
     // Vision

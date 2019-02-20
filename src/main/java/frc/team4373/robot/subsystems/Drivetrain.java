@@ -241,7 +241,7 @@ public class Drivetrain extends Subsystem {
     public double getPigeonYaw() {
         double[] ypr = new double[3];
         this.pigeon.getYawPitchRoll(ypr);
-        return ypr[0];
+        return ypr[0] * -1;
     }
 
     /**
