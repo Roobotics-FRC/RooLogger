@@ -25,13 +25,7 @@ public class OI {
     private JoystickButton operatorLiftGround;
     private JoystickButton operatorStowIntake;
 
-    // climb buttons
-    private JoystickButton driverClimbRaiseBot;
-    private JoystickButton driverClimbRetractFront;
-    private JoystickButton driverClimbRetractRear;
-
     // debug
-    private JoystickButton dEBUGdriverClimbRetract;
     private JoystickButton dEBUGdriverToggleTelescope;
 
     // drive buttons
@@ -68,22 +62,6 @@ public class OI {
         operatorStowIntake = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_STOW_INTAKE);
         operatorStowIntake.whenPressed(new StowIntakeAuton());
-
-        driverClimbRaiseBot = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT);
-        driverClimbRaiseBot.whenPressed(new ExtendClimberWithPitchAuton());
-
-        driverClimbRetractFront = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_FRONT);
-        driverClimbRetractFront.whenPressed(new RetractClimberFrontAuton());
-
-        driverClimbRetractRear = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_REAR);
-        driverClimbRetractRear.whenPressed(new RetractClimberRearAuton());
-
-        dEBUGdriverClimbRetract = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_ALL);
-        dEBUGdriverClimbRetract.whenPressed(new RetractClimberAuton());
 
         dEBUGdriverToggleTelescope = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_TOGGLE_TELESCOPE);

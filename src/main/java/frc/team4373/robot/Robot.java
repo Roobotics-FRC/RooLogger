@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap.CargoShipPort;
 import frc.team4373.robot.RobotMap.Side;
-import frc.team4373.robot.commands.auton.elemental.RetractClimberAuton;
 import frc.team4373.robot.commands.auton.sequences.*;
 import frc.team4373.robot.subsystems.*;
 
@@ -54,8 +53,6 @@ public class Robot extends TimedRobot {
         autonEntries.put("R Hatch 2 Low", "r.hatch.far.low");
         autonEntries.put("R Hatch 2 Mid", "r.hatch.far.mid");
         autonEntries.put("R Hatch 2 Hi", "r.hatch.far.hi");
-
-        this.compressor = new Compressor(RobotMap.PCM_1_PORT);
     }
 
     /**
@@ -68,12 +65,9 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Initialize subsystems
         Drivetrain.getInstance();
-        Climber.getInstance();
         Intake.getInstance();
         Lift.getInstance();
         compressor.start();
-
-        Scheduler.getInstance().add(new RetractClimberAuton());
 
         // Populate dashboard
         boolean isFirstEntry = true;
@@ -118,9 +112,6 @@ public class Robot extends TimedRobot {
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.MIDDLE_1));
         SmartDashboard.putNumber("Lift Ang", Lift.getInstance().getPotenAngle());
         SmartDashboard.putNumber("Lift Pos", Lift.getInstance().getComputedArmHeight());
-        SmartDashboard.putNumber("CDrive Pow", ClimberDrive.getInstance().getPercentOutput());
-        SmartDashboard.putBoolean("Climb Front", Climber.getInstance().frontIsDeployed());
-        SmartDashboard.putBoolean("Climb Rear", Climber.getInstance().rearIsDeployed());
         SmartDashboard.putBoolean("Light Ring", Drivetrain.getInstance().getLightRingEnabled());
         SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
         SmartDashboard.putBoolean("Intake Deployed", Intake.getInstance().isDeployed());
