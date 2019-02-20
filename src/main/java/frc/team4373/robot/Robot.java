@@ -53,6 +53,8 @@ public class Robot extends TimedRobot {
         autonEntries.put("R Hatch 2 Low", "r.hatch.far.low");
         autonEntries.put("R Hatch 2 Mid", "r.hatch.far.mid");
         autonEntries.put("R Hatch 2 Hi", "r.hatch.far.hi");
+
+        this.compressor = new Compressor(RobotMap.PCM_1_PORT);
     }
 
     /**
