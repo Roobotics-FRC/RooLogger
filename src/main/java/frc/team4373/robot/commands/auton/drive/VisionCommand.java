@@ -37,12 +37,11 @@ public abstract class VisionCommand extends Command {
     @Override
     protected void execute() {
         if (sampleCount < RobotMap.VISION_SAMPLE_COUNT) { // polling state
-            this.drivetrain.setLightRing(true);
-            // TODO: Check whether light ring turns on fast enough for the first fetch to be valid
+            SmartDashboard.putString(this.getName() + " State", "Sampling");
             distanceSum += SmartDashboard.getNumber(dashboardId, 0);
             ++sampleCount;
         } else if (!readyForPID) { // setpoint setting state
-            this.drivetrain.setLightRing(false);
+            SmartDashboard.putString(this.getName() + " State", "Setting");
             this.averageSetpoint = distanceSum / RobotMap.VISION_SAMPLE_COUNT;
             if (cameraValueIsAcceptable(this.averageSetpoint)) {
                 this.finished = true;
@@ -50,7 +49,7 @@ public abstract class VisionCommand extends Command {
                 this.readyForPID = true;
             }
         } else { // PID execution state—NEEDS to be separate so that we can reset the state
-            this.drivetrain.setLightRing(false);
+            SmartDashboard.putString(this.getName() + " State", "Executing");
             resetState();
             // if uACV creates a new command, initialize() will be called again
             useAverageCameraValue(this.averageSetpoint);
@@ -75,5 +74,15 @@ public abstract class VisionCommand extends Command {
     @Override
     protected boolean isFinished() {
         return this.finished;
+    }
+
+    @Override
+    protected void end() {
+        this.drivetrain.setLightRing(false);
+    }
+
+    @Override
+    protected void interrupted() {
+        this.end();
     }
 }

@@ -44,12 +44,11 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
     @Override
     protected void usePIDOutput(double output) {
         if (sampleCount < RobotMap.VISION_SAMPLE_COUNT) { // polling state
-            this.drivetrain.setLightRing(true);
-            // TODO: Check whether light ring turns on fast enough for the first fetch to be valid
+            SmartDashboard.putString("MWA State", "Polling");
             distanceSum += SmartDashboard.getNumber("lateral_distance_to_target", 0);
             ++sampleCount;
         } else if (!readyForPID) { // setpoint setting state
-            this.drivetrain.setLightRing(false);
+            SmartDashboard.putString("MWA State", "Setting");
             double setpointInches = distanceSum / RobotMap.VISION_SAMPLE_COUNT;
             if (setpointInches < RobotMap.ALLOWABLE_LATERAL_OFFSET_FROM_VIS_TARGET) {
                 this.finished = true;
@@ -60,7 +59,7 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
                 readyForPID = true;
             }
         } else { // PID execution state
-            this.drivetrain.setLightRing(false); // safety
+            SmartDashboard.putString("MWA State", "Executing");
             if (Math.abs(output) < outputThreshold) {
                 resetState();
             } else {
@@ -83,7 +82,7 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
 
     @Override
     protected void end() {
-        this.drivetrain.setLightRing(false); // safety
+        this.drivetrain.setLightRing(false);
         this.drivetrain.zeroMotors();
         if (initiallyDeployed) {
             drivetrain.deployMiddleWheel();
