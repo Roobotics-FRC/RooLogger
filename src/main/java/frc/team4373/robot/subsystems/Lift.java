@@ -86,7 +86,7 @@ public class Lift extends Subsystem {
      * @return the angle from the potentiometer, converted based on the chain ratio.
      */
     public double getPotenAngle() {
-        return poten.get();
+        return poten.get() * RobotMap.LIFT_PTN_TO_ARM_CHAIN_RATIO;
     }
 
     /**
