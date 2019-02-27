@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.subsystems.Drivetrain;
 
@@ -60,6 +61,13 @@ public class DriveDistanceAuton extends PIDCommand {
         this.distancePIDController = new PIDController(RobotMap.DRIVETRAIN_DIST_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_DIST_PID_GAINS.kI, RobotMap.DRIVETRAIN_DIST_PID_GAINS.kD,
                 distanceSource, distanceOutputLambda);
+
+        // this.getPIDController().setPID(SmartDashboard.getNumber("kP-T", 0),
+        //         SmartDashboard.getNumber("kI-T", 0),
+        //         SmartDashboard.getNumber("kD-T", 0));
+        // this.distancePIDController.setPID(SmartDashboard.getNumber("kP-D", 0),
+        //         SmartDashboard.getNumber("kI-D", 0),
+        //         SmartDashboard.getNumber("kD-D", 0));
     }
 
     @Override

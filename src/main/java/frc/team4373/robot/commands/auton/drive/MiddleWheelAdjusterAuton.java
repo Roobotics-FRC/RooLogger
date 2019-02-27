@@ -34,6 +34,9 @@ public class MiddleWheelAdjusterAuton extends PIDCommand {
         this.drivetrain.deployMiddleWheel();
         this.getPIDController().setOutputRange(-RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED,
                 RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED);
+        // this.getPIDController().setPID(SmartDashboard.getNumber("kP-D", 0),
+        //         SmartDashboard.getNumber("kI-D", 0),
+        //         SmartDashboard.getNumber("kD-D", 0));
     }
 
     @Override

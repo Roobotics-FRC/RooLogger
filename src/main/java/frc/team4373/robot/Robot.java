@@ -91,9 +91,12 @@ public class Robot extends TimedRobot {
         SmartDashboard.putBoolean("Auton OK", true);
         SmartDashboard.putString("Activated Auton", "None");
 
-        SmartDashboard.putNumber("kP", 0);
-        SmartDashboard.putNumber("kI", 0);
-        SmartDashboard.putNumber("kD", 0);
+        SmartDashboard.putNumber("kP-D", 0);
+        SmartDashboard.putNumber("kI-D", 0);
+        SmartDashboard.putNumber("kD-D", 0);
+        SmartDashboard.putNumber("kP-T", 0);
+        SmartDashboard.putNumber("kI-T", 0);
+        SmartDashboard.putNumber("kD-T", 0);
     }
 
     /**
