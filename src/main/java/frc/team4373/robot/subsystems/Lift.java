@@ -77,7 +77,7 @@ public class Lift extends Subsystem {
      */
     public void setPercentOutput(double power) {
         power = Robot.constrainPercentOutput(power);
-        double angle = getPotenAngleRelative()
+        double angle = getPotenAngleRelative();
         if (angle <= RobotMap.LIFT_MINIMUM_SAFE_ANGLE) {
             this.talon1.set(power > 0 ? power : 0);
         } else if (angle >= RobotMap.LIFT_MAXIMUM_SAFE_ANGLE) {
