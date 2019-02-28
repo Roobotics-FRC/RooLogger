@@ -46,10 +46,8 @@ public class RobotMap {
     public static final int OPERATOR_BUTTON_LIFT_TO_LOAD = 8; // start button
     public static final int OPERATOR_BUTTON_STOW_INTAKE = 7;
     public static final int OPERATOR_BUTTON_TOGGLE_INTAKE = 10; // press unused (right) stick
+    public static final int OPERATOR_BUTTON_TOGGLE_TELESCOPE = 10; // click left stick
     public static final int OPERATOR_AXIS_LIFT_MANUAL_CONTROL = 1; //Left stick Y, up is negative.
-    // ----- begin debugging buttons -----
-    public static final int DRIVER_BUTTON_TOGGLE_TELESCOPE = 10;
-    // -----  end debugging buttons  -----
     public static final int DRIVER_BUTTON_VISION_ALIGNMENT = 2;
     public static final int DRIVER_BUTTON_KILL_AUTON = 6;
     public static final int DRIVER_BUTTON_TOGGLE_LIGHT_RING = 5;
@@ -108,8 +106,9 @@ public class RobotMap {
     public static final int LIFT_DEGREES_OF_MOTION = 120;
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
     public static final double LIFT_ARM_LENGTH = 39;
-    public static final double LIFT_ARM_MOUNT_HEIGHT = 43.5; // from floor, not bottom of bot
+    public static final double LIFT_ARM_MOUNT_HEIGHT = 39; // from floor, not bottom of bot
     public static final double LIFT_MAXIMUM_SAFE_ANGLE = 110;
+    public static final double LIFT_MINIMUM_SAFE_ANGLE = 0;
 
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(1, 0, 0);

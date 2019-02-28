@@ -163,7 +163,7 @@ public class Drivetrain extends Subsystem {
      * Retracts middle wheel using pistons.
      */
     public void retractMiddleWheel() {
-        this.piston.set(DoubleSolenoid.Value.kReverse); //I checked with David
+        this.piston.set(DoubleSolenoid.Value.kForward);
         this.middleWheelDeployed = false;
     }
 
@@ -171,7 +171,7 @@ public class Drivetrain extends Subsystem {
      * Deploys the middle wheel using pistons.
      */
     public void deployMiddleWheel() {
-        this.piston.set(DoubleSolenoid.Value.kForward);
+        this.piston.set(DoubleSolenoid.Value.kReverse);
         this.middleWheelDeployed = true;
     }
 

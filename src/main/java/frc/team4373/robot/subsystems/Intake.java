@@ -77,11 +77,11 @@ public class Intake extends Subsystem {
     }
 
     public void collectHatch() {
-        hatchPiston.set(DoubleSolenoid.Value.kReverse);
+        hatchPiston.set(DoubleSolenoid.Value.kForward);
     }
 
     public void releaseHatch() {
-        hatchPiston.set(DoubleSolenoid.Value.kForward);
+        hatchPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     private void setLeftTalon(double power) {

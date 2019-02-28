@@ -26,7 +26,7 @@ public class OI {
     private JoystickButton operatorStowIntake;
 
     // debug
-    private JoystickButton dEBUGdriverToggleTelescope;
+    private JoystickButton operatorButtonTelescope;
 
     // drive buttons
     private JoystickButton driverVisionAlignment;
@@ -63,9 +63,9 @@ public class OI {
                 RobotMap.OPERATOR_BUTTON_STOW_INTAKE);
         operatorStowIntake.whenPressed(new StowIntakeAuton());
 
-        dEBUGdriverToggleTelescope = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_TOGGLE_TELESCOPE);
-        dEBUGdriverToggleTelescope.whenPressed(new ToggleLiftTelescopeAuton());
+        operatorButtonTelescope = new JoystickButton(operatorJoystick,
+                RobotMap.OPERATOR_BUTTON_TOGGLE_TELESCOPE);
+        operatorButtonTelescope.whenPressed(new ToggleLiftTelescopeAuton());
 
         driverVisionAlignment = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_VISION_ALIGNMENT);

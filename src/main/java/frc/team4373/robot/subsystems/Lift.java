@@ -36,6 +36,7 @@ public class Lift extends Subsystem {
     private WPI_TalonSRX talon2;
     private DoubleSolenoid piston1;
     private Potentiometer poten;
+    private double initPos = 0;
 
     private Lift() {
         this.talon1 = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_1);
@@ -60,32 +61,49 @@ public class Lift extends Subsystem {
      * Telescopes the lift up.
      */
     public void telescope() {
-        this.piston1.set(DoubleSolenoid.Value.kForward);
+        this.piston1.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
      * Retracts the telescoping pistons.
      */
     public void retract() {
-        this.piston1.set(DoubleSolenoid.Value.kReverse);
+        this.piston1.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
-     * Sets the raw percent output of the lift motors.
+     * Sets the raw percent output of the lift motors. Positive power means moving up.
      * @param power the percent output to which to set the motors.
      */
     public void setPercentOutput(double power) {
-        if (getPotenAngle() > 0 && getPotenAngle() < RobotMap.LIFT_MAXIMUM_SAFE_ANGLE) {
+        // FIXME: This needs to be replaced with impending code
+        if (getPotenAngleRelative() > 0
+                && getPotenAngleRelative() < RobotMap.LIFT_MAXIMUM_SAFE_ANGLE) {
             power = Robot.constrainPercentOutput(power);
             this.talon1.set(ControlMode.PercentOutput, power);
         }
     }
 
     /**
-     * Gets the current angle from the potentiometer. Converts based on chain ratio.
-     * @return the angle from the potentiometer, converted based on the chain ratio.
+     * Sets the zero position of the potentiometer to the current position.
      */
-    public double getPotenAngle() {
+    public void zeroPotentiometer() {
+        this.initPos = this.getPotenAngleAbsolute();
+    }
+
+    /**
+     * Gets the current relative angle from the potentiometer. Converts based on chain ratio.
+     * @return the relative angle from the potentiometer, converted based on the chain ratio.
+     */
+    public double getPotenAngleRelative() {
+        return getPotenAngleAbsolute() - this.initPos;
+    }
+
+    /**
+     * Gets the absolute value of the potentiometer, converted with ratio.
+     * @return absolute value of potentiometer.
+     */
+    public double getPotenAngleAbsolute() {
         return poten.get() * RobotMap.LIFT_PTN_TO_ARM_CHAIN_RATIO;
     }
 
@@ -95,7 +113,7 @@ public class Lift extends Subsystem {
      */
     public double getComputedArmHeight() {
         return RobotMap.LIFT_ARM_MOUNT_HEIGHT
-                - RobotMap.LIFT_ARM_LENGTH * Math.cos(getPotenAngle());
+                - RobotMap.LIFT_ARM_LENGTH * Math.cos(getPotenAngleRelative());
     }
 
     public boolean isTelescoped() {

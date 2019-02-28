@@ -62,7 +62,7 @@ public class SetLiftAuton extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
-        return this.lift.getPotenAngle();
+        return this.lift.getPotenAngleRelative();
     }
 
     @Override
