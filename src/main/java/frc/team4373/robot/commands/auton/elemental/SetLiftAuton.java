@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.subsystems.Lift;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * Moves the lift to the given position.
  */
@@ -12,6 +15,8 @@ public class SetLiftAuton extends PIDCommand {
     private double angle;
     private boolean telescope;
 
+    private Deque<Double> potenReadings;
+
     private boolean finished = false;
     private boolean coolingDown = false;
     private long cooldownStart = 0;
@@ -19,9 +24,9 @@ public class SetLiftAuton extends PIDCommand {
     private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.25;
 
     public enum Position {
-        HATCH_3(60, false), HATCH_2(42, false), HATCH_1(14, false),
-        CARGO_3(68.5, false), CARGO_2(50.5, false), CARGO_1(22.5, false),
-        CARGO_SHIP(43, false), LOADING(14, false), STOW(5, false);
+        HATCH_3(1000, false), HATCH_2(800, false), HATCH_1(320, false),
+        CARGO_3(1000, false), CARGO_2(1000, false), CARGO_1(480, false),
+        CARGO_SHIP(650, false), LOADING(320, false), STOW(5, false);
 
         private double armAngle;
         private boolean telescope;
@@ -47,11 +52,13 @@ public class SetLiftAuton extends PIDCommand {
         requires(this.lift = Lift.getInstance());
         this.angle = position.armAngle;
         this.telescope = position.telescope;
+        this.potenReadings = new ArrayDeque<>();
     }
 
     @Override
     protected void initialize() {
         this.finished = this.coolingDown = false;
+        this.potenReadings.clear();
         this.setInputRange(0, RobotMap.LIFT_MAX_POTEN_VALUE);
         this.getPIDController().setOutputRange(-RobotMap.LIFT_MOVEMENT_SPEED,
                 RobotMap.LIFT_MOVEMENT_SPEED);
@@ -61,7 +68,17 @@ public class SetLiftAuton extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
-        return this.lift.getPotenAngleRelative();
+        this.potenReadings.add(this.lift.getPotenAngleRelative());
+        int readingCount = this.potenReadings.size();
+        if (readingCount > 10) {
+            this.potenReadings.removeFirst();
+            readingCount = 10;
+        }
+        double readingSum = 0;
+        for (double reading: potenReadings) {
+            readingSum += reading;
+        }
+        return readingSum / readingCount;
     }
 
     @Override
