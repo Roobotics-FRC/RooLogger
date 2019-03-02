@@ -110,10 +110,10 @@ public class RobotMap {
     public static final double LIFT_MAXIMUM_SAFE_ANGLE = 110;
     public static final double LIFT_MINIMUM_SAFE_ANGLE = 0;
     // allowable percent output increase on lift between cycles
-    public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.0075;
+    public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.0095;
 
     // PID gains
-    public static final PID LIFT_PID_GAINS = new PID(0.001, 0, 0);
+    public static final PID LIFT_PID_GAINS = new PID(0.002, 0, 0);
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.001, 0, 0);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
     public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.01, 0, 0);

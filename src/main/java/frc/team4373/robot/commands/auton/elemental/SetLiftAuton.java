@@ -1,6 +1,7 @@
 package frc.team4373.robot.commands.auton.elemental;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.subsystems.Lift;
 
@@ -21,7 +22,7 @@ public class SetLiftAuton extends PIDCommand {
     private boolean coolingDown = false;
     private long cooldownStart = 0;
     private static final long COOLDOWN_TIME = 500;
-    private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.25;
+    private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.2;
 
     public enum Position {
         HATCH_3(1000, false), HATCH_2(800, false), HATCH_1(320, false),
@@ -63,6 +64,9 @@ public class SetLiftAuton extends PIDCommand {
         this.getPIDController().setOutputRange(-RobotMap.LIFT_MOVEMENT_SPEED,
                 RobotMap.LIFT_MOVEMENT_SPEED);
         this.setSetpoint(angle);
+        // this.getPIDController().setPID(SmartDashboard.getNumber("kP-D", 0),
+        //         SmartDashboard.getNumber("kI-D", 0),
+        //         SmartDashboard.getNumber("kD-D", 0));
         setTimeout(0.5); // ensure that there's enough time for the pistons to potentially move
     }
 
