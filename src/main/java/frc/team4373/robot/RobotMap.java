@@ -103,7 +103,7 @@ public class RobotMap {
     // converts from units/0.1s to in/s
     public static final double DRIVETRAIN_ENC_VEL_TO_INPS = 6 * 10 * Math.PI / 4096 / 10.71;
     public static final double LIFT_PTN_TO_ARM_CHAIN_RATIO = 10d / 3d; // 10/3 ptn turns = 1 motor
-    public static final int LIFT_DEGREES_OF_MOTION = 120;
+    public static final int LIFT_MAX_POTEN_VALUE = 1000;
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
     public static final double LIFT_ARM_LENGTH = 39;
     public static final double LIFT_ARM_MOUNT_HEIGHT = 39; // from floor, not bottom of bot
@@ -113,7 +113,7 @@ public class RobotMap {
     public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.005;
 
     // PID gains
-    public static final PID LIFT_PID_GAINS = new PID(1, 0, 0);
+    public static final PID LIFT_PID_GAINS = new PID(0.001, 0, 0);
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.001, 0, 0);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
     public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.01, 0, 0);

@@ -52,7 +52,7 @@ public class SetLiftAuton extends PIDCommand {
     @Override
     protected void initialize() {
         this.finished = this.coolingDown = false;
-        this.setInputRange(0, RobotMap.LIFT_DEGREES_OF_MOTION);
+        this.setInputRange(0, RobotMap.LIFT_MAX_POTEN_VALUE);
         this.getPIDController().setOutputRange(-RobotMap.LIFT_MOVEMENT_SPEED,
                 RobotMap.LIFT_MOVEMENT_SPEED);
         this.setSetpoint(angle);
@@ -69,7 +69,7 @@ public class SetLiftAuton extends PIDCommand {
         if (coolingDown) {
             if (System.currentTimeMillis() - COOLDOWN_TIME > this.cooldownStart) {
                 this.finished = true;
-                this.lift.setPercentOutputRamping(0);
+                this.lift.setPercentOutputRaw(0);
                 return;
             }
         } else if (Math.abs(output) < COOLDOWN_THRESHOLD) {
@@ -92,7 +92,7 @@ public class SetLiftAuton extends PIDCommand {
 
     @Override
     protected void end() {
-        this.lift.setPercentOutputRamping(0);
+        this.lift.setPercentOutputRaw(0);
         this.getPIDController().reset();
     }
 

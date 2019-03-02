@@ -45,7 +45,7 @@ public class Lift extends Subsystem {
                 RobotMap.LIFT_PISTON_FORWARD, RobotMap.LIFT_PISTON_BACKWARD);
 
         this.poten = new AnalogPotentiometer(RobotMap.PTN_CHANNEL,
-                RobotMap.LIFT_DEGREES_OF_MOTION, RobotMap.LIFT_INITIAL_ANG_OFFSET);
+                RobotMap.LIFT_MAX_POTEN_VALUE, RobotMap.LIFT_INITIAL_ANG_OFFSET);
 
         this.talon1.setNeutralMode(NeutralMode.Brake);
         this.talon2.setNeutralMode(NeutralMode.Brake);
@@ -120,7 +120,7 @@ public class Lift extends Subsystem {
      * @return absolute value of potentiometer.
      */
     public double getPotenAngleAbsolute() {
-        return poten.get() * RobotMap.LIFT_PTN_TO_ARM_CHAIN_RATIO;
+        return poten.get();
     }
 
     /**

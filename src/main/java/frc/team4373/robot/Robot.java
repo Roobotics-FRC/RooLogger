@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
      */
     public Robot() {
         autonEntries = new LinkedHashMap<>();
+        autonEntries.put("Teleop", "teleop");
         autonEntries.put("Drive Forward", "drive");
         autonEntries.put("CS Side Cargo 1", "cs.cargo.s1");
         autonEntries.put("CS Side Cargo 2", "cs.cargo.s2");
@@ -142,6 +143,8 @@ public class Robot extends TimedRobot {
         }
         String objective = objectiveChooser.getSelected();
         String[] components = objective.split("\\.");
+
+        if (objective.equals("teleop")) return;
 
         if (pos == Side.MIDDLE) {
             if (objective.equals("cs.hatchF")) {

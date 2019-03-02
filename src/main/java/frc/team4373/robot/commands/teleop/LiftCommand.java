@@ -60,7 +60,7 @@ public class LiftCommand extends Command {
 
     @Override
     protected void end() {
-        // lift.setPercentOutputRamping(0);
+        // lift.setPercentOutputRaw(0);
     }
 
     @Override
