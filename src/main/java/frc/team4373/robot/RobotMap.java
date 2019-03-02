@@ -12,8 +12,8 @@ public class RobotMap {
     public static final boolean DRIVETRAIN_MOTOR_LEFT_2_INVERTED = true;
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_1_INVERTED = false;
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_2_INVERTED = false;
-    public static final boolean LIFT_MOTOR_1_INVERTED = true;
-    public static final boolean LIFT_MOTOR_2_INVERTED = true;
+    public static final boolean LIFT_MOTOR_1_INVERTED = false;
+    public static final boolean LIFT_MOTOR_2_INVERTED = false;
     public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = true;
     public static final boolean INTAKE_MOTOR_LEFT_INVERTED = true;
 
@@ -110,7 +110,7 @@ public class RobotMap {
     public static final double LIFT_MAXIMUM_SAFE_ANGLE = 110;
     public static final double LIFT_MINIMUM_SAFE_ANGLE = 0;
     // allowable percent output increase on lift between cycles
-    public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.005;
+    public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.0075;
 
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(0.001, 0, 0);
