@@ -40,7 +40,7 @@ public class DrivetrainCommand extends Command {
         double x = OI.getOI().getDriveJoystick().rooGetX();
         double y = OI.getOI().getDriveJoystick().rooGetY();
         double z = Math.signum(OI.getOI().getDriveJoystick().rooGetZ())
-                * Math.sqrt(Math.abs(OI.getOI().getDriveJoystick().rooGetZ())) / 2;
+                * Math.sqrt(Math.abs(OI.getOI().getDriveJoystick().rooGetZ())) / 3;
         drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, x);
         drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, y + z);
         drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, y - z);

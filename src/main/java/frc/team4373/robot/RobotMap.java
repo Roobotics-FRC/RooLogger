@@ -110,7 +110,7 @@ public class RobotMap {
     public static final double LIFT_MAXIMUM_SAFE_ANGLE = 110;
     public static final double LIFT_MINIMUM_SAFE_ANGLE = 0;
     // allowable percent output increase on lift between cycles
-    public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.0095;
+    public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.02;
 
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(0.002, 0, 0);
