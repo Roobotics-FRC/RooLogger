@@ -120,7 +120,7 @@ public class Lift extends Subsystem {
      * @return absolute value of potentiometer.
      */
     public double getPotenAngleAbsolute() {
-        return poten.get();
+        return poten.get() * -1;
     }
 
     public boolean isTelescoped() {

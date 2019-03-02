@@ -22,7 +22,6 @@ public class IntakeCommand extends Command {
 
     @Override
     protected void initialize() {
-        intake.releaseHatch();
         intake.neutralizeCargoMotors();
         this.firstTime = true;
     }
