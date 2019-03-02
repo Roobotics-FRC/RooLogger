@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap.CargoShipPort;
 import frc.team4373.robot.RobotMap.Side;
 import frc.team4373.robot.commands.auton.sequences.*;
-import frc.team4373.robot.input.OI;
 import frc.team4373.robot.subsystems.*;
 
 import java.util.LinkedHashMap;
@@ -117,8 +116,8 @@ public class Robot extends TimedRobot {
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.LEFT_1));
         SmartDashboard.putNumber("C Pow",
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.MIDDLE_1));
-        SmartDashboard.putNumber("Lift Ang", Lift.getInstance().getPotenAngleRelative());
-        SmartDashboard.putNumber("Lift Pos", Lift.getInstance().getComputedArmHeight());
+        SmartDashboard.putNumber("Poten Rel", Lift.getInstance().getPotenAngleRelative());
+        SmartDashboard.putNumber("Poten Abs", Lift.getInstance().getPotenAngleAbsolute());
         SmartDashboard.putBoolean("Light Ring", Drivetrain.getInstance().getLightRingEnabled());
         SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
         SmartDashboard.putBoolean("Intake Deployed", Intake.getInstance().isDeployed());

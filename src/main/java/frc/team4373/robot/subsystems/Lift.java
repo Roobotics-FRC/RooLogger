@@ -123,15 +123,6 @@ public class Lift extends Subsystem {
         return poten.get();
     }
 
-    /**
-     * Gets the current height of the arm based on the angle.
-     * @return the height of the arm.
-     */
-    public double getComputedArmHeight() {
-        return RobotMap.LIFT_ARM_MOUNT_HEIGHT
-                - RobotMap.LIFT_ARM_LENGTH * Math.cos(getPotenAngleRelative());
-    }
-
     public boolean isTelescoped() {
         return this.piston1.get() == DoubleSolenoid.Value.kForward;
     }
