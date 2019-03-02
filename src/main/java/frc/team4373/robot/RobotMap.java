@@ -12,8 +12,8 @@ public class RobotMap {
     public static final boolean DRIVETRAIN_MOTOR_LEFT_2_INVERTED = true;
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_1_INVERTED = false;
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_2_INVERTED = false;
-    public static final boolean LIFT_MOTOR_1_INVERTED = false;
-    public static final boolean LIFT_MOTOR_2_INVERTED = false;
+    public static final boolean LIFT_MOTOR_1_INVERTED = true;
+    public static final boolean LIFT_MOTOR_2_INVERTED = true;
     public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = true;
     public static final boolean INTAKE_MOTOR_LEFT_INVERTED = true;
 
