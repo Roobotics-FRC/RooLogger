@@ -36,7 +36,7 @@ public class LiftCommand extends Command {
     protected void execute() {
         double power = -OI.getOI().getOperatorJoystick().getAxis(
                 RobotMap.OPERATOR_AXIS_LIFT_MANUAL_CONTROL);
-        lift.setPercentOutput(power);
+        lift.setPercentOutputRamping(power);
 
         switch (OI.getOI().getOperatorJoystick().getPOV()) {
             case 0:
@@ -60,7 +60,7 @@ public class LiftCommand extends Command {
 
     @Override
     protected void end() {
-        // lift.setPercentOutput(0);
+        // lift.setPercentOutputRamping(0);
     }
 
     @Override

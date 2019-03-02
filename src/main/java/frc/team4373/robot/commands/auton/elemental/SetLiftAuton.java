@@ -19,8 +19,8 @@ public class SetLiftAuton extends PIDCommand {
     private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.25;
 
     public enum Position {
-        HATCH_3(60, true), HATCH_2(42, false), HATCH_1(14, false),
-        CARGO_3(68.5, true), CARGO_2(50.5, false), CARGO_1(22.5, false),
+        HATCH_3(60, false), HATCH_2(42, false), HATCH_1(14, false),
+        CARGO_3(68.5, false), CARGO_2(50.5, false), CARGO_1(22.5, false),
         CARGO_SHIP(43, false), LOADING(14, false), STOW(5, false);
 
         private double armAngle;
@@ -28,12 +28,11 @@ public class SetLiftAuton extends PIDCommand {
 
         /**
          * Initializes a Lift Position preset.
-         * @param armHeight the height of the arm, in inches—DISREGARDING telescoping.
+         * @param armAngle the angle of the arm, in degrees.
          * @param telescope whether to telescope the lift with pistons.
          */
-        Position(double armHeight, boolean telescope) {
-            this.armAngle = Math.acos((RobotMap.LIFT_ARM_MOUNT_HEIGHT - armHeight)
-                    / RobotMap.LIFT_ARM_LENGTH);
+        Position(double armAngle, boolean telescope) {
+            this.armAngle = armAngle;
             this.telescope = telescope;
         }
     }
@@ -70,7 +69,7 @@ public class SetLiftAuton extends PIDCommand {
         if (coolingDown) {
             if (System.currentTimeMillis() - COOLDOWN_TIME > this.cooldownStart) {
                 this.finished = true;
-                this.lift.setPercentOutput(0);
+                this.lift.setPercentOutputRamping(0);
                 return;
             }
         } else if (Math.abs(output) < COOLDOWN_THRESHOLD) {
@@ -83,7 +82,7 @@ public class SetLiftAuton extends PIDCommand {
         } else {
             this.lift.retract();
         }
-        this.lift.setPercentOutput(output);
+        this.lift.setPercentOutputRaw(output);
     }
 
     @Override
@@ -93,7 +92,7 @@ public class SetLiftAuton extends PIDCommand {
 
     @Override
     protected void end() {
-        this.lift.setPercentOutput(0);
+        this.lift.setPercentOutputRamping(0);
         this.getPIDController().reset();
     }
 

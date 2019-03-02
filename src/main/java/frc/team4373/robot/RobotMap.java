@@ -109,6 +109,8 @@ public class RobotMap {
     public static final double LIFT_ARM_MOUNT_HEIGHT = 39; // from floor, not bottom of bot
     public static final double LIFT_MAXIMUM_SAFE_ANGLE = 110;
     public static final double LIFT_MINIMUM_SAFE_ANGLE = 0;
+    // allowable percent output increase on lift between cycles
+    public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.005;
 
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(1, 0, 0);

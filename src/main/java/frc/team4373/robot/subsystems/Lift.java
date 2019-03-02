@@ -1,6 +1,5 @@
 package frc.team4373.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -72,20 +71,33 @@ public class Lift extends Subsystem {
     }
 
     /**
-     * Sets the raw percent output of the lift motors. Positive power means moving up.
+     * Sets the raw percent output of the lift motors with ramping. Positive power means moving up.
      * @param power the percent output to which to set the motors.
      */
-    public void setPercentOutput(double power) {
+    public void setPercentOutputRamping(double power) {
+        double curPower = this.talon1.get();
+        double diff = power - curPower;
+        diff = Math.abs(diff) > RobotMap.LIFT_MAXIMUM_RAMP_INCREASE
+                ? Math.copySign(RobotMap.LIFT_MAXIMUM_RAMP_INCREASE, diff) : diff;
+        setPercentOutputRaw(curPower + diff);
+    }
+
+    /**
+     * Sets the raw percent output of lift motors with NO RAMPING. BE CAREFUL. Positive power = up.
+     * @param power the power to set.
+     */
+    public void setPercentOutputRaw(double power) {
         power = Robot.constrainPercentOutput(power);
-        // double angle = getPotenAngleRelative();
-        // if (angle <= RobotMap.LIFT_MINIMUM_SAFE_ANGLE) {
-        //     this.talon1.set(power > 0 ? power : 0);
-        // } else if (angle >= RobotMap.LIFT_MAXIMUM_SAFE_ANGLE) {
-        //     this.talon1.set(power < 0 ? power : 0);
-        // } else {
-        //     this.talon1.set(power);
-        // }
+        double angle = getPotenAngleRelative();
+        if (angle <= RobotMap.LIFT_MINIMUM_SAFE_ANGLE) {
+            this.talon1.set(power > 0 ? power : 0);
+        } else if (angle >= RobotMap.LIFT_MAXIMUM_SAFE_ANGLE) {
+            this.talon1.set(power < 0 ? power : 0);
+        } else {
+            this.talon1.set(power);
+        }
         this.talon1.set(power);
+
     }
 
     /**
