@@ -39,13 +39,13 @@ public class OI {
         this.operatorJoystick =
                 new RooJoystick<>(RobotMap.OPERATOR_JOYSTICK_PORT, new XboxAxisFilter());
 
-        operatorLiftCargoL3 = new JoystickButton(operatorJoystick,
-                RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L3);
-        operatorLiftCargoL3.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_3));
-
-        operatorLiftCargoL2 = new JoystickButton(operatorJoystick,
-                RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L2);
-        operatorLiftCargoL2.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_2));
+        // operatorLiftCargoL3 = new JoystickButton(operatorJoystick,
+        //         RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L3);
+        // operatorLiftCargoL3.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_3));
+        //
+        // operatorLiftCargoL2 = new JoystickButton(operatorJoystick,
+        //         RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L2);
+        // operatorLiftCargoL2.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_2));
 
         operatorLiftCargoL1 = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L1);

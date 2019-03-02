@@ -40,10 +40,10 @@ public class LiftCommand extends Command {
 
         switch (OI.getOI().getOperatorJoystick().getPOV()) {
             case 0:
-                Scheduler.getInstance().add(liftToHatch3);
+                // Scheduler.getInstance().add(liftToHatch3);
                 break;
             case 270:
-                Scheduler.getInstance().add(liftToHatch2);
+                // Scheduler.getInstance().add(liftToHatch2);
                 break;
             case 180:
                 Scheduler.getInstance().add(liftToHatch1);
@@ -51,6 +51,7 @@ public class LiftCommand extends Command {
             default:
                 break;
         }
+
     }
 
     @Override
