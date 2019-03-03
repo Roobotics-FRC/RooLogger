@@ -2,6 +2,7 @@ package frc.team4373.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.input.OI;
+import frc.team4373.robot.input.RooJoystick;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
@@ -41,6 +42,7 @@ public class DrivetrainCommand extends Command {
         double y = OI.getOI().getDriveJoystick().rooGetY();
         double z = Math.signum(OI.getOI().getDriveJoystick().rooGetZ())
                 * Math.sqrt(Math.abs(OI.getOI().getDriveJoystick().rooGetZ())) / 3;
+        if (Math.abs(z) < RooJoystick.DEADZONE) z = 0;
         drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, x);
         drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, y + z);
         drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, y - z);
