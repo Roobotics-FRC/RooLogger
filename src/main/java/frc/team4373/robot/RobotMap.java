@@ -51,6 +51,7 @@ public class RobotMap {
     public static final int DRIVER_BUTTON_VISION_ALIGNMENT = 2;
     public static final int DRIVER_BUTTON_KILL_AUTON = 6;
     public static final int DRIVER_BUTTON_TOGGLE_LIGHT_RING = 5;
+    public static final int DRIVER_BUTTON_DRIVE_STRAIGHT = 12;
 
     // Motor CAN chain identifiers
     public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 13;
