@@ -5,9 +5,6 @@ package frc.team4373.robot.input.filters;
  * -------------------------------------------------------------
  * Note that this piecewise function is pre-defined for a single case.
  * As such, it should MOST LIKELY NOT be used in anything new.
- *
- * @author (tesla)
- * @author Rui-Jie Fang
  */
 public class FineGrainedPiecewiseFilter extends DoubleTypeFilter {
 
