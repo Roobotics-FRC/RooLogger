@@ -21,9 +21,6 @@ public class RCargoAuton extends CommandGroup {
     public RCargoAuton(RobotMap.Side side, RobotMap.RocketHeight height) {
         SetLiftAuton.Position pos;
         switch (height) {
-            case HIGH:
-                pos = SetLiftAuton.Position.CARGO_3;
-                break;
             case MIDDLE:
                 pos = SetLiftAuton.Position.CARGO_2;
                 break;

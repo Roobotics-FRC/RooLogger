@@ -47,13 +47,10 @@ public class Robot extends TimedRobot {
         autonEntries.put("CS Front Hatch", "cs.hatchF");
         autonEntries.put("R Cargo Low", "r.cargo.low");
         autonEntries.put("R Cargo Med", "r.cargo.med");
-        autonEntries.put("R Cargo Hi", "r.cargo.hi");
         autonEntries.put("R Hatch 1 Low", "r.hatch.near.low");
         autonEntries.put("R Hatch 1 Mid", "r.hatch.near.mid");
-        autonEntries.put("R Hatch 1 Hi", "r.hatch.near.hi");
         autonEntries.put("R Hatch 2 Low", "r.hatch.far.low");
         autonEntries.put("R Hatch 2 Mid", "r.hatch.far.mid");
-        autonEntries.put("R Hatch 2 Hi", "r.hatch.far.hi");
 
         this.compressor = new Compressor(RobotMap.PCM_1_PORT);
     }
@@ -69,7 +66,7 @@ public class Robot extends TimedRobot {
         // Initialize subsystems
         Drivetrain.getInstance();
         Intake.getInstance();
-        Lift.getInstance().zeroPotentiometer();
+        Lift.getInstance();
         compressor.start();
 
         // Populate dashboard
@@ -116,8 +113,7 @@ public class Robot extends TimedRobot {
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.LEFT_1));
         SmartDashboard.putNumber("C Pow",
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.MIDDLE_1));
-        SmartDashboard.putNumber("Poten Rel", Lift.getInstance().getPotenAngleRelative());
-        SmartDashboard.putNumber("Poten Abs", Lift.getInstance().getPotenAngleAbsolute());
+        SmartDashboard.putNumber("Poten Value", Lift.getInstance().getPotenValue());
         SmartDashboard.putBoolean("Light Ring", Drivetrain.getInstance().getLightRingEnabled());
         SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
         SmartDashboard.putBoolean("Intake Deployed", Intake.getInstance().isDeployed());
@@ -187,10 +183,6 @@ public class Robot extends TimedRobot {
                     if (components[1].equals("cargo")) {
                         RobotMap.RocketHeight height;
                         switch (components[2]) {
-                            case "hi":
-                                height = RobotMap.RocketHeight.HIGH;
-                                SmartDashboard.putString("Activated Auton", "R Cargo High");
-                                break;
                             case "mid":
                                 height = RobotMap.RocketHeight.MIDDLE;
                                 SmartDashboard.putString("Activated Auton", "R Cargo Middle");
@@ -215,10 +207,6 @@ public class Robot extends TimedRobot {
                             activatedAuton.append(" Near ");
                         }
                         switch (components[3]) {
-                            case "hi":
-                                height = RobotMap.RocketHeight.HIGH;
-                                activatedAuton.append("High");
-                                break;
                             case "mid":
                                 height = RobotMap.RocketHeight.MIDDLE;
                                 activatedAuton.append("Middle");

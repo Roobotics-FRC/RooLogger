@@ -23,7 +23,7 @@ public class RobotMap {
     public static final boolean DRIVETRAIN_MIDDLE_SENSOR_PHASE = false;
 
     // Speed presets
-    public static final double LIFT_MOVEMENT_SPEED = 0.5;
+    public static final double LIFT_MOVEMENT_SPEED = 0.75;
     public static final int INTAKE_MOTOR_OUTPUT = 1;
     public static final double AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED = 0.5;
     public static final double AUTON_TURN_SPEED = 0.2;
@@ -39,12 +39,11 @@ public class RobotMap {
     public static final int OPERATOR_TRIGGER_RELEASE_HATCH = 3; // R trigger
     public static final int OPERATOR_BUTTON_COLLECT_CARGO = 5; // left button
     public static final int OPERATOR_BUTTON_RELEASE_CARGO = 6; // right button
-    public static final int OPERATOR_BUTTON_LIFT_CARGO_L3 = 4; // y button
     public static final int OPERATOR_BUTTON_LIFT_CARGO_L2 = 2; // b button
     public static final int OPERATOR_BUTTON_LIFT_CARGO_L1 = 1; // a button
     public static final int OPERATOR_BUTTON_LIFT_CARGO_SHIP = 3; // x button
     public static final int OPERATOR_BUTTON_LIFT_TO_LOAD = 8; // start button
-    public static final int OPERATOR_BUTTON_STOW_INTAKE = 7;
+    public static final int OPERATOR_BUTTON_LIFT_TO_GROUND = 7; // back button
     public static final int OPERATOR_BUTTON_TOGGLE_INTAKE = 10; // press unused (right) stick
     public static final int OPERATOR_BUTTON_TOGGLE_TELESCOPE = 9; // click left stick
     public static final int OPERATOR_AXIS_LIFT_MANUAL_CONTROL = 1; //Left stick Y, up is negative.
@@ -108,14 +107,14 @@ public class RobotMap {
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
     public static final double LIFT_ARM_LENGTH = 39;
     public static final double LIFT_ARM_MOUNT_HEIGHT = 39; // from floor, not bottom of bot
-    public static final double LIFT_MAXIMUM_SAFE_ANGLE = 110;
-    public static final double LIFT_MINIMUM_SAFE_ANGLE = 0;
+    public static final double LIFT_MAXIMUM_SAFE_ANGLE = 565;
+    public static final double LIFT_MINIMUM_SAFE_ANGLE = 165;
     // allowable percent output increase on lift between cycles
     public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.02;
 
     // PID gains
     public static final PID LIFT_PID_GAINS = new PID(0.002, 0, 0);
-    public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.001, 0, 0);
+    public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.0175, 0, 0.03);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
     public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.01, 0, 0);
 
@@ -138,7 +137,7 @@ public class RobotMap {
     }
 
     public enum RocketHeight {
-        LOW, MIDDLE, HIGH
+        LOW, MIDDLE
     }
 
 }

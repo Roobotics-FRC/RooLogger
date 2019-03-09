@@ -18,7 +18,6 @@ public class OI {
     private RooJoystick<XboxAxisFilter> operatorJoystick;
 
     // lift buttons
-    private JoystickButton operatorLiftCargoL3;
     private JoystickButton operatorLiftCargoL2;
     private JoystickButton operatorLiftCargoL1;
     private JoystickButton operatorLiftCargoShip;
@@ -39,13 +38,9 @@ public class OI {
         this.operatorJoystick =
                 new RooJoystick<>(RobotMap.OPERATOR_JOYSTICK_PORT, new XboxAxisFilter());
 
-        // operatorLiftCargoL3 = new JoystickButton(operatorJoystick,
-        //         RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L3);
-        // operatorLiftCargoL3.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_3));
-        //
-        // operatorLiftCargoL2 = new JoystickButton(operatorJoystick,
-        //         RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L2);
-        // operatorLiftCargoL2.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_2));
+        operatorLiftCargoL2 = new JoystickButton(operatorJoystick,
+                RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L2);
+        operatorLiftCargoL2.whenPressed(new SetLiftAuton(SetLiftAuton.Position.CARGO_2));
 
         operatorLiftCargoL1 = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_LIFT_CARGO_L1);
@@ -60,8 +55,8 @@ public class OI {
         operatorLiftGround.whenPressed(new SetLiftAuton(SetLiftAuton.Position.LOADING));
 
         operatorStowIntake = new JoystickButton(operatorJoystick,
-                RobotMap.OPERATOR_BUTTON_STOW_INTAKE);
-        operatorStowIntake.whenPressed(new StowIntakeAuton());
+                RobotMap.OPERATOR_BUTTON_LIFT_TO_GROUND);
+        operatorStowIntake.whenPressed(new SetLiftAuton(SetLiftAuton.Position.GROUND));
 
         operatorButtonTelescope = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_TOGGLE_TELESCOPE);

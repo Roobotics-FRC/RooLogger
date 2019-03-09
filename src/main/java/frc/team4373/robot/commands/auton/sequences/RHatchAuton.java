@@ -26,9 +26,6 @@ public class RHatchAuton extends CommandGroup {
 
         SetLiftAuton.Position pos;
         switch (height) {
-            case HIGH:
-                pos = SetLiftAuton.Position.HATCH_3;
-                break;
             case MIDDLE:
                 pos = SetLiftAuton.Position.HATCH_2;
                 break;

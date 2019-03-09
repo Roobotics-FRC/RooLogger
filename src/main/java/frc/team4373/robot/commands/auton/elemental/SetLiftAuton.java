@@ -14,7 +14,6 @@ import java.util.Deque;
 public class SetLiftAuton extends PIDCommand {
     private Lift lift;
     private double angle;
-    private boolean telescope;
 
     private Deque<Double> potenReadings;
 
@@ -25,21 +24,18 @@ public class SetLiftAuton extends PIDCommand {
     private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.2;
 
     public enum Position {
-        HATCH_3(1000, false), HATCH_2(800, false), HATCH_1(320, false),
-        CARGO_3(1000, false), CARGO_2(1000, false), CARGO_1(480, false),
-        CARGO_SHIP(650, false), LOADING(320, false), STOW(5, false);
+        HATCH_2(506), HATCH_1(312),
+        CARGO_2(560), CARGO_1(365),
+        CARGO_SHIP(506), LOADING(300), GROUND(167);
 
         private double armAngle;
-        private boolean telescope;
 
         /**
          * Initializes a Lift Position preset.
          * @param armAngle the angle of the arm, in degrees.
-         * @param telescope whether to telescope the lift with pistons.
          */
-        Position(double armAngle, boolean telescope) {
+        Position(double armAngle) {
             this.armAngle = armAngle;
-            this.telescope = telescope;
         }
     }
 
@@ -52,7 +48,6 @@ public class SetLiftAuton extends PIDCommand {
                 RobotMap.LIFT_PID_GAINS.kD);
         requires(this.lift = Lift.getInstance());
         this.angle = position.armAngle;
-        this.telescope = position.telescope;
         this.potenReadings = new ArrayDeque<>();
     }
 
@@ -64,15 +59,15 @@ public class SetLiftAuton extends PIDCommand {
         this.getPIDController().setOutputRange(-RobotMap.LIFT_MOVEMENT_SPEED,
                 RobotMap.LIFT_MOVEMENT_SPEED);
         this.setSetpoint(angle);
-        // this.getPIDController().setPID(SmartDashboard.getNumber("kP-D", 0),
-        //         SmartDashboard.getNumber("kI-D", 0),
-        //         SmartDashboard.getNumber("kD-D", 0));
+        this.getPIDController().setPID(SmartDashboard.getNumber("kP-D", 0),
+                SmartDashboard.getNumber("kI-D", 0),
+                SmartDashboard.getNumber("kD-D", 0));
         setTimeout(0.5); // ensure that there's enough time for the pistons to potentially move
     }
 
     @Override
     protected double returnPIDInput() {
-        this.potenReadings.add(this.lift.getPotenAngleRelative());
+        this.potenReadings.add(this.lift.getPotenValue());
         int readingCount = this.potenReadings.size();
         if (readingCount > 10) {
             this.potenReadings.removeFirst();
@@ -96,12 +91,6 @@ public class SetLiftAuton extends PIDCommand {
         } else if (Math.abs(output) < COOLDOWN_THRESHOLD) {
             this.coolingDown = true;
             this.cooldownStart = System.currentTimeMillis();
-        }
-
-        if (this.telescope) {
-            this.lift.telescope();
-        } else {
-            this.lift.retract();
         }
         this.lift.setPercentOutputRaw(output);
     }
