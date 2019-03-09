@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
-import frc.team4373.robot.commands.teleop.DrivetrainCommand;
+import frc.team4373.robot.commands.teleop.DriveStraightCommand;
 
 /**
  * A programmatic representation of the robot's drivetrain.
@@ -276,6 +276,6 @@ public class Drivetrain extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new DrivetrainCommand());
+        setDefaultCommand(new DriveStraightCommand()); //FIXME: Maybe not on first bot, needed on 2
     }
 }
