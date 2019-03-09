@@ -57,6 +57,20 @@ public class DriveStraightCommand extends PIDCommand {
         this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, rightOutput);
         this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, leftOutput);
         if (!driveStraightOverride) {
+            switch (OI.getOI().getDriveJoystick().getPOV()) {
+                case 315:
+                case 0:
+                case 45:
+                    drivetrain.retractMiddleWheel();
+                    break;
+                case 135:
+                case 180:
+                case 225:
+                    drivetrain.deployMiddleWheel();
+                    break;
+                default:
+                    break;
+            }
             this.drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, joyX);
         }
     }
