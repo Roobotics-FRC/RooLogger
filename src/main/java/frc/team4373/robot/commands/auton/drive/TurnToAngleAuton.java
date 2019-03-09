@@ -39,9 +39,9 @@ public class TurnToAngleAuton extends PIDCommand {
                 RobotMap.AUTON_TURN_SPEED);
         this.getPIDController().setPID(RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI, RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD);
-        // this.getPIDController().setPID(SmartDashboard.getNumber("kP", 0),
-        //         SmartDashboard.getNumber("kI", 0),
-        //         SmartDashboard.getNumber("kD", 0));
+        // this.getPIDController().setPID(SmartDashboard.getNumber("kP-T", 0),
+        //         SmartDashboard.getNumber("kI-T", 0),
+        //         SmartDashboard.getNumber("kD-T", 0));
     }
 
     @Override
