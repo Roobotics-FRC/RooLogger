@@ -59,9 +59,9 @@ public class SetLiftAuton extends PIDCommand {
         this.getPIDController().setOutputRange(-RobotMap.LIFT_MOVEMENT_SPEED,
                 RobotMap.LIFT_MOVEMENT_SPEED);
         this.setSetpoint(angle);
-        this.getPIDController().setPID(SmartDashboard.getNumber("kP-D", 0),
-                SmartDashboard.getNumber("kI-D", 0),
-                SmartDashboard.getNumber("kD-D", 0));
+        // this.getPIDController().setPID(SmartDashboard.getNumber("kP-D", 0),
+        //         SmartDashboard.getNumber("kI-D", 0),
+        //         SmartDashboard.getNumber("kD-D", 0));
         setTimeout(0.5); // ensure that there's enough time for the pistons to potentially move
     }
 
