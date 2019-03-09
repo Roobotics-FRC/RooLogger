@@ -27,6 +27,11 @@ public class DriveStraightCommand extends PIDCommand {
         // Angular PID configuration
         this.setSetpoint(drivetrain.getPigeonYaw());
         this.getPIDController().setOutputRange(-1, 1);
+        this.getPIDController().setPID(RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
+                RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI, RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD);
+//         this.getPIDController().setPID(SmartDashboard.getNumber("kP-T", 0),
+//                 SmartDashboard.getNumber("kI-T", 0),
+//                 SmartDashboard.getNumber("kD-T", 0));
     }
 
     @Override
@@ -46,13 +51,14 @@ public class DriveStraightCommand extends PIDCommand {
         double rightOutput;
         double leftOutput;
         if (driveStraightOverride
-                || (joyZ == 0 && System.currentTimeMillis() > lastManualOp + COOLDOWN)) {
+                || (Math.abs(joyZ) < 0.05 && System.currentTimeMillis() > lastManualOp + COOLDOWN)) {
             rightOutput = Robot.constrainPercentOutput(joyY - angleOutput);
             leftOutput = Robot.constrainPercentOutput(joyY + angleOutput);
         } else {
             rightOutput = Robot.constrainPercentOutput(joyY + joyZ);
             leftOutput = Robot.constrainPercentOutput(joyY - joyZ);
             if (joyZ != 0) this.lastManualOp = System.currentTimeMillis();
+            this.setSetpoint(drivetrain.getPigeonYaw());
         }
         this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, rightOutput);
         this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, leftOutput);
