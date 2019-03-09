@@ -47,8 +47,8 @@ public class DriveStraightCommand extends PIDCommand {
         double leftOutput;
         if (driveStraightOverride
                 || (joyZ == 0 && System.currentTimeMillis() > lastManualOp + COOLDOWN)) {
-            rightOutput = Robot.constrainPercentOutput(joyY + angleOutput);
-            leftOutput = Robot.constrainPercentOutput(joyY - angleOutput);
+            rightOutput = Robot.constrainPercentOutput(joyY - angleOutput);
+            leftOutput = Robot.constrainPercentOutput(joyY + angleOutput);
         } else {
             rightOutput = Robot.constrainPercentOutput(joyY + joyZ);
             leftOutput = Robot.constrainPercentOutput(joyY - joyZ);

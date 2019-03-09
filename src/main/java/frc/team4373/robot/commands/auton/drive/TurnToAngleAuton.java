@@ -1,7 +1,6 @@
 package frc.team4373.robot.commands.auton.drive;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.subsystems.Drivetrain;
 
@@ -62,8 +61,8 @@ public class TurnToAngleAuton extends PIDCommand {
             this.cooldownStart = System.currentTimeMillis();
         }
 
-        this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, output);
-        this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, -output);
+        this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, -output);
+        this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, output);
     }
 
     @Override
