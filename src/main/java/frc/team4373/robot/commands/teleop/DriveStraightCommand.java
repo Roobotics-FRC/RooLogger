@@ -41,7 +41,7 @@ public class DriveStraightCommand extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double angleOutput) {
-        double joyZ = OI.getOI().getDriveJoystick().rooGetZFiltered();
+        double joyZ = OI.getOI().getDriveJoystick().newRooGetZFiltered();
         double joyX = OI.getOI().getDriveJoystick().rooGetX();
         double joyY = OI.getOI().getDriveJoystick().rooGetY();
 
