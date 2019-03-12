@@ -1,9 +1,12 @@
 package frc.team4373.robot.input;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.auton.ClearSubsystemsCommandGroup;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
+import frc.team4373.robot.commands.auton.drive.SimpleMiddleWheelAdjusterAuton;
+import frc.team4373.robot.commands.auton.drive.StrafeDistanceAuton;
 import frc.team4373.robot.commands.auton.elemental.*;
 import frc.team4373.robot.commands.teleop.ToggleLightRingCommand;
 import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
@@ -23,9 +26,6 @@ public class OI {
     private JoystickButton operatorLiftCargoShip;
     private JoystickButton operatorLiftGround;
     private JoystickButton operatorStowIntake;
-
-    // debug
-    private JoystickButton operatorButtonTelescope;
 
     // drive buttons
     private JoystickButton driverVisionAlignment;
@@ -58,13 +58,9 @@ public class OI {
                 RobotMap.OPERATOR_BUTTON_LIFT_TO_GROUND);
         operatorStowIntake.whenPressed(new SetLiftAuton(SetLiftAuton.Position.GROUND));
 
-        operatorButtonTelescope = new JoystickButton(operatorJoystick,
-                RobotMap.OPERATOR_BUTTON_TOGGLE_TELESCOPE);
-        operatorButtonTelescope.whenPressed(new ToggleLiftTelescopeAuton());
-
         driverVisionAlignment = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_VISION_ALIGNMENT);
-        driverVisionAlignment.whenPressed(new MiddleWheelAdjusterAuton());
+        driverVisionAlignment.whenPressed(new SimpleMiddleWheelAdjusterAuton());
 
         driverToggleLightRing = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_TOGGLE_LIGHT_RING);

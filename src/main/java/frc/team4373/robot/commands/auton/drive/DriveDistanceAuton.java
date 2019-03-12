@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.subsystems.Drivetrain;
 
@@ -32,7 +31,7 @@ public class DriveDistanceAuton extends PIDCommand {
         super("DriveDistanceAuton", RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD);
-        this.setpointRelative = distance / RobotMap.DRIVETRAIN_ENC_UNITS_TO_IN;
+        this.setpointRelative = distance / RobotMap.DRIVETRAIN_SIDE_ENC_UNITS_TO_IN;
         this.robotSpeed = speed;
         this.cooldownThreshold = this.robotSpeed * 0.25;
         requires(this.drivetrain = Drivetrain.getInstance());

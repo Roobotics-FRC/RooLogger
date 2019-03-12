@@ -20,7 +20,7 @@ public class RobotMap {
     // Sensor phase configuration
     public static final boolean DRIVETRAIN_RIGHT_ENCODER_PHASE = false;
     public static final boolean DRIVETRAIN_LEFT_ENCODER_PHASE = false;
-    public static final boolean DRIVETRAIN_MIDDLE_SENSOR_PHASE = false;
+    public static final boolean DRIVETRAIN_MIDDLE_SENSOR_PHASE = true;
 
     // Speed presets
     public static final double LIFT_MOVEMENT_SPEED = 0.75;
@@ -99,7 +99,8 @@ public class RobotMap {
     }
 
     // 6in diameter wheels; 10.71:1 gearbox ratio; 4096 encoder units per rotation
-    public static final double DRIVETRAIN_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;
+    public static final double DRIVETRAIN_SIDE_ENC_UNITS_TO_IN = 6 * Math.PI / 4096 / 10.71;
+    public static final double DRIVETRAIN_MID_ENC_UNITS_TO_IN = 6 * Math.PI / 4096;
     // converts from units/0.1s to in/s
     public static final double DRIVETRAIN_ENC_VEL_TO_INPS = 6 * 10 * Math.PI / 4096 / 10.71;
     public static final double LIFT_PTN_TO_ARM_CHAIN_RATIO = 10d / 3d; // 10/3 ptn turns = 1 motor
@@ -116,11 +117,11 @@ public class RobotMap {
     public static final PID LIFT_PID_GAINS = new PID(0.002, 0, 0);
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.0175, 0, 0.03);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
-    public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.01, 0, 0);
+    public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.003, 0, 0.0025);
 
     // Vision
     public static final double VISION_SAMPLE_COUNT = 10;
-    public static final double ALLOWABLE_LATERAL_OFFSET_FROM_VIS_TARGET = 3; // inches
+    public static final double ALLOWABLE_LATERAL_OFFSET_FROM_VIS_TARGET = 1.5; // inches
     public static final double ALLOWABLE_ANGLE_TO_VIS_TARGET = 3; // degrees
     public static final double ALLOWABLE_ERR_DISTANCE_TO_VIS_TARGET = 4; // inches
 
