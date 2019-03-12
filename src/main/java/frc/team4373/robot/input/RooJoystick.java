@@ -95,6 +95,14 @@ public class RooJoystick<F extends DoubleTypeFilter> extends Joystick {
     }
 
     /**
+     * Returns z-axis with a less sensitive filter, especially at low power
+     * @return The filtered z-axis.
+     */
+    public double newRooGetZFiltered() {
+        return Math.signum(this.getZ()) * this.getZ() * this.rooGetZFiltered();
+    }
+
+    /**
      * Returns the filtered value of a joystick axis.
      *
      * @param axis the axis from which to read.
