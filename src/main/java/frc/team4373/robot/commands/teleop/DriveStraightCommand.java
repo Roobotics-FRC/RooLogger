@@ -80,6 +80,17 @@ public class DriveStraightCommand extends PIDCommand {
             }
             this.drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, joyX);
         }
+/*
+        if (this.drivetrain.isMiddleWheelDeployed()) { //deployed
+            if (Math.abs(joyY) >= 0.05 && Math.abs(joyX) <= 0.05) { //only forward/back; not strafe
+                this.drivetrain.retractMiddleWheel(); //retract
+            }
+        } else { //not deployed
+            if (Math.abs(joyY) <= 0.05 && Math.abs(joyX) >= 0.05) { //only strafe; not forward/back
+                this.drivetrain.deployMiddleWheel(); //deploy
+            }
+        }
+        */
     }
 
     @Override
