@@ -130,7 +130,7 @@ public class RobotMap {
     public static final PID LIFT_PID_GAINS = new PID(0.01, 0, 0.01);
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.0175, 0, 0.03);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
-    public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.003, 0, 0.0025);
+    public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.0025, 0, 0.0025);
 
     // Vision
     public static final double VISION_SAMPLE_COUNT = 10;

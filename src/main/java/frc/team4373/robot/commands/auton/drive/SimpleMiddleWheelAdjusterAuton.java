@@ -15,7 +15,7 @@ public class SimpleMiddleWheelAdjusterAuton extends PIDCommand {
     private int sampleCount = 0;
     private double distanceSum = 0;
     private boolean readyForPID = false;
-    private double outputThreshold = RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED * 0.1;
+    private double outputThreshold = RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED * 0.15;
 
     /**
      * Constructs a new auton command to align the robot with the vision target using the H-wheel.
