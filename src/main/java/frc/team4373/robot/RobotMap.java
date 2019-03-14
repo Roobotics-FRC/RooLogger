@@ -14,6 +14,7 @@ public class RobotMap {
     public static final boolean DRIVETRAIN_MOTOR_MIDDLE_2_INVERTED = false;
     public static final boolean LIFT_MOTOR_1_INVERTED = true;
     public static final boolean LIFT_MOTOR_2_INVERTED = true;
+    public static final boolean CLIMBER_MOTOR_INVERTED = true;
     public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = true;
     public static final boolean INTAKE_MOTOR_LEFT_INVERTED = true;
 
@@ -29,6 +30,7 @@ public class RobotMap {
     public static final double AUTON_TURN_SPEED = 0.2;
     public static final double AUTON_LONG_DRIVE_SPEED = 1; // for driving long distances
     public static final double AUTON_VISION_APPROACH_SPEED = 0.25;
+    public static final double MAXIMUM_CLIMBER_DRIVE_SPEED = 0.333;
 
     // OI devices
     public static final int DRIVE_JOYSTICK_PORT = 0;
@@ -47,10 +49,16 @@ public class RobotMap {
     public static final int OPERATOR_BUTTON_TOGGLE_INTAKE = 10; // press unused (right) stick
     public static final int OPERATOR_BUTTON_TOGGLE_TELESCOPE = 9; // click left stick
     public static final int OPERATOR_AXIS_LIFT_MANUAL_CONTROL = 1; //Left stick Y, up is negative.
+    public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT = 7;
+    public static final int DRIVER_BUTTON_CLIMB_RETRACT_FRONT = 9;
+    public static final int DRIVER_BUTTON_CLIMB_RETRACT_REAR = 11;
+    public static final int DRIVER_BUTTON_CLIMB_DRIVE_BACKWARD = 10; // n.b. no longer 12
     public static final int DRIVER_BUTTON_VISION_ALIGNMENT = 2;
     public static final int DRIVER_BUTTON_KILL_AUTON = 6;
     public static final int DRIVER_BUTTON_TOGGLE_LIGHT_RING = 5;
     public static final int DRIVER_BUTTON_DRIVE_STRAIGHT = 12;
+
+    public static final int DRIVER_AXIS_SLIDER_CLIMBER_WHEEL = 3;
 
     // Motor CAN chain identifiers
     public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 13;
@@ -61,6 +69,7 @@ public class RobotMap {
     public static final int DRIVETRAIN_MOTOR_MIDDLE_2 = 16;
     public static final int LIFT_MOTOR_1 = 21;
     public static final int LIFT_MOTOR_2 = 22;
+    public static final int CLIMBER_DRIVE_MOTOR = 31;
     public static final int INTAKE_MOTOR_RIGHT = 41;
     public static final int INTAKE_MOTOR_LEFT = 42;
 
@@ -69,6 +78,10 @@ public class RobotMap {
     public static final int DRIVETRAIN_PISTON_BACKWARD = 1; // pcm 1
     public static final int INTAKE_PISTON_DEPLOYMENT_FORWARD = 2; // pcm 1
     public static final int INTAKE_PISTON_DEPLOYMENT_BACKWARD = 3; // pcm 1
+    public static final int CLIMBER_PISTON_REAR_FORWARD = 4; // pcm 1
+    public static final int CLIMBER_PISTON_REAR_BACKWARD = 5; // pcm 1
+    public static final int CLIMBER_PISTON_FRONT_FORWARD = 6; // pcm 1
+    public static final int CLIMBER_PISTON_FRONT_BACKWARD = 7; // pcm 1
     public static final int LIFT_PISTON_BACKWARD = 1; // pcm 2
     public static final int LIFT_PISTON_FORWARD = 7; // pcm 2
     public static final int INTAKE_PISTON_HATCH_BACKWARD = 0; // pcm 2

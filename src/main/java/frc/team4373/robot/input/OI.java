@@ -27,6 +27,11 @@ public class OI {
     private JoystickButton operatorLiftGround;
     private JoystickButton operatorStowIntake;
 
+    // climb buttons
+    private JoystickButton driverClimbRaiseBot;
+    private JoystickButton driverClimbRetractFront;
+    private JoystickButton driverClimbRetractRear;
+
     // drive buttons
     private JoystickButton driverVisionAlignment;
     private JoystickButton driverToggleLightRing;
@@ -57,6 +62,18 @@ public class OI {
         operatorStowIntake = new JoystickButton(operatorJoystick,
                 RobotMap.OPERATOR_BUTTON_LIFT_TO_GROUND);
         operatorStowIntake.whenPressed(new SetLiftAuton(SetLiftAuton.Position.GROUND));
+
+        driverClimbRaiseBot = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT);
+        driverClimbRaiseBot.whenPressed(new ExtendClimberAuton());
+
+        driverClimbRetractFront = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_FRONT);
+        driverClimbRetractFront.whenPressed(new RetractClimberFrontAuton());
+
+        driverClimbRetractRear = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_REAR);
+        driverClimbRetractRear.whenPressed(new RetractClimberRearAuton());
 
         driverVisionAlignment = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_VISION_ALIGNMENT);
