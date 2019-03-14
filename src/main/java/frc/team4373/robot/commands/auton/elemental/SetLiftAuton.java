@@ -21,7 +21,7 @@ public class SetLiftAuton extends PIDCommand {
     private boolean coolingDown = false;
     private long cooldownStart = 0;
     private static final long COOLDOWN_TIME = 500;
-    private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.2;
+    private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.08;
 
     public enum Position {
         HATCH_2(506), HATCH_1(312),

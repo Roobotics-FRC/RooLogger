@@ -114,7 +114,7 @@ public class RobotMap {
     public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.02;
 
     // PID gains
-    public static final PID LIFT_PID_GAINS = new PID(0.002, 0, 0);
+    public static final PID LIFT_PID_GAINS = new PID(0.01, 0, 0.01);
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.0175, 0, 0.03);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
     public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.003, 0, 0.0025);
