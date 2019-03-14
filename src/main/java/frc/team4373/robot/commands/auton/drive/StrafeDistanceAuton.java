@@ -10,6 +10,9 @@ public class StrafeDistanceAuton extends PIDCommand {
     private double outputThreshold = RobotMap.AUTON_MIDDLE_WHEEL_ADJUSTMENT_SPEED * 0.1;
     private boolean finished = false;
 
+    /**
+     * Creates a new StrafeDistanceAuton command.
+     */
     public StrafeDistanceAuton() {
         super("StrafeDistanceAuton", RobotMap.DRIVETRAIN_MIDDLE_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_MIDDLE_PID_GAINS.kI, RobotMap.DRIVETRAIN_MIDDLE_PID_GAINS.kD);
