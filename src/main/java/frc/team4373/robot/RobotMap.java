@@ -47,12 +47,13 @@ public class RobotMap {
     public static final int OPERATOR_BUTTON_LIFT_TO_LOAD = 8; // start button
     public static final int OPERATOR_BUTTON_LIFT_TO_GROUND = 7; // back button
     public static final int OPERATOR_BUTTON_TOGGLE_INTAKE = 10; // press unused (right) stick
-    public static final int OPERATOR_BUTTON_TOGGLE_TELESCOPE = 9; // click left stick
     public static final int OPERATOR_AXIS_LIFT_MANUAL_CONTROL = 1; //Left stick Y, up is negative.
-    public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT = 7;
+    // public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT = 7;
+    public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT_FRONT = 7;
+    public static final int DRIVER_BUTTON_CLIMB_RAISE_BOT_REAR = 8;
     public static final int DRIVER_BUTTON_CLIMB_RETRACT_FRONT = 9;
-    public static final int DRIVER_BUTTON_CLIMB_RETRACT_REAR = 11;
-    public static final int DRIVER_BUTTON_CLIMB_DRIVE_BACKWARD = 10; // n.b. no longer 12
+    public static final int DRIVER_BUTTON_CLIMB_RETRACT_REAR = 10;
+    public static final int DRIVER_BUTTON_CLIMB_DRIVE_BACKWARD = 11; // n.b. no longer 12
     public static final int DRIVER_BUTTON_VISION_ALIGNMENT = 2;
     public static final int DRIVER_BUTTON_KILL_AUTON = 6;
     public static final int DRIVER_BUTTON_TOGGLE_LIGHT_RING = 5;

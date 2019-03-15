@@ -1,12 +1,9 @@
 package frc.team4373.robot.input;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.auton.ClearSubsystemsCommandGroup;
-import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.drive.SimpleMiddleWheelAdjusterAuton;
-import frc.team4373.robot.commands.auton.drive.StrafeDistanceAuton;
 import frc.team4373.robot.commands.auton.elemental.*;
 import frc.team4373.robot.commands.teleop.ToggleLightRingCommand;
 import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
@@ -28,7 +25,8 @@ public class OI {
     private JoystickButton operatorStowIntake;
 
     // climb buttons
-    private JoystickButton driverClimbRaiseBot;
+    private JoystickButton driverClimbRaiseBotFront;
+    private JoystickButton driverClimbRaiseBotRear;
     private JoystickButton driverClimbRetractFront;
     private JoystickButton driverClimbRetractRear;
 
@@ -63,9 +61,13 @@ public class OI {
                 RobotMap.OPERATOR_BUTTON_LIFT_TO_GROUND);
         operatorStowIntake.whenPressed(new SetLiftAuton(SetLiftAuton.Position.GROUND));
 
-        driverClimbRaiseBot = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT);
-        driverClimbRaiseBot.whenPressed(new ExtendClimberAuton());
+        driverClimbRaiseBotFront = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_FRONT);
+        driverClimbRaiseBotFront.whenPressed(new DeployClimberFrontAuton());
+
+        driverClimbRaiseBotRear = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_REAR);
+        driverClimbRaiseBotRear.whenPressed(new DeployClimberRearAuton());
 
         driverClimbRetractFront = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_FRONT);

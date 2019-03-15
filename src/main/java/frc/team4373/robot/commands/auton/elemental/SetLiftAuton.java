@@ -62,7 +62,7 @@ public class SetLiftAuton extends PIDCommand {
         // this.getPIDController().setPID(SmartDashboard.getNumber("kP-D", 0),
         //         SmartDashboard.getNumber("kI-D", 0),
         //         SmartDashboard.getNumber("kD-D", 0));
-        setTimeout(0.5); // ensure that there's enough time for the pistons to potentially move
+        setTimeout(5); // safety net
     }
 
     @Override
@@ -97,7 +97,7 @@ public class SetLiftAuton extends PIDCommand {
 
     @Override
     protected boolean isFinished() {
-        return this.finished && this.isTimedOut();
+        return this.finished || this.isTimedOut();
     }
 
     @Override
