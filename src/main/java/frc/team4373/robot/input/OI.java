@@ -25,10 +25,10 @@ public class OI {
     private JoystickButton operatorStowIntake;
 
     // climb buttons
-    private JoystickButton driverClimbRaiseBotFront;
-    private JoystickButton driverClimbRaiseBotRear;
-    private JoystickButton driverClimbRetractFront;
-    private JoystickButton driverClimbRetractRear;
+    // private JoystickButton driverClimbRaiseBotFront;
+    // private JoystickButton driverClimbRaiseBotRear;
+    // private JoystickButton driverClimbRetractFront;
+    // private JoystickButton driverClimbRetractRear;
 
     // drive buttons
     private JoystickButton driverVisionAlignment;
@@ -61,21 +61,21 @@ public class OI {
                 RobotMap.OPERATOR_BUTTON_LIFT_TO_GROUND);
         operatorStowIntake.whenPressed(new SetLiftAuton(SetLiftAuton.Position.GROUND));
 
-        driverClimbRaiseBotFront = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_FRONT);
-        driverClimbRaiseBotFront.whenPressed(new DeployClimberFrontAuton());
-
-        driverClimbRaiseBotRear = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_REAR);
-        driverClimbRaiseBotRear.whenPressed(new DeployClimberRearAuton());
-
-        driverClimbRetractFront = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_FRONT);
-        driverClimbRetractFront.whenPressed(new RetractClimberFrontAuton());
-
-        driverClimbRetractRear = new JoystickButton(driveJoystick,
-                RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_REAR);
-        driverClimbRetractRear.whenPressed(new RetractClimberRearAuton());
+        // driverClimbRaiseBotFront = new JoystickButton(driveJoystick,
+        //         RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_FRONT);
+        // driverClimbRaiseBotFront.whenPressed(new DeployClimberFrontAuton());
+        //
+        // driverClimbRaiseBotRear = new JoystickButton(driveJoystick,
+        //         RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_REAR);
+        // driverClimbRaiseBotRear.whenPressed(new DeployClimberRearAuton());
+        //
+        // driverClimbRetractFront = new JoystickButton(driveJoystick,
+        //         RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_FRONT);
+        // driverClimbRetractFront.whenPressed(new RetractClimberFrontAuton());
+        //
+        // driverClimbRetractRear = new JoystickButton(driveJoystick,
+        //         RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_REAR);
+        // driverClimbRetractRear.whenPressed(new RetractClimberRearAuton());
 
         driverVisionAlignment = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_VISION_ALIGNMENT);
