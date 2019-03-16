@@ -48,12 +48,12 @@ public class ExtendClimberWithPitchAuton extends Command {
         } else {
             double pitch = this.drivetrain.getPigeonPitch();
             if (pitch - this.startingPitch > TOLERABLE_PITCH) {
-                this.climber.retractFront();
+                this.climber.neutralizeFront();
                 this.climber.deployRear();
                 lastPitchTime = now;
                 this.finished = false;
             } else if (pitch + this.startingPitch < -TOLERABLE_PITCH) {
-                this.climber.retractRear();
+                this.climber.neutralizeRear();
                 this.climber.deployFront();
                 lastPitchTime = now;
                 this.finished = false;

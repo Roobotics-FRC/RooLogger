@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
         Intake.getInstance();
         Lift.getInstance();
         // Climber.getInstance();
+        // ClimberDrive.getInstance();
         compressor.start();
 
         Scheduler.getInstance().add(new RetractClimberAuton());

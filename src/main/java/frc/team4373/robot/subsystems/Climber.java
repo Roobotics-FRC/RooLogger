@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.DummyCommand;
+import frc.team4373.robot.commands.auton.climb.DebugClimberCommand;
 
 /**
  * A programmatic representation of the robot's climbing components.
@@ -63,6 +64,14 @@ public class Climber extends Subsystem {
         this.retractRear();
     }
 
+    public void neutralizeFront() {
+        this.frontPiston.set(DoubleSolenoid.Value.kOff);
+    }
+
+    public void neutralizeRear() {
+        this.rearPiston.set(DoubleSolenoid.Value.kOff);
+    }
+
     /**
      * Whether the front pistons are deployed.
      * @return whether the front pistons are deployed.
@@ -81,6 +90,7 @@ public class Climber extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new DummyCommand(this));
+        // setDefaultCommand(new DummyCommand(this));
+        setDefaultCommand(new DebugClimberCommand());
     }
 }
