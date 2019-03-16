@@ -32,7 +32,7 @@ public class SetLiftAuton extends PIDCommand {
 
         /**
          * Initializes a Lift Position preset.
-         * @param armAngle the angle of the arm, in degrees.
+         * @param armAngle the angle of the arm, in potentiometer units.
          */
         Position(double armAngle) {
             this.armAngle = armAngle;

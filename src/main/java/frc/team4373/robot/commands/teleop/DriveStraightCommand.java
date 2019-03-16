@@ -47,6 +47,14 @@ public class DriveStraightCommand extends PIDCommand {
 
         boolean driveStraightOverride = OI.getOI().getDriveJoystick().getRawButton(
                 RobotMap.DRIVER_BUTTON_DRIVE_STRAIGHT);
+        boolean strafeOverride = OI.getOI().getDriveJoystick().getRawButton(
+                RobotMap.DRIVER_BUTTON_STRAFE_ONLY);
+
+        if (strafeOverride) {
+            this.drivetrain.deployMiddleWheel();
+            this.drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, joyX);
+            return;
+        }
 
         double rightOutput;
         double leftOutput;
