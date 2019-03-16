@@ -95,6 +95,7 @@ public class Lift extends Subsystem {
         } else {
             this.talon1.set(power);
         }
+        this.talon1.set(power);
     }
 
     /**
@@ -102,7 +103,7 @@ public class Lift extends Subsystem {
      * @return absolute value of potentiometer.
      */
     public double getPotenValue() {
-        return poten.get() * -1 + RobotMap.LIFT_MAX_POTEN_VALUE;
+        return poten.get();
     }
 
     public boolean isTelescoped() {

@@ -15,8 +15,8 @@ public class RobotMap {
     public static final boolean LIFT_MOTOR_1_INVERTED = true;
     public static final boolean LIFT_MOTOR_2_INVERTED = true;
     public static final boolean CLIMBER_MOTOR_INVERTED = true;
-    public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = true;
-    public static final boolean INTAKE_MOTOR_LEFT_INVERTED = true;
+    public static final boolean INTAKE_MOTOR_RIGHT_INVERTED = false;
+    public static final boolean INTAKE_MOTOR_LEFT_INVERTED = false;
 
     // Sensor phase configuration
     public static final boolean DRIVETRAIN_RIGHT_ENCODER_PHASE = false;
