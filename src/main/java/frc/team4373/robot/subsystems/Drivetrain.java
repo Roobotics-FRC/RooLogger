@@ -55,7 +55,7 @@ public class Drivetrain extends Subsystem {
         this.middle1 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_MOTOR_MIDDLE_1);
         this.middle2 = new WPI_TalonSRX(RobotMap.DRIVETRAIN_MOTOR_MIDDLE_2);
 
-        this.pigeon = new PigeonIMU(this.middle2); //FIXME: THIS HAS BEEN CHANGED FOR THE 2ND BOT!
+        this.pigeon = new PigeonIMU(this.right2);
         this.piston = new DoubleSolenoid(RobotMap.PCM_1_PORT,
                 RobotMap.DRIVETRAIN_PISTON_FORWARD, RobotMap.DRIVETRAIN_PISTON_BACKWARD);
 
