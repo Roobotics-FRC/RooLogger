@@ -18,8 +18,8 @@ public class DebugClimberCommand extends Command {
      */
     public DebugClimberCommand() {
         if (OI.getOI().getDriveJoystick().getRawButton(
-                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_FRONT) &&
-            OI.getOI().getDriveJoystick().getRawButton(
+                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_FRONT)
+                && OI.getOI().getDriveJoystick().getRawButton(
                     RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT_REAR)) {
             this.climber.deployFront();
             this.climber.deployRear();
