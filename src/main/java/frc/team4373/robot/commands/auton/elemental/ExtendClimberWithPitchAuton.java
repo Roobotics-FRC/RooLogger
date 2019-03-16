@@ -14,8 +14,8 @@ public class ExtendClimberWithPitchAuton extends Command {
     private ClimberDrive cld;
     private Drivetrain drivetrain;
 
-    private long lastPitch = -1;
-    private boolean initialDeploy = false;
+    private long lastPitchTime = -1;
+    private boolean initialDeployOccurred = false;
     private boolean finished = false;
     private double startingPitch = 0;
     private static final double TOLERABLE_PITCH = 1;
@@ -33,7 +33,7 @@ public class ExtendClimberWithPitchAuton extends Command {
 
     @Override
     protected void initialize() {
-        this.initialDeploy = false;
+        this.initialDeployOccurred = false;
         this.finished = false;
         this.startingPitch = drivetrain.getPigeonPitch();
         setTimeout(30); // FIXME: Undo if used at competition
@@ -42,24 +42,24 @@ public class ExtendClimberWithPitchAuton extends Command {
     @Override
     protected void execute() {
         long now = System.currentTimeMillis();
-        if (!this.initialDeploy) {
+        if (!this.initialDeployOccurred) {
             this.climber.deployFront();
-            this.initialDeploy = true;
+            this.initialDeployOccurred = true;
         } else {
             double pitch = this.drivetrain.getPigeonPitch();
             if (pitch - this.startingPitch > TOLERABLE_PITCH) {
                 this.climber.retractFront();
                 this.climber.deployRear();
-                lastPitch = now;
+                lastPitchTime = now;
                 this.finished = false;
             } else if (pitch + this.startingPitch < -TOLERABLE_PITCH) {
                 this.climber.retractRear();
                 this.climber.deployFront();
-                lastPitch = now;
+                lastPitchTime = now;
                 this.finished = false;
-            } else if (this.lastPitch > -1) {
+            } else if (this.lastPitchTime > -1) {
                 this.climber.climb();
-                if (now > this.lastPitch + COOLDOWN) {
+                if (now > this.lastPitchTime + COOLDOWN) {
                     this.finished = true;
                 }
             }
