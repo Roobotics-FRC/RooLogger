@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.auton.ClearSubsystemsCommandGroup;
 import frc.team4373.robot.commands.auton.drive.SimpleMiddleWheelAdjusterAuton;
-import frc.team4373.robot.commands.auton.elemental.*;
+import frc.team4373.robot.commands.auton.lift.SetLiftAuton;
 import frc.team4373.robot.commands.teleop.DrivetrainCommand;
 import frc.team4373.robot.commands.teleop.ToggleLightRingCommand;
 import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;

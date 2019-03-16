@@ -3,7 +3,7 @@ package frc.team4373.robot.commands.teleop;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team4373.robot.RobotMap;
-import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
+import frc.team4373.robot.commands.auton.lift.SetLiftAuton;
 import frc.team4373.robot.input.OI;
 import frc.team4373.robot.subsystems.Lift;
 

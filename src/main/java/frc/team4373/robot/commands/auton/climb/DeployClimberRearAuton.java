@@ -1,4 +1,4 @@
-package frc.team4373.robot.commands.auton.elemental;
+package frc.team4373.robot.commands.auton.climb;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,9 +7,9 @@ import frc.team4373.robot.subsystems.ClimberDrive;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 /**
- * Extends the font climber and sets neutral modes.
+ * Extends rear climber and sets neutral modes.
  */
-public class DeployClimberFrontAuton extends Command {
+public class DeployClimberRearAuton extends Command {
     private Climber climber;
     private ClimberDrive cld;
     private Drivetrain drivetrain;
@@ -17,7 +17,7 @@ public class DeployClimberFrontAuton extends Command {
     /**
      * Constructs a command to retract the climber.
      */
-    public DeployClimberFrontAuton() {
+    public DeployClimberRearAuton() {
         requires(this.climber = Climber.getInstance());
         requires(this.drivetrain = Drivetrain.getInstance());
         requires(this.cld = ClimberDrive.getInstance());
@@ -30,7 +30,7 @@ public class DeployClimberFrontAuton extends Command {
 
     @Override
     protected void execute() {
-        this.climber.deployFront();
+        this.climber.deployRear();
         this.drivetrain.setNeutralMode(NeutralMode.Coast);
         this.cld.setNeutralMode(NeutralMode.Brake);
     }
