@@ -57,6 +57,7 @@ public class RobotMap {
     public static final int DRIVER_BUTTON_VISION_ALIGNMENT = 2;
     public static final int DRIVER_BUTTON_KILL_AUTON = 6;
     public static final int DRIVER_BUTTON_TOGGLE_LIGHT_RING = 5;
+    public static final int DRIVER_BUTTON_BASIC_DRIVE = 4;
     public static final int DRIVER_BUTTON_DRIVE_STRAIGHT = 12;
 
     public static final int DRIVER_AXIS_SLIDER_CLIMBER_WHEEL = 3;
@@ -122,13 +123,13 @@ public class RobotMap {
     public static final int LIFT_INITIAL_ANG_OFFSET = 0;
     public static final double LIFT_ARM_LENGTH = 39;
     public static final double LIFT_ARM_MOUNT_HEIGHT = 39; // from floor, not bottom of bot
-    public static final double LIFT_MAXIMUM_SAFE_ANGLE = 565;
-    public static final double LIFT_MINIMUM_SAFE_ANGLE = 165;
+    public static final double LIFT_MAXIMUM_SAFE_ANGLE = 380;
+    public static final double LIFT_MINIMUM_SAFE_ANGLE = 12;
     // allowable percent output increase on lift between cycles
     public static final double LIFT_MAXIMUM_RAMP_INCREASE = 0.02;
 
     // PID gains
-    public static final PID LIFT_PID_GAINS = new PID(0.01, 0, 0.01);
+    public static final PID LIFT_PID_GAINS = new PID(0.009, 0, 0.025);
     public static final PID DRIVETRAIN_DIST_PID_GAINS = new PID(0.0175, 0, 0.03);
     public static final PID DRIVETRAIN_ANG_PID_GAINS = new PID(0.009, 0, 0.008); // tuned@0.2speed
     public static final PID DRIVETRAIN_MIDDLE_PID_GAINS = new PID(0.0025, 0, 0.0025);

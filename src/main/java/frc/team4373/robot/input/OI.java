@@ -5,6 +5,7 @@ import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.auton.ClearSubsystemsCommandGroup;
 import frc.team4373.robot.commands.auton.drive.SimpleMiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.elemental.*;
+import frc.team4373.robot.commands.teleop.DrivetrainCommand;
 import frc.team4373.robot.commands.teleop.ToggleLightRingCommand;
 import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
 import frc.team4373.robot.input.filters.XboxAxisFilter;
@@ -34,6 +35,7 @@ public class OI {
     private JoystickButton driverVisionAlignment;
     private JoystickButton driverToggleLightRing;
     private JoystickButton killAllAuton;
+    private JoystickButton driverStartBasicDrive;
 
     private OI() {
         this.driveJoystick =
@@ -84,6 +86,10 @@ public class OI {
         driverToggleLightRing = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_TOGGLE_LIGHT_RING);
         driverToggleLightRing.whenPressed(new ToggleLightRingCommand());
+
+        driverStartBasicDrive = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_BASIC_DRIVE);
+        driverStartBasicDrive.whenPressed(new DrivetrainCommand());
 
         killAllAuton = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_KILL_AUTON);

@@ -119,6 +119,9 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("C Pow",
                 Drivetrain.getInstance().getOutputPercent(Drivetrain.TalonID.MIDDLE_1));
         SmartDashboard.putNumber("Poten Value", Lift.getInstance().getPotenValue());
+        SmartDashboard.putNumber("Cargo Motor", Intake.getInstance().getRightMotorPower());
+        SmartDashboard.putBoolean("Hatch Retain",
+                Intake.getInstance().getHatchPanelIntakeRetaining());
         SmartDashboard.putBoolean("Light Ring", Drivetrain.getInstance().getLightRingEnabled());
         SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
         SmartDashboard.putBoolean("Intake Deployed", Intake.getInstance().isDeployed());

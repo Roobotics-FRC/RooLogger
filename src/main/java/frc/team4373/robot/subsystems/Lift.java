@@ -95,7 +95,6 @@ public class Lift extends Subsystem {
         } else {
             this.talon1.set(power);
         }
-        this.talon1.set(power);
     }
 
     /**

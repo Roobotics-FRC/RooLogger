@@ -24,6 +24,9 @@ public class Intake extends Subsystem {
     private static final DoubleSolenoid.Value DEPLOYED = DoubleSolenoid.Value.kForward;
     private static final DoubleSolenoid.Value RETRACTED = DoubleSolenoid.Value.kReverse;
 
+    private static final DoubleSolenoid.Value RETAIN_HATCH = DoubleSolenoid.Value.kForward;
+    private static final DoubleSolenoid.Value RELEASE_HATCH = DoubleSolenoid.Value.kReverse;
+
     private static volatile Intake instance;
 
     /**
@@ -77,11 +80,11 @@ public class Intake extends Subsystem {
     }
 
     public void collectHatch() {
-        hatchPiston.set(DoubleSolenoid.Value.kForward);
+        hatchPiston.set(RETAIN_HATCH);
     }
 
     public void releaseHatch() {
-        hatchPiston.set(DoubleSolenoid.Value.kReverse);
+        hatchPiston.set(RELEASE_HATCH);
     }
 
     private void setLeftTalon(double power) {
@@ -108,6 +111,14 @@ public class Intake extends Subsystem {
 
     public boolean getLimitSwitch() {
         return limitSwitch.get();
+    }
+
+    public boolean getHatchPanelIntakeRetaining() {
+        return this.hatchPiston.get() == RETAIN_HATCH;
+    }
+
+    public double getRightMotorPower() {
+        return this.rightTalon.get();
     }
 
     @Override
