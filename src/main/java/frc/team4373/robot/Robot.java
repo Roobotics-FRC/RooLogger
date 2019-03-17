@@ -129,6 +129,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putBoolean("Mid Wheel Deployed",
                 Drivetrain.getInstance().isMiddleWheelDeployed());
         SmartDashboard.putNumber("Pitch", Drivetrain.getInstance().getPigeonPitch());
+        SmartDashboard.putNumber("Yaw", Drivetrain.getInstance().getPigeonYaw());
     }
 
     /**

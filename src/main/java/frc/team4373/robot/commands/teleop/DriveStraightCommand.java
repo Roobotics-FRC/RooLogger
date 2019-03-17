@@ -26,7 +26,8 @@ public class DriveStraightCommand extends PIDCommand {
     protected void initialize() {
         // Angular PID configuration
         this.setSetpoint(drivetrain.getPigeonYaw());
-        this.getPIDController().setOutputRange(-1, 1);
+        this.getPIDController().setOutputRange(-RobotMap.AUTON_TURN_SPEED,
+                RobotMap.AUTON_TURN_SPEED);
         this.getPIDController().setPID(RobotMap.DRIVETRAIN_ANG_PID_GAINS.kP,
                 RobotMap.DRIVETRAIN_ANG_PID_GAINS.kI, RobotMap.DRIVETRAIN_ANG_PID_GAINS.kD);
         // this.getPIDController().setPID(SmartDashboard.getNumber("kP-T", 0),
