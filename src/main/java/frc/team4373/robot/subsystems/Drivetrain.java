@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
-import frc.team4373.robot.commands.teleop.DrivetrainCommand;
+import frc.team4373.robot.commands.teleop.DriveStraightCommand;
 
 /**
  * A programmatic representation of the robot's drivetrain.
@@ -163,7 +163,7 @@ public class Drivetrain extends Subsystem {
      * Retracts middle wheel using pistons.
      */
     public void retractMiddleWheel() {
-        this.piston.set(DoubleSolenoid.Value.kForward);
+        this.piston.set(DoubleSolenoid.Value.kReverse);
         this.middleWheelDeployed = false;
     }
 
@@ -171,7 +171,7 @@ public class Drivetrain extends Subsystem {
      * Deploys the middle wheel using pistons.
      */
     public void deployMiddleWheel() {
-        this.piston.set(DoubleSolenoid.Value.kReverse);
+        this.piston.set(DoubleSolenoid.Value.kForward);
         this.middleWheelDeployed = true;
     }
 
@@ -251,7 +251,7 @@ public class Drivetrain extends Subsystem {
     public double getPigeonPitch() {
         double[] ypr = new double[3];
         this.pigeon.getYawPitchRoll(ypr);
-        return ypr[1];
+        return ypr[2]; // this should be 1, but the Pigeon is mounted incorrectly
     }
 
     /**
@@ -276,6 +276,6 @@ public class Drivetrain extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new DrivetrainCommand());
+        setDefaultCommand(new DriveStraightCommand()); //FIXME: Maybe not on first bot, needed on 2
     }
 }

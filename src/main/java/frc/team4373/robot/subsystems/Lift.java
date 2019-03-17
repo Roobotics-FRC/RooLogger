@@ -35,7 +35,6 @@ public class Lift extends Subsystem {
     private WPI_TalonSRX talon2;
     private DoubleSolenoid piston1;
     private Potentiometer poten;
-    private double initPos = 0;
 
     private Lift() {
         this.talon1 = new WPI_TalonSRX(RobotMap.LIFT_MOTOR_1);
@@ -88,7 +87,7 @@ public class Lift extends Subsystem {
      */
     public void setPercentOutputRaw(double power) {
         power = Robot.constrainPercentOutput(power);
-        double angle = getPotenAngleRelative();
+        double angle = getPotenValue();
         if (angle <= RobotMap.LIFT_MINIMUM_SAFE_ANGLE) {
             this.talon1.set(power > 0 ? power : 0);
         } else if (angle >= RobotMap.LIFT_MAXIMUM_SAFE_ANGLE) {
@@ -96,31 +95,14 @@ public class Lift extends Subsystem {
         } else {
             this.talon1.set(power);
         }
-        this.talon1.set(power);
-
-    }
-
-    /**
-     * Sets the zero position of the potentiometer to the current position.
-     */
-    public void zeroPotentiometer() {
-        this.initPos = this.getPotenAngleAbsolute();
-    }
-
-    /**
-     * Gets the current relative angle from the potentiometer. Converts based on chain ratio.
-     * @return the relative angle from the potentiometer, converted based on the chain ratio.
-     */
-    public double getPotenAngleRelative() {
-        return getPotenAngleAbsolute() - this.initPos;
     }
 
     /**
      * Gets the absolute value of the potentiometer, converted with ratio.
      * @return absolute value of potentiometer.
      */
-    public double getPotenAngleAbsolute() {
-        return poten.get() * -1;
+    public double getPotenValue() {
+        return poten.get();
     }
 
     public boolean isTelescoped() {

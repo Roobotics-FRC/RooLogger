@@ -1,4 +1,4 @@
-package frc.team4373.robot.commands.auton.elemental;
+package frc.team4373.robot.commands.auton.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Intake;

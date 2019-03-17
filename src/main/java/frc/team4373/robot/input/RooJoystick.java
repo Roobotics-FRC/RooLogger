@@ -36,7 +36,7 @@ public class RooJoystick<F extends DoubleTypeFilter> extends Joystick {
         }
     }
 
-    public static final double DEADZONE = 0.09;
+    private static final double DEADZONE = 0.09;
     private F filter = null;
 
     public RooJoystick(int port, F filter) {
@@ -81,6 +81,25 @@ public class RooJoystick<F extends DoubleTypeFilter> extends Joystick {
 
     public double rooGetThrottle() {
         return this.filter(this.getThrottle());
+    }
+
+    /**
+     * Returns z axis with a custom filter.
+     * @return the filtered z-axis.
+     */
+    public double rooGetZFiltered() {
+        double singleFilterZ = this.rooGetZ();
+        double filtered = Math.signum(singleFilterZ) * Math.sqrt(Math.abs(singleFilterZ)) / 3;
+        if (Math.abs(filtered) < DEADZONE) filtered = 0;
+        return filtered;
+    }
+
+    /**
+     * Returns z-axis with a less sensitive filter, especially at low power
+     * @return The filtered z-axis.
+     */
+    public double newRooGetZFiltered() {
+        return Math.signum(this.getZ()) * this.getZ() * this.rooGetZFiltered();
     }
 
     /**

@@ -1,26 +1,26 @@
-package frc.team4373.robot.commands.auton.elemental;
+package frc.team4373.robot.commands.auton.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Intake;
 
 /**
- * Retracts the intake.
+ * Deploys the intake.
  */
-public class RetractIntakeAuton extends Command {
+public class DeployIntakeAuton extends Command {
     private Intake intake;
 
-    public RetractIntakeAuton() {
+    public DeployIntakeAuton() {
         requires(this.intake = Intake.getInstance());
     }
 
     @Override
     protected void initialize() {
-        setTimeout(0.5);
+        setTimeout(0.25);
     }
 
     @Override
     protected void execute() {
-        this.intake.retract();
+        this.intake.deploy();
     }
 
     @Override

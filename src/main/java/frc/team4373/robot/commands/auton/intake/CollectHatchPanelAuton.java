@@ -1,24 +1,24 @@
-package frc.team4373.robot.commands.auton.elemental;
+package frc.team4373.robot.commands.auton.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4373.robot.subsystems.Intake;
 
-public class CollectCargoAuton extends Command {
+public class CollectHatchPanelAuton extends Command {
 
     private Intake intake;
 
-    public CollectCargoAuton() {
+    public CollectHatchPanelAuton() {
         requires(this.intake = Intake.getInstance());
     }
 
     @Override
     protected void initialize() {
-        setTimeout(0.5);
+        setTimeout(1);
     }
 
     @Override
     protected void execute() {
-        this.intake.collectCargo();
+        this.intake.collectHatch();
     }
 
     @Override

@@ -6,10 +6,10 @@ import frc.team4373.robot.commands.auton.drive.ApproachVisionTargetAuton;
 import frc.team4373.robot.commands.auton.drive.DriveDistanceAuton;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.drive.TurnToAngleAuton;
-import frc.team4373.robot.commands.auton.elemental.CollectCargoAuton;
-import frc.team4373.robot.commands.auton.elemental.DeployIntakeAuton;
-import frc.team4373.robot.commands.auton.elemental.ReleaseCargoAuton;
-import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
+import frc.team4373.robot.commands.auton.intake.CollectCargoAuton;
+import frc.team4373.robot.commands.auton.intake.DeployIntakeAuton;
+import frc.team4373.robot.commands.auton.intake.ReleaseCargoAuton;
+import frc.team4373.robot.commands.auton.lift.SetLiftAuton;
 
 public class RCargoAuton extends CommandGroup {
 
@@ -21,9 +21,6 @@ public class RCargoAuton extends CommandGroup {
     public RCargoAuton(RobotMap.Side side, RobotMap.RocketHeight height) {
         SetLiftAuton.Position pos;
         switch (height) {
-            case HIGH:
-                pos = SetLiftAuton.Position.CARGO_3;
-                break;
             case MIDDLE:
                 pos = SetLiftAuton.Position.CARGO_2;
                 break;

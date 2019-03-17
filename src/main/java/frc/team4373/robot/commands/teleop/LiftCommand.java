@@ -3,7 +3,7 @@ package frc.team4373.robot.commands.teleop;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team4373.robot.RobotMap;
-import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
+import frc.team4373.robot.commands.auton.lift.SetLiftAuton;
 import frc.team4373.robot.input.OI;
 import frc.team4373.robot.subsystems.Lift;
 
@@ -13,7 +13,6 @@ import frc.team4373.robot.subsystems.Lift;
 public class LiftCommand extends Command {
     private Lift lift;
 
-    private Command liftToHatch3;
     private Command liftToHatch2;
     private Command liftToHatch1;
 
@@ -23,7 +22,6 @@ public class LiftCommand extends Command {
     public LiftCommand() {
         requires(this.lift = Lift.getInstance());
 
-        this.liftToHatch3 = new SetLiftAuton(SetLiftAuton.Position.HATCH_3);
         this.liftToHatch2 = new SetLiftAuton(SetLiftAuton.Position.HATCH_2);
         this.liftToHatch1 = new SetLiftAuton(SetLiftAuton.Position.HATCH_1);
     }
@@ -39,11 +37,8 @@ public class LiftCommand extends Command {
         lift.setPercentOutputRamping(power);
 
         switch (OI.getOI().getOperatorJoystick().getPOV()) {
-            case 0:
-                // Scheduler.getInstance().add(liftToHatch3);
-                break;
             case 270:
-                // Scheduler.getInstance().add(liftToHatch2);
+                Scheduler.getInstance().add(liftToHatch2);
                 break;
             case 180:
                 Scheduler.getInstance().add(liftToHatch1);

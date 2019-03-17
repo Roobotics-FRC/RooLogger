@@ -5,10 +5,10 @@ import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.auton.drive.ApproachVisionTargetAuton;
 import frc.team4373.robot.commands.auton.drive.DriveDistanceAuton;
 import frc.team4373.robot.commands.auton.drive.MiddleWheelAdjusterAuton;
-import frc.team4373.robot.commands.auton.elemental.CollectHatchPanelAuton;
-import frc.team4373.robot.commands.auton.elemental.DeployIntakeAuton;
-import frc.team4373.robot.commands.auton.elemental.ReleaseHatchPanelAuton;
-import frc.team4373.robot.commands.auton.elemental.SetLiftAuton;
+import frc.team4373.robot.commands.auton.intake.CollectHatchPanelAuton;
+import frc.team4373.robot.commands.auton.intake.DeployIntakeAuton;
+import frc.team4373.robot.commands.auton.intake.ReleaseHatchPanelAuton;
+import frc.team4373.robot.commands.auton.lift.SetLiftAuton;
 
 public class CSFrontHatchAuton extends CommandGroup {
     /**
