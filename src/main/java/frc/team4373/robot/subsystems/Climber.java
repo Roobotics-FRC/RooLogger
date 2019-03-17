@@ -90,7 +90,6 @@ public class Climber extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        // setDefaultCommand(new DummyCommand(this));
-        setDefaultCommand(new DebugClimberCommand());
+        setDefaultCommand(new DummyCommand(this));
     }
 }
