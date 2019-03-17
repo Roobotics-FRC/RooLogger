@@ -24,9 +24,9 @@ public class SetLiftAuton extends PIDCommand {
     private static final double COOLDOWN_THRESHOLD = RobotMap.LIFT_MOVEMENT_SPEED * 0.08;
 
     public enum Position {
-        HATCH_2(350), HATCH_1(190),
+        HATCH_2(355), HATCH_1(190),
         CARGO_2(379), CARGO_1(210),
-        CARGO_SHIP(350), LOADING(162), GROUND(14);
+        CARGO_SHIP(355), LOADING(184), GROUND(14);
 
         private double armAngle;
 

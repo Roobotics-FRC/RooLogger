@@ -54,6 +54,7 @@ public class DriveStraightCommand extends PIDCommand {
         if (strafeOverride) {
             this.drivetrain.deployMiddleWheel();
             this.drivetrain.setPercentOutput(Drivetrain.TalonID.MIDDLE_1, joyX);
+            this.setSetpoint(drivetrain.getPigeonYaw());
             return;
         }
 
