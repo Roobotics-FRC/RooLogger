@@ -3,6 +3,7 @@ package frc.team4373.robot.input;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.commands.auton.ClearSubsystemsCommandGroup;
+import frc.team4373.robot.commands.auton.climb.ExtendClimberWithPitchAuton;
 import frc.team4373.robot.commands.auton.drive.SimpleMiddleWheelAdjusterAuton;
 import frc.team4373.robot.commands.auton.lift.SetLiftAuton;
 import frc.team4373.robot.commands.teleop.DrivetrainCommand;
@@ -30,6 +31,7 @@ public class OI {
     // private JoystickButton driverClimbRaiseBotRear;
     // private JoystickButton driverClimbRetractFront;
     // private JoystickButton driverClimbRetractRear;
+    private JoystickButton climb;
 
     // drive buttons
     private JoystickButton driverVisionAlignment;
@@ -78,6 +80,10 @@ public class OI {
         // driverClimbRetractRear = new JoystickButton(driveJoystick,
         //         RobotMap.DRIVER_BUTTON_CLIMB_RETRACT_REAR);
         // driverClimbRetractRear.whenPressed(new RetractClimberRearAuton());
+
+        climb = new JoystickButton(driveJoystick,
+                RobotMap.DRIVER_BUTTON_CLIMB_RAISE_BOT);
+        climb.whenPressed(new ExtendClimberWithPitchAuton());
 
         driverVisionAlignment = new JoystickButton(driveJoystick,
                 RobotMap.DRIVER_BUTTON_VISION_ALIGNMENT);

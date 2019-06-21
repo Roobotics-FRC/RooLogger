@@ -44,6 +44,7 @@ public class ExtendClimberWithPitchAuton extends Command {
         long now = System.currentTimeMillis();
         if (!this.initialDeployOccurred) {
             this.climber.deployFront();
+            //TODO: this.climber.climb();
             this.initialDeployOccurred = true;
         } else {
             double pitch = this.drivetrain.getPigeonPitch();
