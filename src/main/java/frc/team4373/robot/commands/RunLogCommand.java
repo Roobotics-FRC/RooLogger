@@ -19,6 +19,7 @@ public class RunLogCommand extends Command {
 
     private boolean shouldSetLeft;
     private boolean shouldSetRight;
+    private double velocity = 0;
 
     private double startTime = -1;
 
@@ -49,6 +50,7 @@ public class RunLogCommand extends Command {
                 this.shouldSetRight = true;
                 break;
         }
+        this.velocity = SmartDashboard.getNumber("Log Speed", 0);
     }
 
     @Override
@@ -60,8 +62,10 @@ public class RunLogCommand extends Command {
             this.logger.startLogging();
         } else if (now - this.startTime >= 0.5 && now - this.startTime <= 4) {
             // We're ready to start logging. Spin up the appropriate motors.
-            this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1, shouldSetLeft ? 1 : 0);
-            this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1, shouldSetRight ? 1 : 0);
+            this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1,
+                    this.shouldSetLeft ? this.velocity : 0);
+            this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1,
+                    this.shouldSetRight ? this.velocity : 0);
         } else if (now - this.startTime <= 4.5) {
             // We're in the closing "grace period:" stop the motors and continue logging
             this.drivetrain.zeroMotors();
