@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.robot.Robot;
 import frc.team4373.robot.RobotMap;
-import frc.team4373.robot.commands.teleop.DriveStraightCommand;
+import frc.team4373.robot.commands.teleop.DrivetrainCommand;
 
 /**
  * A programmatic representation of the robot's drivetrain.
@@ -206,7 +206,7 @@ public class Drivetrain extends Subsystem {
      * @param talonID Talon to query.
      * @return percent output of talon.
      */
-    public double getOutputPercent(TalonID talonID) {
+    public double getPercentOutput(TalonID talonID) {
         return getTalon(talonID).getMotorOutputPercent();
     }
 
@@ -276,6 +276,6 @@ public class Drivetrain extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new DriveStraightCommand()); //FIXME: Maybe not on first bot, needed on 2
+        setDefaultCommand(new DrivetrainCommand()); //FIXME: Maybe not on first bot, needed on 2
     }
 }
