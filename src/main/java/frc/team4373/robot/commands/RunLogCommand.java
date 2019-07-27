@@ -32,9 +32,19 @@ public class RunLogCommand extends Command {
         this.drivetrain.zeroMotors();
         this.startTime = -1; // reset in case the command gets reused
 
-        SendableChooser<String> modeChooser = (SendableChooser<String>)
-                SmartDashboard.getData("Log Type");
-        String mode = modeChooser.getSelected();
+        SendableChooser<String> modeChooser;
+        String mode;
+        try {
+            modeChooser = (SendableChooser<String>) SmartDashboard.getData("Log Type");
+            mode = modeChooser.getSelected();
+        } catch (ClassCastException exc) {
+            DriverStation.reportError("No log type chooser found, or invalid type received.",
+                    false);
+            exc.printStackTrace();
+            this.shouldSetLeft = false;
+            this.shouldSetRight = false;
+            return;
+        }
         switch (mode) {
             case "left_only":
                 this.shouldSetLeft = true;
