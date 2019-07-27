@@ -14,16 +14,11 @@ public class OI {
     private RooJoystick<FineGrainedPiecewiseFilter> driveJoystick;
     private RooJoystick<XboxAxisFilter> operatorJoystick;
 
-    private Button startLogButton;
-
     private OI() {
         this.driveJoystick =
                 new RooJoystick<>(RobotMap.DRIVE_JOYSTICK_PORT, new FineGrainedPiecewiseFilter());
         this.operatorJoystick =
                 new RooJoystick<>(RobotMap.OPERATOR_JOYSTICK_PORT, new XboxAxisFilter());
-
-        this.startLogButton = new JoystickButton(this.driveJoystick,
-                RobotMap.DRIVER_START_LOG_BUTTON);
     }
 
     /**

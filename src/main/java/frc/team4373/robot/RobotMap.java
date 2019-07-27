@@ -22,9 +22,6 @@ public class RobotMap {
     public static final int DRIVE_JOYSTICK_PORT = 0;
     public static final int OPERATOR_JOYSTICK_PORT = 1;
 
-    // Button mappings
-    public static final int DRIVER_START_LOG_BUTTON = 10;
-
     // Motor CAN chain identifiers
     public static final int DRIVETRAIN_MOTOR_RIGHT_1 = 13;
     public static final int DRIVETRAIN_MOTOR_RIGHT_2 = 14;

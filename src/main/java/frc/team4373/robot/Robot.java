@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team4373.robot.commands.RunLogCommand;
 import frc.team4373.robot.subsystems.*;
 
 /**
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
         // Set up dashboard
         SmartDashboard.putData("Log Type", this.logTypeChooser);
         SmartDashboard.putNumber("Log Speed", 0);
+        SmartDashboard.putData("RunLogCommand", new RunLogCommand());
 
         // Initialize subsystems
         Drivetrain.getInstance();

@@ -25,6 +25,7 @@ public class RunLogCommand extends Command {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void initialize() {
         this.logger = new Logger();
         this.loggerThread = new Thread(this.logger);
