@@ -1,5 +1,6 @@
 package frc.team4373.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -31,7 +32,8 @@ public class RunLogCommand extends Command {
         this.drivetrain.zeroMotors();
         this.startTime = -1; // reset in case the command gets reused
 
-        SendableChooser<String> modeChooser = (SendableChooser<String>) SmartDashboard.getData("Log Type");
+        SendableChooser<String> modeChooser = (SendableChooser<String>)
+                SmartDashboard.getData("Log Type");
         String mode = modeChooser.getSelected();
         switch (mode) {
             case "left_only":
@@ -46,6 +48,10 @@ public class RunLogCommand extends Command {
                 this.shouldSetLeft = true;
                 this.shouldSetRight = true;
                 break;
+            default:
+                this.shouldSetLeft = false;
+                this.shouldSetRight = false;
+                DriverStation.reportError("Invalid log type selection found.", false);
         }
         this.velocity = SmartDashboard.getNumber("Log Speed", 0);
 

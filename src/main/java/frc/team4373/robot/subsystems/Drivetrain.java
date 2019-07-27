@@ -276,6 +276,6 @@ public class Drivetrain extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new DrivetrainCommand()); //FIXME: Maybe not on first bot, needed on 2
+        setDefaultCommand(new DrivetrainCommand());
     }
 }

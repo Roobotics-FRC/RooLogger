@@ -8,6 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LoggerProcessor {
+    /**
+     * Captures the log from the specified {@link Logger} and writes it to a CSV.
+     * @param logger the Logger whose log to write.
+     */
     public static void writeLogToFile(Logger logger) {
         StringBuilder builder = new StringBuilder();
         builder.append(Logger.CSV_HEADERS);

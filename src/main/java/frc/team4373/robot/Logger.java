@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.Timer;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 public class Logger implements Runnable {
-    public final static int NUM_DATA_PTS = 8;
-    public final static int SAMPLE_TIME_SECS = 4;
-    public final static int SAMPLES_PER_SEC = 1000;
+    public static final int NUM_DATA_PTS = 8;
+    public static final int SAMPLE_TIME_SECS = 4;
+    public static final int SAMPLES_PER_SEC = 1000;
 
-    public final static int BUFFER_SIZE = SAMPLE_TIME_SECS * SAMPLES_PER_SEC * NUM_DATA_PTS;
-    public final static String CSV_HEADERS =
+    public static final int BUFFER_SIZE = SAMPLE_TIME_SECS * SAMPLES_PER_SEC * NUM_DATA_PTS;
+    public static final String CSV_HEADERS =
             "Time (s), L Output (%), L Pos (ticks), L Vel (ticks), "
             + "R Output (%), R Pos (ticks), R Vel (ticks), Heading (deg)";
 
@@ -20,6 +20,9 @@ public class Logger implements Runnable {
     private volatile boolean isLogging;
     private volatile boolean enabled;
 
+    /**
+     * Constructs a new Logger.
+     */
     public Logger() {
         this.drivetrain = Drivetrain.getInstance();
         this.buffer = new double[BUFFER_SIZE];
@@ -55,6 +58,7 @@ public class Logger implements Runnable {
 
     /**
      * Enables the logging flag.
+     *
      * <p>Writes to the logging flag are <b>not</b> atomic; only ONE thread should take ownership
      * of logging state modifications.
      */
@@ -64,6 +68,7 @@ public class Logger implements Runnable {
 
     /**
      * Disables the logging flag.
+     * 
      * <p>Writes to the logging flag are <b>not</b> atomic; only ONE thread should take ownership
      * of logging state modifications.
      */
