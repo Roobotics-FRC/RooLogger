@@ -6,21 +6,23 @@ import frc.team4373.robot.subsystems.Drivetrain;
 
 public class Logger implements Runnable {
     public final static int NUM_DATA_PTS = 8;
-    // 3.5 ~= 4 seconds * 1000 samples/sec * 7 values/sample
-    public final static int BUFFER_SIZE = 4 * 1000 * NUM_DATA_PTS;
+    public final static int SAMPLE_TIME_SECS = 4;
+    public final static int SAMPLES_PER_SEC = 1000;
+
+    public final static int BUFFER_SIZE = SAMPLE_TIME_SECS * SAMPLES_PER_SEC * NUM_DATA_PTS;
     public final static String CSV_HEADERS =
             "Time (s), L Output (%), L Pos (ticks), L Vel (ticks), "
             + "R Output (%), R Pos (ticks), R Vel (ticks), Heading (deg)";
 
     private Drivetrain drivetrain;
-    private double[] buffer;
     private int idx;
-    private boolean isLogging;
+    private volatile double[] buffer;
+    private volatile boolean isLogging;
     private volatile boolean enabled;
 
     public Logger() {
         this.drivetrain = Drivetrain.getInstance();
-        this.buffer = new double[Logger.BUFFER_SIZE];
+        this.buffer = new double[BUFFER_SIZE];
         this.idx = 0;
         this.enabled = true;
         this.isLogging = false;
@@ -28,6 +30,7 @@ public class Logger implements Runnable {
 
     @Override
     public void run() {
+        int sleepTime = 1000 / SAMPLES_PER_SEC;
         while (enabled) {
             if (this.isLogging) {
                 // If we're going to overflow, stop logging and wait for termination/reset
@@ -42,7 +45,7 @@ public class Logger implements Runnable {
                 buffer[this.idx++] = this.drivetrain.getPigeonYaw();
             }
             try {
-                Thread.sleep(1);
+                Thread.sleep(sleepTime);
             } catch (Exception exc) {
                 DriverStation.reportError("Failed to sleep in logger thread", false);
                 exc.printStackTrace();
@@ -52,6 +55,8 @@ public class Logger implements Runnable {
 
     /**
      * Enables the logging flag.
+     * <p>Writes to the logging flag are <b>not</b> atomic; only ONE thread should take ownership
+     * of logging state modifications.
      */
     public void startLogging() {
         this.isLogging = true;
@@ -59,6 +64,8 @@ public class Logger implements Runnable {
 
     /**
      * Disables the logging flag.
+     * <p>Writes to the logging flag are <b>not</b> atomic; only ONE thread should take ownership
+     * of logging state modifications.
      */
     public void stopLogging() {
         this.isLogging = false;
@@ -76,7 +83,7 @@ public class Logger implements Runnable {
      * Clears buffer entries.
      */
     public void flushBuffer() {
-        this.buffer = new double[Logger.BUFFER_SIZE];
+        this.buffer = new double[BUFFER_SIZE];
     }
 
     /**
