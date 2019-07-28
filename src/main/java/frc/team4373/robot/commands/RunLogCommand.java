@@ -22,12 +22,13 @@ public class RunLogCommand extends Command {
 
     public RunLogCommand() {
         requires(this.drivetrain = Drivetrain.getInstance());
+        this.logger = new Logger();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     protected void initialize() {
-        this.logger = new Logger();
+        this.logger.reset();
         this.loggerThread = new Thread(this.logger);
 
         this.drivetrain.zeroMotors();
@@ -86,7 +87,8 @@ public class RunLogCommand extends Command {
             // We're in the closing "grace period:" stop the motors and continue logging
             this.drivetrain.zeroMotors();
         } else {
-            this.logger.stopLogging();
+            // We're finished: stop the logger
+            this.logger.stop();
         }
     }
 
@@ -97,9 +99,8 @@ public class RunLogCommand extends Command {
 
     @Override
     protected void end() {
-        this.logger.stopLogging();
+        this.logger.stop();
         LoggerProcessor.writeLogToFile(this.logger);
-        this.logger.exitThread();
     }
 
     @Override

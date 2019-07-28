@@ -19,8 +19,8 @@ public class Logger implements Runnable {
     // TODO: Array volatility is useless for thread-safety
     private volatile double[] buffer;
 
+    private volatile boolean isEnabled;
     private volatile boolean isLogging;
-    private volatile boolean enabled;
 
     /**
      * Constructs a new Logger.
@@ -29,17 +29,20 @@ public class Logger implements Runnable {
         this.drivetrain = Drivetrain.getInstance();
         this.buffer = new double[BUFFER_SIZE];
         this.idx = 0;
-        this.enabled = true;
+        this.isEnabled = true;
         this.isLogging = false;
     }
 
     @Override
     public void run() {
         int sleepTime = 1000 / SAMPLES_PER_SEC;
-        while (enabled) {
+        while (this.isEnabled) {
             if (this.isLogging) {
                 // If we're going to overflow, stop logging and wait for termination/reset
-                if (this.idx + NUM_DATA_PTS - 1 > BUFFER_SIZE) this.isLogging = false;
+                if (this.idx + NUM_DATA_PTS - 1 > BUFFER_SIZE) {
+                    this.isLogging = false;
+                    continue;
+                }
                 buffer[this.idx++] = Timer.getFPGATimestamp();
                 buffer[this.idx++] = this.drivetrain.getPercentOutput(Drivetrain.TalonID.LEFT_1);
                 buffer[this.idx++] = this.drivetrain.getSensorPosition(Drivetrain.TalonID.LEFT_1);
@@ -60,22 +63,17 @@ public class Logger implements Runnable {
 
     /**
      * Enables the logging flag.
-     *
-     * <p>Writes to the logging flag are <b>not</b> atomic; only ONE thread should take ownership
-     * of logging state modifications.
      */
     public void startLogging() {
         this.isLogging = true;
     }
 
     /**
-     * Disables the logging flag.
-     * 
-     * <p>Writes to the logging flag are <b>not</b> atomic; only ONE thread should take ownership
-     * of logging state modifications.
+     * Stops logging and exits the thread.
      */
-    public void stopLogging() {
+    public void stop() {
         this.isLogging = false;
+        this.isEnabled = false;
     }
 
     /**
@@ -87,16 +85,18 @@ public class Logger implements Runnable {
     }
 
     /**
-     * Clears buffer entries.
+     * Clears all entries in the logging buffer.
      */
     public void flushBuffer() {
         this.buffer = new double[BUFFER_SIZE];
     }
 
     /**
-     * Terminates the logging thread.
+     * Resets the Logger for reuse.
      */
-    public void exitThread() {
-        this.enabled = false;
+    public void reset() {
+        this.flushBuffer();
+        this.isLogging = false;
+        this.isEnabled = true;
     }
 }
