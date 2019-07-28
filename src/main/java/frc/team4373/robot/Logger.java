@@ -16,7 +16,9 @@ public class Logger implements Runnable {
 
     private Drivetrain drivetrain;
     private int idx;
+    // TODO: Array volatility is useless for thread-safety
     private volatile double[] buffer;
+
     private volatile boolean isLogging;
     private volatile boolean enabled;
 
@@ -39,12 +41,12 @@ public class Logger implements Runnable {
                 // If we're going to overflow, stop logging and wait for termination/reset
                 if (this.idx + NUM_DATA_PTS - 1 > BUFFER_SIZE) this.isLogging = false;
                 buffer[this.idx++] = Timer.getFPGATimestamp();
-                buffer[this.idx++] = this.drivetrain.getPercentOutput(Drivetrain.TalonID.RIGHT_1);
-                buffer[this.idx++] = this.drivetrain.getSensorPosition(Drivetrain.TalonID.RIGHT_1);
-                buffer[this.idx++] = this.drivetrain.getSensorVelocity(Drivetrain.TalonID.RIGHT_1);
                 buffer[this.idx++] = this.drivetrain.getPercentOutput(Drivetrain.TalonID.LEFT_1);
                 buffer[this.idx++] = this.drivetrain.getSensorPosition(Drivetrain.TalonID.LEFT_1);
                 buffer[this.idx++] = this.drivetrain.getSensorVelocity(Drivetrain.TalonID.LEFT_1);
+                buffer[this.idx++] = this.drivetrain.getPercentOutput(Drivetrain.TalonID.RIGHT_1);
+                buffer[this.idx++] = this.drivetrain.getSensorPosition(Drivetrain.TalonID.RIGHT_1);
+                buffer[this.idx++] = this.drivetrain.getSensorVelocity(Drivetrain.TalonID.RIGHT_1);
                 buffer[this.idx++] = this.drivetrain.getPigeonYaw();
             }
             try {
