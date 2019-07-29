@@ -40,7 +40,7 @@ public class RunLogCommand extends Command {
             modeChooser = (SendableChooser<String>) SmartDashboard.getData("Log Type");
             mode = modeChooser.getSelected();
         } catch (ClassCastException exc) {
-            DriverStation.reportError("No log type chooser found, or invalid type received.",
+            DriverStation.reportError("No log type chooser found, or invalid data received.",
                     false);
             exc.printStackTrace();
             this.shouldSetLeft = false;
@@ -76,7 +76,6 @@ public class RunLogCommand extends Command {
         if (this.startTime < 0) {
             // We're in the "grace period:" spin up the logger and prepare
             this.startTime = now;
-            this.logger.startLogging();
         } else if (now - this.startTime >= 0.5 && now - this.startTime <= 4) {
             // We're ready to start logging. Spin up the appropriate motors
             this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1,

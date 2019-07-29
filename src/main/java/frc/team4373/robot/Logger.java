@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import frc.team4373.robot.subsystems.Drivetrain;
 
+import java.util.Arrays;
+
 public class Logger implements Runnable {
     public static final int NUM_DATA_PTS = 8;
     public static final int SAMPLE_TIME_SECS = 4;
@@ -16,11 +18,9 @@ public class Logger implements Runnable {
 
     private Drivetrain drivetrain;
     private int idx;
-    // TODO: Array volatility is useless for thread-safety
-    private volatile double[] buffer;
+    private final double[] buffer;
 
     private volatile boolean isEnabled;
-    private volatile boolean isLogging;
 
     /**
      * Constructs a new Logger.
@@ -30,17 +30,15 @@ public class Logger implements Runnable {
         this.buffer = new double[BUFFER_SIZE];
         this.idx = 0;
         this.isEnabled = true;
-        this.isLogging = false;
     }
 
     @Override
     public void run() {
         int sleepTime = 1000 / SAMPLES_PER_SEC;
-        while (this.isEnabled) {
-            if (this.isLogging) {
+        synchronized (this.buffer) {
+            while (this.isEnabled) {
                 // If we're going to overflow, stop logging and wait for termination/reset
                 if (this.idx + NUM_DATA_PTS - 1 > BUFFER_SIZE) {
-                    this.isLogging = false;
                     continue;
                 }
                 buffer[this.idx++] = Timer.getFPGATimestamp();
@@ -51,28 +49,20 @@ public class Logger implements Runnable {
                 buffer[this.idx++] = this.drivetrain.getSensorPosition(Drivetrain.TalonID.RIGHT_1);
                 buffer[this.idx++] = this.drivetrain.getSensorVelocity(Drivetrain.TalonID.RIGHT_1);
                 buffer[this.idx++] = this.drivetrain.getPigeonYaw();
-            }
-            try {
-                Thread.sleep(sleepTime);
-            } catch (Exception exc) {
-                DriverStation.reportError("Failed to sleep in logger thread", false);
-                exc.printStackTrace();
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (Exception exc) {
+                    DriverStation.reportError("Failed to sleep in logger thread", false);
+                    exc.printStackTrace();
+                }
             }
         }
-    }
-
-    /**
-     * Enables the logging flag.
-     */
-    public void startLogging() {
-        this.isLogging = true;
     }
 
     /**
      * Stops logging and exits the thread.
      */
     public void stop() {
-        this.isLogging = false;
         this.isEnabled = false;
     }
 
@@ -81,14 +71,18 @@ public class Logger implements Runnable {
      * @return the buffer of size {@link #BUFFER_SIZE}.
      */
     public double[] getBuffer() {
-        return this.buffer;
+        synchronized (this.buffer) {
+            return this.buffer;
+        }
     }
 
     /**
      * Clears all entries in the logging buffer.
      */
     public void flushBuffer() {
-        this.buffer = new double[BUFFER_SIZE];
+        synchronized (this.buffer) {
+            Arrays.fill(buffer, 0);
+        }
     }
 
     /**
@@ -96,7 +90,6 @@ public class Logger implements Runnable {
      */
     public void reset() {
         this.flushBuffer();
-        this.isLogging = false;
         this.isEnabled = true;
     }
 }
