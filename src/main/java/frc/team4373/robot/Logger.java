@@ -61,6 +61,9 @@ public class Logger implements Runnable {
 
     /**
      * Stops logging and exits the thread.
+     *
+     * <p>Note that this method <b>must</b> be called before attempting to
+     *    fetch the buffer via {@link #getBuffer()}.
      */
     public void stop() {
         this.isEnabled = false;
@@ -68,6 +71,10 @@ public class Logger implements Runnable {
 
     /**
      * Gets the buffer of logged values.
+     *
+     * <p>Note that <b>this must not be called before calling {@link #stop()}</b>
+     *    or the Logger will continue indefinitely.
+     *
      * @return the buffer of size {@link #BUFFER_SIZE}.
      */
     public double[] getBuffer() {
