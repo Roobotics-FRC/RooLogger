@@ -1,4 +1,4 @@
-package frc.team4373.robot;
+package frc.team4373.robot.logging;
 
 import edu.wpi.first.wpilibj.DriverStation;
 

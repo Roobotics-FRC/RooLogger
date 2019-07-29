@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team4373.robot.Logger;
-import frc.team4373.robot.LoggerProcessor;
+import frc.team4373.robot.logging.Logger;
+import frc.team4373.robot.logging.LoggerProcessor;
 import frc.team4373.robot.subsystems.Drivetrain;
 
 public class RunLogCommand extends Command {
