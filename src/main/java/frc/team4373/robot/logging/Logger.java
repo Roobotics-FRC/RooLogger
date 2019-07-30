@@ -20,7 +20,7 @@ public class Logger implements Runnable {
     private int idx;
     private final double[] buffer;
 
-    private volatile boolean isEnabled;
+    private volatile boolean enabled;
 
     /**
      * Constructs a new Logger.
@@ -29,14 +29,14 @@ public class Logger implements Runnable {
         this.drivetrain = Drivetrain.getInstance();
         this.buffer = new double[BUFFER_SIZE];
         this.idx = 0;
-        this.isEnabled = true;
+        this.enabled = true;
     }
 
     @Override
     public void run() {
         int sleepTime = 1000 / SAMPLES_PER_SEC;
         synchronized (this.buffer) {
-            while (this.isEnabled) {
+            while (this.enabled) {
                 // If we're going to overflow, stop logging and wait for termination/reset
                 if (this.idx + NUM_DATA_PTS - 1 > BUFFER_SIZE) {
                     continue;
@@ -66,37 +66,59 @@ public class Logger implements Runnable {
      *    fetch the buffer via {@link #getBuffer()}.
      */
     public void stop() {
-        this.isEnabled = false;
+        this.enabled = false;
     }
 
     /**
      * Gets the buffer of logged values.
      *
-     * <p>Note that <b>this must not be called before calling {@link #stop()}</b>
-     *    or the Logger will continue indefinitely.
+     * <p>Note that <b>this must not be called before calling {@link #stop()}</b>.
+     *    For safety, this method will return an empty array if the enabled flag is still true.
      *
-     * @return the buffer of size {@link #BUFFER_SIZE}.
+     * @return the buffer of size {@link #BUFFER_SIZE} if safe to fetch; empty array otherwise.
      */
     public double[] getBuffer() {
-        synchronized (this.buffer) {
-            return this.buffer;
+        if (!this.enabled) {
+            synchronized (this.buffer) {
+                return this.buffer;
+            }
+        } else {
+            DriverStation.reportError("An attempt was made to retrieve the Logger buffer "
+                    + "while already enabled.", false);
+            return new double[0];
         }
     }
 
     /**
      * Clears all entries in the logging buffer.
+     *
+     * <p><b>Only</b> call this method when the Logger has stopped.
+     *    If the logger is not stopped, this method will not flush the buffer.
      */
     public void flushBuffer() {
-        synchronized (this.buffer) {
-            Arrays.fill(buffer, 0);
+        if (!this.enabled) {
+            synchronized (this.buffer) {
+                Arrays.fill(buffer, 0);
+            }
+        } else {
+            DriverStation.reportError("An attempt was made to flush the Logger buffer "
+                    + "while already enabled.", false);
         }
     }
 
     /**
      * Resets the Logger for reuse.
+     *
+     * <p><b>Only</b> call this method when the Logger has stopped.
+     *    If the logger is not stopped, this method will not reset the Logger.
      */
     public void reset() {
-        this.flushBuffer();
-        this.isEnabled = true;
+        if (!this.enabled) {
+            this.flushBuffer();
+            this.enabled = true;
+        } else {
+            DriverStation.reportError("An attempt was made to reset Logger while already enabled.",
+                    false);
+        }
     }
 }

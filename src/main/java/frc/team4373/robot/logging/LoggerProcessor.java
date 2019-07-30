@@ -17,6 +17,10 @@ public class LoggerProcessor {
         builder.append(Logger.CSV_HEADERS);
 
         double[] output = logger.getBuffer();
+        if (output.length == 0) {
+            DriverStation.reportWarning("Length of logger output is 0. "
+                    + "Did you try to process it while the run loop was still executing?", false);
+        }
         for (int i = 0; i < output.length; ++i) {
             if (i % Logger.BUFFER_SIZE == 0) {
                 builder.append("\n");
