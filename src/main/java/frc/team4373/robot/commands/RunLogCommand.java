@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.logging.Logger;
 import frc.team4373.robot.logging.LoggerProcessor;
 import frc.team4373.robot.subsystems.Drivetrain;
@@ -17,6 +18,7 @@ public class RunLogCommand extends Command {
     private boolean shouldSetLeft;
     private boolean shouldSetRight;
     private double velocity = 0;
+    private double duration = 0;
 
     private double startTime = -1;
 
@@ -28,7 +30,14 @@ public class RunLogCommand extends Command {
     @Override
     @SuppressWarnings("unchecked")
     protected void initialize() {
-        this.logger.reset();
+        double oldDuration = this.duration;
+        this.duration = SmartDashboard.getNumber("Log Duration (s)", 0);
+        // if there's no change in duration, it's far more efficient not to overwrite the array
+        if (Math.abs(oldDuration - this.duration) < RobotMap.FP_EQUALITY_THRESHOLD) {
+            this.logger.reset();
+        } else {
+            this.logger.resetDuration(this.duration);
+        }
         this.loggerThread = new Thread(this.logger);
 
         this.drivetrain.zeroMotors();
@@ -76,13 +85,13 @@ public class RunLogCommand extends Command {
         if (this.startTime < 0) {
             // We're in the "grace period:" spin up the logger and prepare
             this.startTime = now;
-        } else if (now - this.startTime >= 0.5 && now - this.startTime <= 4) {
+        } else if (now - this.startTime >= 0.5 && now - this.startTime <= duration - 0.5) {
             // We're ready to start logging. Spin up the appropriate motors
             this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1,
                     this.shouldSetLeft ? this.velocity : 0);
             this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1,
                     this.shouldSetRight ? this.velocity : 0);
-        } else if (now - this.startTime <= 4.5) {
+        } else if (now - this.startTime <= duration) {
             // We're in the closing "grace period:" stop the motors and continue logging
             this.drivetrain.zeroMotors();
         } else {
@@ -93,7 +102,7 @@ public class RunLogCommand extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Timer.getFPGATimestamp() - this.startTime <= 4.5;
+        return Timer.getFPGATimestamp() - this.startTime <= duration;
     }
 
     @Override

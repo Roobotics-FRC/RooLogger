@@ -8,37 +8,35 @@ import java.util.Arrays;
 
 public class Logger implements Runnable {
     public static final int NUM_DATA_PTS = 8;
-    public static final int SAMPLE_TIME_SECS = 4;
     public static final int SAMPLES_PER_SEC = 1000;
 
-    public static final int BUFFER_SIZE = SAMPLE_TIME_SECS * SAMPLES_PER_SEC * NUM_DATA_PTS;
     public static final String CSV_HEADERS =
             "Time (s), L Output (%), L Pos (ticks), L Vel (ticks), "
             + "R Output (%), R Pos (ticks), R Vel (ticks), Heading (deg)";
 
     private Drivetrain drivetrain;
-    private int idx;
-    private final double[] buffer;
+    private int idx = 0;
+    private double[] buffer = new double[0];
 
-    private volatile boolean enabled;
+    private final Object lock = new Object();
+
+    private volatile double duration = 0;
+    private volatile boolean enabled = true;
 
     /**
      * Constructs a new Logger.
      */
     public Logger() {
         this.drivetrain = Drivetrain.getInstance();
-        this.buffer = new double[BUFFER_SIZE];
-        this.idx = 0;
-        this.enabled = true;
     }
 
     @Override
     public void run() {
         int sleepTime = 1000 / SAMPLES_PER_SEC;
-        synchronized (this.buffer) {
+        synchronized (this.lock) {
             while (this.enabled) {
                 // If we're going to overflow, stop logging and wait for termination/reset
-                if (this.idx + NUM_DATA_PTS - 1 > BUFFER_SIZE) {
+                if (this.idx + NUM_DATA_PTS - 1 > buffer.length) {
                     continue;
                 }
                 buffer[this.idx++] = Timer.getFPGATimestamp();
@@ -60,6 +58,27 @@ public class Logger implements Runnable {
     }
 
     /**
+     * Sets the duration for which the logger will log and resets the logger.
+     *
+     * <p>Note that this method must be called before starting the logger,
+     *    as the default duration is 0.
+     *    Also, it is unnecessary (and wasteful) to call {@link #reset()} after this method;
+     *    this method fully resets the logger.
+     *
+     * @param duration the duration for which to log, in seconds.
+     */
+    public void resetDuration(double duration) {
+        if (!this.enabled) {
+            this.duration = duration;
+            resizeBuffer();
+            this.enabled = true;
+        } else {
+            DriverStation.reportError("An attempt was made to modify the Logger duration "
+                    + "while already enabled.", false);
+        }
+    }
+
+    /**
      * Stops logging and exits the thread.
      *
      * <p>Note that this method <b>must</b> be called before attempting to
@@ -75,11 +94,11 @@ public class Logger implements Runnable {
      * <p>Note that <b>this must not be called before calling {@link #stop()}</b>.
      *    For safety, this method will return an empty array if the enabled flag is still true.
      *
-     * @return the buffer of size {@link #BUFFER_SIZE} if safe to fetch; empty array otherwise.
+     * @return the log buffer if safe to fetch; empty array otherwise.
      */
     public double[] getBuffer() {
         if (!this.enabled) {
-            synchronized (this.buffer) {
+            synchronized (this.lock) {
                 return this.buffer;
             }
         } else {
@@ -97,7 +116,7 @@ public class Logger implements Runnable {
      */
     public void flushBuffer() {
         if (!this.enabled) {
-            synchronized (this.buffer) {
+            synchronized (this.lock) {
                 Arrays.fill(buffer, 0);
             }
         } else {
@@ -120,5 +139,13 @@ public class Logger implements Runnable {
             DriverStation.reportError("An attempt was made to reset Logger while already enabled.",
                     false);
         }
+    }
+
+    /**
+     * Creates a new zeroed buffer array based on the duration, sample count, and data point count.
+     */
+    private void resizeBuffer() {
+        int bufferSize = (int) Math.ceil(duration) * SAMPLES_PER_SEC * NUM_DATA_PTS;
+        this.buffer = new double[bufferSize];
     }
 }

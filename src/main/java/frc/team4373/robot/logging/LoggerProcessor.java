@@ -22,11 +22,11 @@ public class LoggerProcessor {
                     + "Did you try to process it while the run loop was still executing?", false);
         }
         for (int i = 0; i < output.length; ++i) {
-            if (i % Logger.BUFFER_SIZE == 0) {
+            if (i % output.length == 0) {
                 builder.append("\n");
             }
             builder.append(output[i]);
-            if (i % Logger.BUFFER_SIZE != Logger.BUFFER_SIZE - 1) {
+            if (i % output.length != output.length - 1) {
                 builder.append(", ");
             }
         }

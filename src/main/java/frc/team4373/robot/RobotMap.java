@@ -54,4 +54,6 @@ public class RobotMap {
         }
     }
 
+    // Mathematical/operation constants
+    public static final double FP_EQUALITY_THRESHOLD = 1e-5;
 }

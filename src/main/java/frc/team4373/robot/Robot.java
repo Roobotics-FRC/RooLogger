@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
         // Set up dashboard
         SmartDashboard.putData("Log Type", this.logTypeChooser);
         SmartDashboard.putNumber("Log Speed", 0);
+        SmartDashboard.putNumber("Log Duration (s)", 0);
         SmartDashboard.putData("RunLogCommand", new RunLogCommand());
 
         // Initialize subsystems
