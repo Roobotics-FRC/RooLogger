@@ -102,7 +102,7 @@ public class RunLogCommand extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Timer.getFPGATimestamp() - this.startTime <= duration;
+        return Timer.getFPGATimestamp() - this.startTime >= duration;
     }
 
     @Override
