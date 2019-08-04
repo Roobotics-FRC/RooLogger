@@ -18,7 +18,7 @@ public class Logger implements Runnable {
     private int idx = 0;
     private double[] buffer = new double[0];
 
-    private final Object lock = new Object();
+    private final Object bufferLock = new Object();
 
     private volatile double duration = 0;
     private volatile boolean enabled = true;
@@ -33,7 +33,7 @@ public class Logger implements Runnable {
     @Override
     public void run() {
         int sleepTime = 1000 / SAMPLES_PER_SEC;
-        synchronized (this.lock) {
+        synchronized (this.bufferLock) {
             while (this.enabled) {
                 // If we're going to overflow, stop logging and wait for termination/reset
                 if (this.idx + NUM_DATA_PTS - 1 > buffer.length) {
@@ -98,7 +98,7 @@ public class Logger implements Runnable {
      */
     public double[] getBuffer() {
         if (!this.enabled) {
-            synchronized (this.lock) {
+            synchronized (this.bufferLock) {
                 return this.buffer;
             }
         } else {
@@ -116,7 +116,7 @@ public class Logger implements Runnable {
      */
     public void flushBuffer() {
         if (!this.enabled) {
-            synchronized (this.lock) {
+            synchronized (this.bufferLock) {
                 Arrays.fill(buffer, 0);
             }
         } else {
