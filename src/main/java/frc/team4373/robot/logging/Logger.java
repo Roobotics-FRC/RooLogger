@@ -21,7 +21,7 @@ public class Logger implements Runnable {
     private final Object bufferLock = new Object();
 
     private volatile double duration = 0;
-    private volatile boolean enabled = true;
+    private volatile boolean enabled = false;
 
     /**
      * Constructs a new Logger.

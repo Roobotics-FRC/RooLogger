@@ -22,11 +22,11 @@ public class LoggerProcessor {
                     + "Did you try to process it while the run loop was still executing?", false);
         }
         for (int i = 0; i < output.length; ++i) {
-            if (i % output.length == 0) {
+            if (i % Logger.NUM_DATA_PTS == 0) {
                 builder.append("\n");
             }
             builder.append(output[i]);
-            if (i % output.length != output.length - 1) {
+            if (i % Logger.NUM_DATA_PTS != Logger.NUM_DATA_PTS - 1) {
                 builder.append(", ");
             }
         }
@@ -35,8 +35,7 @@ public class LoggerProcessor {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd_HHmmss");
         String formattedDate = simpleDateFormat.format(date);
-        Path outPath = Path.of(System.getenv().get("HOME"),
-                String.format("/log%s.txt", formattedDate));
+        Path outPath = Path.of(String.format("/home/lvuser/log%s.csv", formattedDate));
         try {
             Files.writeString(outPath, builder.toString());
         } catch (Exception exc) {
