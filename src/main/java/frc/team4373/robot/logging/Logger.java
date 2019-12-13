@@ -2,7 +2,7 @@ package frc.team4373.robot.logging;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import frc.team4373.robot.subsystems.Drivetrain;
+import frc.team4373.robot.subsystems.LoggableDrivetrain;
 
 import java.util.Arrays;
 
@@ -14,7 +14,7 @@ public class Logger implements Runnable {
             "Time (s), L Output (%), L Pos (ticks), L Vel (ticks), "
             + "R Output (%), R Pos (ticks), R Vel (ticks), Heading (deg)";
 
-    private Drivetrain drivetrain;
+    private LoggableDrivetrain drivetrain;
     private int idx = 0;
     private double[] buffer = new double[0];
 
@@ -26,8 +26,8 @@ public class Logger implements Runnable {
     /**
      * Constructs a new Logger.
      */
-    public Logger() {
-        this.drivetrain = Drivetrain.getInstance();
+    public Logger(LoggableDrivetrain drivetrain) {
+        this.drivetrain = drivetrain;
     }
 
     @Override
@@ -40,13 +40,13 @@ public class Logger implements Runnable {
                     continue;
                 }
                 buffer[this.idx++] = Timer.getFPGATimestamp();
-                buffer[this.idx++] = this.drivetrain.getPercentOutput(Drivetrain.TalonID.LEFT_1);
-                buffer[this.idx++] = this.drivetrain.getSensorPosition(Drivetrain.TalonID.LEFT_1);
-                buffer[this.idx++] = this.drivetrain.getSensorVelocity(Drivetrain.TalonID.LEFT_1);
-                buffer[this.idx++] = this.drivetrain.getPercentOutput(Drivetrain.TalonID.RIGHT_1);
-                buffer[this.idx++] = this.drivetrain.getSensorPosition(Drivetrain.TalonID.RIGHT_1);
-                buffer[this.idx++] = this.drivetrain.getSensorVelocity(Drivetrain.TalonID.RIGHT_1);
-                buffer[this.idx++] = this.drivetrain.getPigeonYaw();
+                buffer[this.idx++] = this.drivetrain.getLeftPercent();
+                buffer[this.idx++] = this.drivetrain.getLeftPosition();
+                buffer[this.idx++] = this.drivetrain.getLeftVelocity();
+                buffer[this.idx++] = this.drivetrain.getRightPercent();
+                buffer[this.idx++] = this.drivetrain.getRightPosition();
+                buffer[this.idx++] = this.drivetrain.getRightVelocity();
+                buffer[this.idx++] = this.drivetrain.getYaw();
                 try {
                     Thread.sleep(sleepTime);
                 } catch (Exception exc) {

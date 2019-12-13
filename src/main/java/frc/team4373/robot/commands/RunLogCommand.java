@@ -5,13 +5,14 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team4373.robot.RobotMap;
 import frc.team4373.robot.logging.Logger;
 import frc.team4373.robot.logging.LoggerProcessor;
-import frc.team4373.robot.subsystems.Drivetrain;
+import frc.team4373.robot.subsystems.LoggableDrivetrain;
 
 public class RunLogCommand extends Command {
-    private Drivetrain drivetrain;
+    private static double FP_EQUALITY_THRESHOLD = 1e-5;
+
+    private LoggableDrivetrain drivetrain;
     private Logger logger;
     private Thread loggerThread;
 
@@ -22,9 +23,9 @@ public class RunLogCommand extends Command {
 
     private double startTime = -1;
 
-    public RunLogCommand() {
-        requires(this.drivetrain = Drivetrain.getInstance());
-        this.logger = new Logger();
+    public RunLogCommand(LoggableDrivetrain drivetrain) {
+        requires(this.drivetrain = drivetrain);
+        this.logger = new Logger(drivetrain);
     }
 
     @Override
@@ -33,14 +34,15 @@ public class RunLogCommand extends Command {
         double oldDuration = this.duration;
         this.duration = SmartDashboard.getNumber("Log Duration (s)", 0);
         // if there's no change in duration, it's far more efficient not to overwrite the array
-        if (Math.abs(oldDuration - this.duration) < RobotMap.FP_EQUALITY_THRESHOLD) {
+        if (Math.abs(oldDuration - this.duration) < FP_EQUALITY_THRESHOLD) {
             this.logger.reset();
         } else {
             this.logger.resetDuration(this.duration);
         }
         this.loggerThread = new Thread(this.logger);
 
-        this.drivetrain.zeroMotors();
+        this.drivetrain.setLeft(0);
+        this.drivetrain.setRight(0);
         this.startTime = -1; // reset in case the command gets reused
 
         SendableChooser<String> modeChooser;
@@ -87,13 +89,12 @@ public class RunLogCommand extends Command {
             this.startTime = now;
         } else if (now - this.startTime >= 0.5 && now - this.startTime <= duration - 0.5) {
             // We're ready to start logging. Spin up the appropriate motors
-            this.drivetrain.setPercentOutput(Drivetrain.TalonID.LEFT_1,
-                    this.shouldSetLeft ? this.velocity : 0);
-            this.drivetrain.setPercentOutput(Drivetrain.TalonID.RIGHT_1,
-                    this.shouldSetRight ? this.velocity : 0);
+            this.drivetrain.setLeft(this.shouldSetLeft ? this.velocity : 0);
+            this.drivetrain.setRight(this.shouldSetRight ? this.velocity : 0);
         } else if (now - this.startTime <= duration) {
             // We're in the closing "grace period:" stop the motors and continue logging
-            this.drivetrain.zeroMotors();
+            this.drivetrain.setLeft(0);
+            this.drivetrain.setRight(0);
         } else {
             // We're finished: stop the logger
             this.logger.stop();
