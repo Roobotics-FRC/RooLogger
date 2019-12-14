@@ -26,6 +26,12 @@ checkstyle {
     toolVersion = '7.1.2'
 }
 
+task gitsetup {
+    doLast {
+        Runtime.getRuntime().exec('git config core.hooksPath .githooks')
+    }
+}
+
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
 // Also defines JUnit 4.
 dependencies {
