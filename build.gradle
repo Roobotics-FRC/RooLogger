@@ -9,8 +9,12 @@ plugins {
     id "checkstyle"
     id "edu.wpi.first.GradleRIO" version "2019.4.1"
     id "idea"
-    id "com.github.spotbugs" version "1.6.9"
 }
+
+group 'frc.team4373'
+version '1.0.0'
+
+sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
@@ -22,24 +26,6 @@ checkstyle {
     toolVersion = '7.1.2'
 }
 
-spotbugs {
-    toolVersion = '3.1.11'
-    effort = 'max'
-    reportLevel = 'low'
-    sourceSets = []
-}
-
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-
-task roospotbugs(type: GradleBuild) {
-    tasks = ['clean', 'build', 'spotbugsMain']
-}
-
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
 // Also defines JUnit 4.
 dependencies {
@@ -47,7 +33,6 @@ dependencies {
     compile wpi.deps.vendor.java()
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
-//    testCompile 'junit:junit:4.12'
 }
 
 wrapper {

@@ -1,13 +1,13 @@
-package frc.team4373.robot.commands;
+package frc.team4373.roologger.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team4373.robot.logging.Logger;
-import frc.team4373.robot.logging.LoggerProcessor;
-import frc.team4373.robot.subsystems.LoggableDrivetrain;
+import frc.team4373.roologger.logging.Logger;
+import frc.team4373.roologger.logging.LoggerProcessor;
+import frc.team4373.roologger.subsystems.LoggableDrivetrain;
 
 public class RunLogCommand extends Command {
     private static double FP_EQUALITY_THRESHOLD = 1e-5;

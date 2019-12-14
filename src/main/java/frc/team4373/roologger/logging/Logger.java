@@ -1,8 +1,8 @@
-package frc.team4373.robot.logging;
+package frc.team4373.roologger.logging;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import frc.team4373.robot.subsystems.LoggableDrivetrain;
+import frc.team4373.roologger.subsystems.LoggableDrivetrain;
 
 import java.util.Arrays;
 
