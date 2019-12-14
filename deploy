@@ -6,7 +6,7 @@ cd RooMaven
 YOUR_GROUP=frc.4373
 YOUR_ARTIFACT=roologger
 YOUR_VERSION="${TRAVIS_TAG:1}"
-YOUR_JAR_FILE=../build/libs/
+YOUR_JAR_FILE=../build/libs/RooLogger-$YOUR_VERSION.jar
 
 mvn install:install-file -DgroupId=$YOUR_GROUP -DartifactId=$YOUR_ARTIFACT -Dversion=$YOUR_VERSION -Dfile=$YOUR_JAR_FILE -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=. -DcreateChecksum=true
 
