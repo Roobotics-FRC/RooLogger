@@ -3,7 +3,7 @@
 git clone https://github.com/Roobotics-FRC/RooMaven.git
 cd RooMaven
 
-YOUR_GROUP=frc.4373
+YOUR_GROUP=frc.team4373
 YOUR_ARTIFACT=roologger
 YOUR_VERSION="${TRAVIS_TAG:1}"
 YOUR_JAR_FILE=../build/libs/RooLogger-$YOUR_VERSION.jar
