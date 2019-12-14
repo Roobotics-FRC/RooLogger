@@ -1,2 +1,4 @@
 echo "$(tput bold)$(tput setaf 9)In order for RooMaven to update, you must push a tag"
-echo "$(tput sgr0)$(tput setaf 1)If you do not, any dependents will not recieve your changes"
+echo "$(tput sgr0)$(tput setaf 1)If you do not, any dependents will not recieve your changes$(tput sgr0)"
+echo
+echo "$(tput bold)$(tput setaf 11)Make sure to update the version in build.gradle before tagging$(tput sgr0)"
