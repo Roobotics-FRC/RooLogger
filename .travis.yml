@@ -2,8 +2,20 @@ sudo: false
 
 language: java
 
+stages:
+  - test
+  - deploy
+    if: tag IS present
+
 jdk:
   - oraclejdk11
+
+jobs:
+  include:
+    - stage: test
+      script: ./gradlew check
+    - stage: deploy
+      script: ./deploy
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

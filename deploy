@@ -1,0 +1,15 @@
+./gradlew jar
+
+git clone https://github.com/Roobotics-FRC/RooMaven.git
+cd RooMaven
+
+YOUR_GROUP=frc.4373
+YOUR_ARTIFACT=roologger
+YOUR_VERSION="${TRAVIS_TAG:1}"
+YOUR_JAR_FILE=../build/libs/
+
+mvn install:install-file -DgroupId=$YOUR_GROUP -DartifactId=$YOUR_ARTIFACT -Dversion=$YOUR_VERSION -Dfile=$YOUR_JAR_FILE -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=. -DcreateChecksum=true
+
+git add .
+git commit -am "Update RooLogger to version $YOUR_VERSION"
+git push
