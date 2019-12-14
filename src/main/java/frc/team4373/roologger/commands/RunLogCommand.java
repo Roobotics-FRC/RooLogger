@@ -1,82 +1,50 @@
 package frc.team4373.roologger.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4373.roologger.logging.Logger;
 import frc.team4373.roologger.logging.LoggerProcessor;
 import frc.team4373.roologger.subsystems.LoggableDrivetrain;
 
 public class RunLogCommand extends Command {
-    private static double FP_EQUALITY_THRESHOLD = 1e-5;
-
     private LoggableDrivetrain drivetrain;
     private Logger logger;
     private Thread loggerThread;
 
     private boolean shouldSetLeft;
     private boolean shouldSetRight;
-    private double velocity = 0;
-    private double duration = 0;
+    private double velocity;
+    private double duration;
 
     private double startTime = -1;
 
-    public RunLogCommand(LoggableDrivetrain drivetrain) {
+    /**
+     * Constructs a new RunLogCommand.
+     * @param drivetrain the drivetrain to log.
+     * @param duration the duration, in seconds, for which to log.
+     * @param velocity the percent output, -1 to 1, at which to run the motors during logging.
+     * @param runLeft whether to run the left motors during logging.
+     * @param runRight whether to run the right motors during logging.
+     */
+    public RunLogCommand(LoggableDrivetrain drivetrain, double duration,
+                         double velocity, boolean runLeft, boolean runRight) {
         requires(this.drivetrain = drivetrain);
         this.logger = new Logger(drivetrain);
+        this.duration = duration;
+        this.velocity = velocity;
+        this.shouldSetLeft = runLeft;
+        this.shouldSetRight = runRight;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     protected void initialize() {
-        double oldDuration = this.duration;
-        this.duration = SmartDashboard.getNumber("Log Duration (s)", 0);
-        // if there's no change in duration, it's far more efficient not to overwrite the array
-        if (Math.abs(oldDuration - this.duration) < FP_EQUALITY_THRESHOLD) {
-            this.logger.reset();
-        } else {
-            this.logger.resetDuration(this.duration);
-        }
+        this.logger.reset();
         this.loggerThread = new Thread(this.logger);
 
         this.drivetrain.setLeft(0);
         this.drivetrain.setRight(0);
         this.startTime = -1; // reset in case the command gets reused
-
-        SendableChooser<String> modeChooser;
-        String mode;
-        try {
-            modeChooser = (SendableChooser<String>) SmartDashboard.getData("Log Type");
-            mode = modeChooser.getSelected();
-        } catch (ClassCastException exc) {
-            DriverStation.reportError("No log type chooser found, or invalid data received.",
-                    false);
-            exc.printStackTrace();
-            this.shouldSetLeft = false;
-            this.shouldSetRight = false;
-            return;
-        }
-        switch (mode) {
-            case "left_only":
-                this.shouldSetLeft = true;
-                this.shouldSetRight = false;
-                break;
-            case "right_only":
-                this.shouldSetLeft = false;
-                this.shouldSetRight = true;
-                break;
-            case "both_sides":
-                this.shouldSetLeft = true;
-                this.shouldSetRight = true;
-                break;
-            default:
-                this.shouldSetLeft = false;
-                this.shouldSetRight = false;
-                DriverStation.reportError("Invalid log type selection found.", false);
-        }
-        this.velocity = SmartDashboard.getNumber("Log Speed", 0);
 
         this.loggerThread.start();
     }
