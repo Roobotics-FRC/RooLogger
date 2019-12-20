@@ -7,12 +7,12 @@ import frc.team4373.roologger.subsystems.LoggableDrivetrain;
 import java.util.Arrays;
 
 public class Logger implements Runnable {
-    public static final int NUM_DATA_PTS = 8;
+    public static final int NUM_DATA_PTS = 9;
     public static final int SAMPLES_PER_SEC = 1000;
 
     public static final String CSV_HEADERS =
             "Time (s), L Output (%), L Pos (ticks), L Vel (ticks), "
-            + "R Output (%), R Pos (ticks), R Vel (ticks), Heading (deg)";
+            + "R Output (%), R Pos (ticks), R Vel (ticks), Heading (deg), Current (amps)";
 
     private LoggableDrivetrain drivetrain;
     private int idx = 0;
@@ -47,6 +47,7 @@ public class Logger implements Runnable {
                 buffer[this.idx++] = this.drivetrain.getRightPosition();
                 buffer[this.idx++] = this.drivetrain.getRightVelocity();
                 buffer[this.idx++] = this.drivetrain.getYaw();
+                buffer[this.idx++] = this.drivetrain.getCurrent();
                 try {
                     Thread.sleep(sleepTime);
                 } catch (Exception exc) {
