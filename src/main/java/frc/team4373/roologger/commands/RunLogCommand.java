@@ -2,12 +2,13 @@ package frc.team4373.roologger.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4373.roologger.logging.Logger;
 import frc.team4373.roologger.logging.LoggerProcessor;
 import frc.team4373.roologger.subsystems.LoggableDrivetrain;
 
-public class RunLogCommand extends Command {
-    private LoggableDrivetrain drivetrain;
+public class RunLogCommand<DrivetrainType extends Subsystem & LoggableDrivetrain> extends Command {
+    private DrivetrainType drivetrain;
     private Logger logger;
     private Thread loggerThread;
 
@@ -26,7 +27,7 @@ public class RunLogCommand extends Command {
      * @param runLeft whether to run the left motors during logging.
      * @param runRight whether to run the right motors during logging.
      */
-    public RunLogCommand(LoggableDrivetrain drivetrain, double duration,
+    public RunLogCommand(DrivetrainType drivetrain, double duration,
                          double velocity, boolean runLeft, boolean runRight) {
         requires(this.drivetrain = drivetrain);
         this.logger = new Logger(drivetrain);
